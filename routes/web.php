@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     
 });
 
-Route::resource('/message', MessageController::class);
+// Route::resource('/message', MessageController::class);
 Route::get('/notification/{message}/{notification}', [NotificationController::class, 'showForUpdating'])->name("/message.show");
 
 require __DIR__ . '/auth.php';
