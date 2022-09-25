@@ -77,7 +77,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('create-driver', function (User $user) {
-            if ($user->role_id == 1 || $user->role_id == 2 && Auth::user()->id == $user->id) {
+            if ($user->role_id == 1 && Auth::user()->id == $user->id) {
                 return true;
             }
             return false;

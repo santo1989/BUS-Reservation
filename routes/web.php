@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RoleController;
@@ -51,6 +52,24 @@ Route::middleware('auth')->group(function () {
     //passenger
 
     Route::resource('/passenger', PassengerController::class);  
+
+    //event
+
+// Event
+Route::get('/events/trashed-news', [EventController::class, 'trash'])
+->name('events.trashed');
+Route::get('/events/trashed-events/{events}/restore', [EventController::class, 'restore'])->name('events.restore');
+Route::delete('/events/trashed-events/{events}/delete', [EventController::class, 'delete'])->name('events.delete');
+
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+Route::post('/events', [EventController::class, 'store'])->name('events.store');
+Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+Route::get('/events/{event_id}/edit', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/events/{event_id}', [EventController::class, 'update'])->name('events.update');
+Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+
+
     
 });
 
