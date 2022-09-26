@@ -6,7 +6,7 @@
                 <div class="sb-sidenav-menu-heading">Admin Home</div>
 
 
-                 <a class="nav-link" href="{{ route('driver.index') }}">
+                 <a class="nav-link" href="{{ route('drivers.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Driver Assign
                 </a>

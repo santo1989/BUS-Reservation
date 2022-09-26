@@ -15,11 +15,11 @@ class CreatePassengersTable extends Migration
     {
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('passenger_id', 11)->unique();
-            $table->string('year')->nullable();
-            $table->string('up_location')->nullable();
-            $table->string('driver_name')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('id_no', 11)->unique();
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

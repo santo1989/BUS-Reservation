@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
     //driver
 
-    Route::resource('/driver', DriverController::class);
+    Route::resource('/drivers', DriverController::class);
 
     //passenger
 

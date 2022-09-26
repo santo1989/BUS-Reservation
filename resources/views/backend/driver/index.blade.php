@@ -7,7 +7,7 @@
         <x-backend.layouts.elements.breadcrumb>
             <x-slot name="pageHeader"> Driver </x-slot>
 
-            <li class="breadcrumb-item"><a href="{{ route('driver.index')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('drivers.index')}}">Dashboard</a></li>
             <li class="breadcrumb-item active">Driver</li>
 
         </x-backend.layouts.elements.breadcrumb>
@@ -19,7 +19,7 @@
             Driver
 
             {{-- @can('create-category') --}}
-            <a class="btn btn-sm btn-info" href="{{ route('driver.create') }}">Add New</a>
+            <a class="btn btn-sm btn-info" href="{{ route('drivers.create') }}">Add New</a>
             {{-- @endcan --}}
 
         </div>
@@ -28,7 +28,7 @@
             <x-backend.layouts.elements.message :fmessage="session('message')" />
 
             <!-- <table id="datatablesSimple"> -->
-            <form method="GET" action="{{ route('driver.index') }}">
+            <form method="GET" action="{{ route('drivers.index') }}">
                 <x-backend.form.input style="width: 200px;" name='search' />
 
             </form>
@@ -52,11 +52,11 @@
                         <td>{{ $driver->contract_number }}</td>                      
                         
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{ route('driver.show', ['driver' => $driver->id]) }}">Show</a>
+                            <a class="btn btn-info btn-sm" href="{{ route('drivers.show', ['driver' => $driver->id]) }}">Show</a>
 
-                            <a class="btn btn-warning btn-sm" href="{{ route('driver.edit', ['driver' => $driver->id]) }}">Edit</a>
+                            <a class="btn btn-warning btn-sm" href="{{ route('drivers.edit', ['driver' => $driver->id]) }}">Edit</a>
 
-                            <form style="display:inline" action="{{ route('driver.destroy', ['driver' => $driver->id]) }}" method="post">
+                            <form style="display:inline" action="{{ route('drivers.destroy', ['driver' => $driver->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
 

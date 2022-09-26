@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\User;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class DriverController extends Controller
 {
@@ -39,11 +41,29 @@ class DriverController extends Controller
     {
         //  @dd($request);
         try {
-            Driver::create([
-                'driver_name' => $request->driver_name,
-                'contract_number' => $request->contract_number,
-                'bus_name' => $request->bus_name,
-            ]);
+            $password = $request->password;
+            $confirmedPassword  = $request->confirmedPassword;
+            if($password === $confirmedPassword)
+            {
+                $userData = [
+                    'name'     => $request->name,
+                    'email'    => $request->email,
+                    'password' => Hash::make($request->password),
+                    'role_id'  => 2
+                ];
+
+                $user = User::create($userData);
+
+                $driverData = [
+                    'name'    => $request->name,
+                    'phone'   => $request->phone,
+                    'email'   => $request->email,
+                    'user_id' => $user->id
+                ];
+                Driver::create($driverData);
+            }else{
+                return redirect()->back()->with('error', "Password didn't match");
+            }
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         } catch (Exception $e) {

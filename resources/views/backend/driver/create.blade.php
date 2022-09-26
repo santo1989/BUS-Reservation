@@ -7,7 +7,7 @@
         <x-backend.layouts.elements.breadcrumb>
             <x-slot name="pageHeader"> Driver </x-slot>
 
-            <li class="breadcrumb-item"><a href="{{ route('driver.index')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('home')}}">Dashboard</a></li>
             <li class="breadcrumb-item active">Add New</li>
 
         </x-backend.layouts.elements.breadcrumb>
@@ -17,18 +17,30 @@
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Create Driver <a class="btn btn-sm btn-info" href="{{ route('driver.index') }}">List</a>
+            Create Driver <a class="btn btn-sm btn-info" href="{{ route('drivers.index') }}">List</a>
         </div>
         <div class="card-body">
 
            <x-backend.layouts.elements.errors :errors="$errors"/>
 
-            <form action="{{ route('driver.store') }}" enctype="multipart/form-data" method="post">
+            <form action="{{ route('drivers.store') }}" enctype="multipart/form-data" method="post">
                 @csrf
 
-                <x-backend.form.input name="driver_name" type="text"/>
+                <x-backend.form.input name="name" type="text"/>
 
-                <x-backend.form.input name="contract_number" type="text"/>
+                <x-backend.form.input name="license_no" type="text"/>
+
+                <x-backend.form.input name="phone" type="text"/>
+
+                <x-backend.form.input name="email" type="email"/>
+
+                <x-backend.form.input name="password" type="password"/>
+
+                <x-backend.form.input name="confirm_password" type="password"/>
+
+                <x-backend.form.input name="picture" type="file"/>
+
+
 
                 <x-backend.form.button>Save</x-backend.form.button>
             </form>
