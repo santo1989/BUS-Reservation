@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bus;
+use App\Models\Driver;
 use App\Models\Event;
 use Exception;
 use Carbon\Carbon;
@@ -33,28 +35,21 @@ class EventController extends Controller
     public function create()
     {
         // $this->authorize('create-event');
-
+       
         return view('backend.events.create');
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'date' => 'required',
-            'time' => 'required',
-            'location' => 'required',
-            'img1' => 'required',
+            'name' => 'required',
+            'details' => 'required',
         ]);
         
         try {
             Event::create([
-                'title' => $request->title,
-                'img1' => $this->uploadimg(request()->file('img1')),
-                'description' => $request->description,
-                'date' => $request->date,
-                'time' => $request->time,
-                'fee' => $request->fee,
-                'location' => $request->location,
+                'name' => $request->name,
+                'details' => $request->details
                 
             ]);
 

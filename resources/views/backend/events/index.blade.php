@@ -27,23 +27,13 @@
         <div class="card-body " >
 
             <x-backend.layouts.elements.message :fmessage="session('message')" />
-
-            <!-- <table id="datatablesSimple"> -->
-            <form method="GET" action="{{ route('events.index') }}">
-                <x-backend.form.input style="width: 200px;" name='search' />
-
-            </form>
+            
             <table class="table ">
                 <thead>
                     <tr>
                         <th>Sl#</th>
                         <th>Title</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Fee</th>
-                        <th>Location</th>
+                        <th>Details</th>                        
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -53,35 +43,21 @@
                     <tr>
                         <td>{{ ++$sl }}</td>
 
-                        <td>{{ $event->title }}</td>
+                        <td>{{ $event->name }}</td>
 
-                        <td>
-                            <img src="{{ asset('storage/events/'.$event->img1) }}" alt="{{ $event->img1 }}" width="100px" height="100px">
-                        </td>
-
-                        <td>{{ $event->description }}</td>
-
-                        <td>{{ $event->date }}</td>
-
-                        <td>{{ $event->time }}</td>
-
-                        <td>{{ $event->fee }}</td>
+                        <td>{{ $event->details }}</td>
                         
-                        <td>{{ $event->location }}</td>
-
-                        <td>{{ $event->phone_Number }}</td>
-
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{ route('events.show', ['event' => $event->id]) }}">Show</a>
+                            <a class="btn btn-info btn-sm" href="{{ route('events.show', ['event_id' => $event->id]) }}">Show</a>
 
-                            <a class="btn btn-warning btn-sm" href="{{ route('events.edit', ['event_id' => $event->id]) }}">Edit</a>
+                            {{--<a class="btn btn-warning btn-sm" href="{{ route('events.edit', ['event_id' => $event->id]) }}">Edit</a>--}}
 
-                            <form style="display:inline" action="{{ route('events.destroy', ['event' => $event->id]) }}" method="post">
+                            {{--<form style="display:inline" action="{{ route('events.destroy', ['event_id' => $event->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
 
                                 <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-sm btn-danger" type="submit">Delete</button>
-                            </form>
+                            </form>--}}
 
                             {{-- <!-- <a href="{{ route('events.destroy', ['events' => $events->id]) }}" >Delete</a> --> --}}
 

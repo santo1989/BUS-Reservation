@@ -1,14 +1,7 @@
-@props(['name'])
+@props(['name', 'label'])
 
-<x-backend.form.field>
-    <textarea name="{{ $name }}" class="form-control" id="{{ $name }}">
 
-    {{ $slot ?? old($name) }}
-
-    </textarea>
-    
-    <x-backend.form.label name="{{ $name }}" />
-
-    <x-backend.form.error name="{{ $name }}" />
-    
-</x-backend.form.field>
+<div class="form-group">
+    <label for="{{ $name }}">{{ $label }}</label>
+    <textarea class="form-control" name="{{ $name }}" id="{{ $name }}" rows="3"></textarea>
+  </div>

@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class DriverController extends Controller
 {
@@ -39,10 +40,10 @@ class DriverController extends Controller
 
     public function store(Request $request)
     {
-        //  @dd($request);
+        // dd($request->all());
         try {
             $password = $request->password;
-            $confirmedPassword  = $request->confirmedPassword;
+            $confirmedPassword  = $request->confirm_password;
             if($password === $confirmedPassword)
             {
                 $userData = [
@@ -53,6 +54,7 @@ class DriverController extends Controller
                 ];
 
                 $user = User::create($userData);
+                event(new Registered($user));
 
                 $driverData = [
                     'name'    => $request->name,
@@ -61,8 +63,11 @@ class DriverController extends Controller
                     'user_id' => $user->id
                 ];
                 Driver::create($driverData);
+
+                return redirect()->route('drivers.index')->withMessage("Successfully created driver with user");
             }else{
-                return redirect()->back()->with('error', "Password didn't match");
+                // dd("Check");
+                return redirect()->back()->withErrors("Password didn't match");
             }
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
