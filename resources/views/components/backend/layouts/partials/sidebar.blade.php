@@ -10,6 +10,28 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Driver Assign
                 </a>
+
+                <a class="nav-link" href="{{ route('buses.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Bus Entry
+                </a>
+
+                <a class="nav-link" href="{{ route('events.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Event Details
+                </a>
+
+                <a class="nav-link" href="{{ route('trips.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Trip Details
+                </a>
+
+                <a class="nav-link" href="{{ route('passengers.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Passenger Details
+                </a>
+
+
                 
 
                 {{--@can('user-management')--}}
@@ -46,9 +68,9 @@
                      Home
                 </a>
 
-                <a class="nav-link" href="{{ route('drivers.index') }}">
+                <a class="nav-link" href="{{ route('trips.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Driver
+                    Trip Details
                 </a>
 
 
@@ -71,6 +93,11 @@
                 <a class="nav-link" href="{{ route('passengers.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Passenger Profile
+                </a>
+
+                <a class="nav-link" href="{{ route('events.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Event Details
                 </a>
 
             </div>
