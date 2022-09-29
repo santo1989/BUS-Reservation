@@ -33,11 +33,10 @@ class PassengerController extends Controller
     {
         // $this->authorize('create-markinput');
         $cours = Driver::all();
-        $year = Year::all();
+    
         $passengers = Passenger::all();
         return view('backend.passenger.create', [
             'drivers' => $cours,
-            'years' => $year,
             'passengers' => $passengers,
         ]);
     }
@@ -46,7 +45,6 @@ class PassengerController extends Controller
     {
         //  @dd($request);
         $cours = Driver::all();
-        $year = Year::all();
         $passengers = Passenger::all();
         try {
             Passenger::create([
@@ -69,12 +67,10 @@ class PassengerController extends Controller
     {
         $passenger = Passenger::findOrFail($id);
         $cours = Driver::all();
-        $year = Year::all();
         $passengers = Passenger::all();
         return view('backend.passenger.edit', [
             'single_passenger' => $passenger,
             'drivers' => $cours,
-            'years' => $year,
             'passengers' => $passengers,
         ]);
     }
@@ -83,14 +79,12 @@ class PassengerController extends Controller
     {
         $passenger = Passenger::findOrFail($id);
         $cours = Driver::all();
-        $year = Year::all();
         $passengers = Passenger::all();
 
         try {
             $passenger->update([
                 'user_id' => $request->user_id,
                 'passenger_id' => $request->passenger_id,
-                'year' => $request->year,
                 'up_location' => $request->up_location,
                 'driver_name' => $request->driver_name,
             ]);
@@ -121,12 +115,10 @@ class PassengerController extends Controller
     {
         $passenger = Passenger::findOrFail($id);
         $cours = Driver::all();
-        $year = Year::all();
         $passengers = Passenger::all();
         return view('backend.passenger.show', [
             'show_passenger' => $passenger,
             'drivers' => $cours,
-            'years' => $year,
             'passengers' => $passengers,
         ]);
     }
