@@ -84,12 +84,12 @@ Route::middleware('auth')->group(function () {
 
     //trips
     Route::controller(TripController::class)->prefix('trips')->group(function () {
-        Route::get('/', 'index')->name('buses.index');
-        Route::get('/create', 'create')->name('buses.create');
-        Route::post('/store', 'store')->name('buses.store');
-        Route::get('/edit/{bus_id}', 'edit')->name('buses.edit');
-        Route::post('/update/{bus_id}', 'update')->name('buses.update');
-        Route::delete('/delete/{bus_id}', 'delete')->name('buses.destroy');
+        Route::get('/', 'index')->name('trips.index');
+        Route::get('/create', 'create')->name('trips.create');
+        Route::post('/store', 'store')->name('trips.store');
+        Route::get('/edit/{trip_id}', 'edit')->name('trips.edit');
+        Route::post('/update/{trip_id}', 'update')->name('trips.update');
+        Route::delete('/delete/{trip_id}', 'delete')->name('trips.destroy');
     });
 
     
