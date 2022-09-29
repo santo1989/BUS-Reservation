@@ -48,16 +48,16 @@
                         <td>{{ $event->details }}</td>
                         
                         <td>
-                            <a class="btn btn-info btn-sm" href="{{ route('events.show', ['event_id' => $event->id]) }}">Show</a>
+                            <a class="btn btn-info btn-sm" href="{{ route('events.show', ['event_show' => $event->id]) }}">Show</a>
 
-                            {{--<a class="btn btn-warning btn-sm" href="{{ route('events.edit', ['event_id' => $event->id]) }}">Edit</a>--}}
+                            <a class="btn btn-warning btn-sm" href="{{ route('events.edit', ['single_event' => $event->id]) }}">Edit</a>
 
-                            {{--<form style="display:inline" action="{{ route('events.destroy', ['event_id' => $event->id]) }}" method="post">
+                             <form style="display:inline" action="{{ route('events.destroy', ['event_id' => $event->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
 
                                 <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-sm btn-danger" type="submit">Delete</button>
-                            </form>--}}
+                            </form>
 
                             {{-- <!-- <a href="{{ route('events.destroy', ['events' => $events->id]) }}" >Delete</a> --> --}}
 

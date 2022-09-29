@@ -16,7 +16,6 @@ class CreatePassengersTable extends Migration
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('id_no', 11)->unique();
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();

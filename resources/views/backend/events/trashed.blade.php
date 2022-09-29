@@ -31,13 +31,8 @@
                 <thead>
                     <tr>
                         <th>Sl#</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Fee</th>
-                        <th>Location</th>
-                        <th>Phone Number</th>
+                        <th>Name</th>
+                        <th>Details</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -46,30 +41,9 @@
                     @foreach ($events as $events)
                     <tr>
                         <td>{{ ++$sl }}</td>
+                        <td>{{ $events->name }}</td>
+                        <td>{{ $events->details }}</td>
 
-                        <td>
-                            <img src="{{ asset('storage/events/'.$events->img1) }}" alt="{{ $events->img1 }}" width="100px" height="100px">
-                        </td>
-
-                        <td>{{ $events->description }}</td>
-
-                        <td>{{ $events->date }}</td>
-
-                        <td>{{ $events->time }}</td>
-
-                        <td>{{ $events->fee }}</td>
-
-                        <td>{{ $events->location }}</td>
-
-                        <td>{{ $events->phone_Number }}</td>
-
-
-
-                        <td>
-                            <img src="{{ asset('storage/events/'.$events->lecturer_img) }}" alt="{{ $events->lecturer_img }}" width="100px" height="100px">
-                        </td>
-
-                        <td>{{ $events->lecturer_description }}</td>
                         <td>
                         
                             <a class="btn btn-warning btn-sm" href="{{ route('events.restore', ['events' => $events->id]) }}" >Restore</a>

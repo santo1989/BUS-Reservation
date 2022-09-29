@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Driver;
 use App\Models\Passenger;
-use App\Models\Year;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -16,11 +15,11 @@ class PassengerController extends Controller
 
         $passengerCollection = Passenger::latest();
 
-        if (request('search')) {
-            $passengerCollection = $passengerCollection
-                ->where('passenger_id', 'like', '%' . request('search') . '%')
-                ->orWhere('year', 'like', '%' . request('search') . '%');
-        }
+        // if (request('search')) {
+        //     $passengerCollection = $passengerCollection
+        //         ->where('passenger_id', 'like', '%' . request('search') . '%')
+        //         ->orWhere('year', 'like', '%' . request('search') . '%');
+        // }
 
         $passenger = $passengerCollection->paginate(10);
 
@@ -36,7 +35,6 @@ class PassengerController extends Controller
     
         $passengers = Passenger::all();
         return view('backend.passenger.create', [
-            'drivers' => $cours,
             'passengers' => $passengers,
         ]);
     }
@@ -49,10 +47,9 @@ class PassengerController extends Controller
         try {
             Passenger::create([
                 'user_id' => $request->user_id,
-                'passenger_id' => $request->passenger_id,
-                'year' => $request->year,
-                'up_location' => $request->up_location,
-                'driver_name' => $request->driver_name,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address
             ]);
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
@@ -60,33 +57,27 @@ class PassengerController extends Controller
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passenger.index')->with('success', 'Passenger created successfully');
+        return redirect()->route('passengers.index')->with('success', 'Passenger created successfully');
     }
 
     public function edit($id)
     {
         $passenger = Passenger::findOrFail($id);
-        $cours = Driver::all();
-        $passengers = Passenger::all();
         return view('backend.passenger.edit', [
-            'single_passenger' => $passenger,
-            'drivers' => $cours,
-            'passengers' => $passengers,
+            'single_passenger' => $passenger
         ]);
     }
 
     public function update(Request $request, $id)
     {
         $passenger = Passenger::findOrFail($id);
-        $cours = Driver::all();
-        $passengers = Passenger::all();
 
         try {
             $passenger->update([
                 'user_id' => $request->user_id,
-                'passenger_id' => $request->passenger_id,
-                'up_location' => $request->up_location,
-                'driver_name' => $request->driver_name,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address
             ]);
         } catch (QueryException $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
@@ -94,7 +85,7 @@ class PassengerController extends Controller
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passenger.index')->with('success', 'Passenger updated successfully');
+        return redirect()->route('passengers.index')->with('success', 'Passenger updated successfully');
     }
 
     public function destroy($id)
@@ -108,18 +99,14 @@ class PassengerController extends Controller
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passenger.index')->with('success', 'Passenger deleted successfully');
+        return redirect()->route('passengers.index')->with('success', 'Passenger deleted successfully');
     }
 
     public function show($id)
     {
         $passenger = Passenger::findOrFail($id);
-        $cours = Driver::all();
-        $passengers = Passenger::all();
         return view('backend.passenger.show', [
             'show_passenger' => $passenger,
-            'drivers' => $cours,
-            'passengers' => $passengers,
         ]);
     }
 }

@@ -52,12 +52,18 @@
                         <td>{{ $bus->reg_number }}</td>
                         <td>{{ $bus->no_of_seat }}</td>
                       <td>
-                        <a class="btn btn-primary" href={{ route("buses.edit", ['bus_id'=>$bus->id]) }}>Edit</a>
-                        <form action={{ route("buses.destroy", $bus->id) }} method="POST" class="d-inline">
-                          @csrf
-                          @method("DELETE")
-                          <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
+                        <a class="btn btn-primary" href={{ route("buses.edit", ['single_buse'=>$bus->id]) }}>Edit</a>
+                        <a class="btn btn-primary" href={{ route("buses.show", ['show_buse'=>$bus->id]) }}>Show</a>
+
+
+                        @can('Admin')
+                            <form style="display:inline" action="{{ route('buses.destroy', ['buse' => $bus->id]) }}" method="post">
+                                @csrf
+                                @method('delete')
+
+                                <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                            @endcan
                       </td>
                     </tr>
                 @endforeach

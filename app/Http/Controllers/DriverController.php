@@ -20,8 +20,8 @@ class DriverController extends Controller
 
         if (request('search')) {
             $driverCollection = $driverCollection
-                ->where('driver_name', 'like', '%' . request('search') . '%')
-                ->orWhere('bus_name', 'like', '%' . request('search') . '%');
+                ->where('email', 'like', '%' . request('search') . '%')
+                ->orWhere('license_no', 'like', '%' . request('search') . '%');
         }
 
         $driver = $driverCollection->paginate(10);
@@ -44,8 +44,7 @@ class DriverController extends Controller
         try {
             $password = $request->password;
             $confirmedPassword  = $request->confirm_password;
-            if($password === $confirmedPassword)
-            {
+            if ($password === $confirmedPassword) {
                 $userData = [
                     'name'     => $request->name,
                     'email'    => $request->email,
@@ -60,12 +59,17 @@ class DriverController extends Controller
                     'name'    => $request->name,
                     'phone'   => $request->phone,
                     'email'   => $request->email,
-                    'user_id' => $user->id
+                    'user_id' => $user->id,
+                    'license_no' => $request->license_no,
+                    'picture' => $request->picture
+
                 ];
+
+
                 Driver::create($driverData);
 
                 return redirect()->route('drivers.index')->withMessage("Successfully created driver with user");
-            }else{
+            } else {
                 // dd("Check");
                 return redirect()->back()->withErrors("Password didn't match");
             }
@@ -96,26 +100,39 @@ class DriverController extends Controller
     public function update(Request $request, $id)
     {
         $driver = Driver::find($id);
+        $user = User::find($driver->user_id);
 
         $driver->update([
 
-            'driver_name' => $request->driver_name,
-            'contract_number' => $request->contract_number,
-            'bus_name' => $request->bus_name,
+            'name'    => $request->name,
+            'phone'   => $request->phone,
+            'email'   => $request->email,
+            'user_id' => $user->id,
+            'license_no' => $request->license_no,
+            'picture' => $request->picture
 
         ]);
 
-        $driver->update();
+        $user->update([
+
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id'  => 2
+
+        ]);
+
+        // $driver->uppdate();
 
 
-        return redirect()->route('driver.index');
+        return redirect()->route('drivers.index');
     }
 
     public function destroy(Driver $driver)
     {
         try {
             $driver->delete();
-            return redirect()->route('driver.index')->withMessage('Successfully Deleted!');
+            return redirect()->route('drivers.index')->withMessage('Successfully Deleted!');
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

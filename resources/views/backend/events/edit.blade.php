@@ -30,28 +30,17 @@
             </div>
             @endif
 
-            <form action="{{ route('events.update', ['event_id' => $single_event->id]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('events.update', ['update_event' => $single_event->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
 
 
-                <x-backend.form.input name="title" type="text" :value="$single_event->title"/>
+                <x-backend.form.input name="name" type="text" label="Title" :value="$single_event->name"/>
 
-                <x-backend.form.input name="img1" type="file" :value="$single_event->img1"/>
-                
-                <x-backend.form.textarea name="description" >
-                {{ $single_event->description }}
-                </x-backend.form.textarea>
+                <x-backend.form.textarea name="details" label="Details" :value="$single_event->details" />
 
-                <x-backend.form.input name="date" type="date" :value="$single_event->date"/>
 
-                <x-backend.form.input name="time" type="time" :value="$single_event->time"/>
-                
-                <x-backend.form.input name="fee" type="number" :value="$single_event->fee"/>
 
-                <x-backend.form.input name="location" :value="$single_event->location"/>
-
-                <x-backend.form.input name="phone_Number" :value="$single_event->phone_Number"/>
                 
                 <x-backend.form.button>Update</x-backend.form.button>
 

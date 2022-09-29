@@ -20,17 +20,13 @@
         </div>
         <div class="card-body">
            
-                
                 <p>Image : <h3>
-                    <img src="{{ asset('storage/events/'.$events->img1) }}"  widp="100px" height="100px">
+                   @foreach ( $event_show->images as $image )
+                     <img src="{{ asset('pulic/images/events/'.$image) }}" alt="" width="100px" height="100px">
+                   @endforeach
                 </h3></p>
-                <p>Description : <h3>{{ $events->description }}</h3></p>
-                <p>Date :  <h3>{{ $events->date }}</h3></p>
-                <p>Time : <h3>{{ $events->time }}</h3></p>
-                <p>Fee : <h3>{{ $events->fee }}</h3></p>
-                <p>Location : <h3>{{ $events->location }}</h3></p>
-                <p>Phone Number : <h3>{{ $events->phone_Number }}</h3></p>
-                
+                <p>Name : <h3>{{ $event_show->name }}</h3></p>
+                <p>Details :  <h3>{{ $event_show->details }}</h3></p>   
 
         </div>
     </div>

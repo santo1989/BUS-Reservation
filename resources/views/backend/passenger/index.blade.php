@@ -7,13 +7,13 @@
         <x-backend.layouts.elements.breadcrumb>
             <x-slot name="pageHeader"> Passenger </x-slot>
 
-            <li class="breadcrumb-item"><a href="{{ route('passenger.index')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('passengers.index')}}">Dashboard</a></li>
             <li class="breadcrumb-item active">Passenger</li>
 
         </x-backend.layouts.elements.breadcrumb>
     </x-slot>
 
-    <div class="card mb-4" style="width:fit-content">
+    <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
             Passenger
@@ -23,7 +23,7 @@
             // dd($model0fpassenger);
         @endphp
         @if ($model0fpassenger == null)
-            <a class="btn btn-sm btn-info" href="{{ route('passenger.create') }}">Add New</a>
+            <a class="btn btn-sm btn-info" href="{{ route('passengers.create') }}">Add New</a>
             
         @endif
             {{-- <a class="btn btn-sm btn-info" href="{{ route('passenger.create') }}">Add New</a> --}}
@@ -35,18 +35,17 @@
             <x-backend.layouts.elements.message :fmessage="session('message')" />
 
             <!-- <table id="datatablesSimple"> -->
-            <form method="GET" action="{{ route('passenger.index') }}">
+            {{-- <form method="GET" action="{{ route('passengers.index') }}">
                 <x-backend.form.input style="width: 200px;" name='search' />
 
-            </form>
-            <table class="table">
+            </form> --}}
+            <table class="table" id="datatablesSimple">
                 <thead>
                     <tr>
                         <th>Sl#</th>
-                        <th>Passenger ID</th>
-                        <th>Year</th>
-                        <th>Driver Name</th>
-                        <th>passenger Session</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -56,23 +55,19 @@
                     <tr>
                         <td>{{ ++$sl }}</td>
                        
-                        <td>{{ $passenger->passenger_id }}</td> 
-                        
-                        <td>{{ $passenger->year }}</td>
-
-                        <td>{{ $passenger->driver_name }}</td>
-
-                        <td>{{ $passenger->up_location }}</td>
+                        <td>{{ $passenger->name }}</td>
+                        <td>{{ $passenger->phone }}</td>
+                        <td>{{ $passenger->address }}</td>
                         
                         
                         <td>
                             @can('create-passenger')
-                            <a class="btn btn-info btn-sm" href="{{ route('passenger.show', ['passenger' => $passenger->id]) }}">Show</a>
+                            <a class="btn btn-info btn-sm" href="{{ route('passengers.show', ['passenger' => $passenger->id]) }}">Show</a>
                            
-                            <a class="btn btn-warning btn-sm" href="{{ route('passenger.edit', ['passenger' => $passenger->id]) }}">Edit</a>
+                            <a class="btn btn-warning btn-sm" href="{{ route('passengers.edit', ['passenger' => $passenger->id]) }}">Edit</a>
                             @endcan
                             @can('Admin')
-                            <form style="display:inline" action="{{ route('passenger.destroy', ['passenger' => $passenger->id]) }}" method="post">
+                            <form style="display:inline" action="{{ route('passengers.destroy', ['passenger' => $passenger->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
 
@@ -88,7 +83,7 @@
 
                 </tbody>
             </table>
-            {{ $passengers->links() }}
+            {{-- {{ $passengers->links() }} --}}
         </div>
     </div>
 

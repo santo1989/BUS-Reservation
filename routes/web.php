@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/drivers', DriverController::class);
 
     //passenger
-    Route::resource('/passenger', PassengerController::class);
+    Route::resource('/passengers', PassengerController::class);
 
     //event    
     // Route::get('/events/trashed-events', [EventController::class, 'trash'])->name('events.trashed');
@@ -64,12 +64,15 @@ Route::middleware('auth')->group(function () {
     Route::controller(EventController::class)->prefix('events')->group(function () {
         Route::get('/events/trashed-events', 'trash')->name('events.trashed');
         Route::get('/events/trashed-events/{events}/restore', 'restore')->name('events.restore');
-        Route::delete('/events/trashed-events/delete/{event_id}', 'delete')->name('events.delete');
-        
+        Route::delete('/events/trashed-events/delete/{events}', 'delete')->name('events.delete');
+
         Route::get('/', 'index')->name('events.index');
         Route::get('/create', 'create')->name('events.create');
         Route::post('/store', 'store')->name('events.store');
-        Route::get('/show/{event_id}', 'show')->name('events.show');
+        Route::get('/edit/{single_event}', 'edit')->name('events.edit');
+        Route::post('/update/{update_event}', 'update')->name('events.update');
+        Route::get('/show/{event_show}', 'show')->name('events.show');
+        Route::delete('/destroy/{event_id}', 'destroy')->name('events.destroy');
     });
 
     //buses
@@ -77,9 +80,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('buses.index');
         Route::get('/create', 'create')->name('buses.create');
         Route::post('/store', 'store')->name('buses.store');
-        Route::get('/edit/{bus_id}', 'edit')->name('buses.edit');
-        Route::post('/update/{bus_id}', 'update')->name('buses.update');
-        Route::delete('/delete/{bus_id}', 'delete')->name('buses.destroy');
+        Route::get('/edit/{single_buse}', 'edit')->name('buses.edit');
+        Route::post('/update/{single_buse}', 'update')->name('buses.update');
+        Route::delete('/delete/{buse}', 'destroy')->name('buses.destroy');
+        Route::get('/show/{show_buse}', 'show')->name('buses.show');
     });
 
     //trips
@@ -91,11 +95,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{trip_id}', 'update')->name('trips.update');
         Route::delete('/delete/{trip_id}', 'delete')->name('trips.destroy');
     });
-
-    
-
-
-    
 });
 
 // Route::resource('/message', MessageController::class);

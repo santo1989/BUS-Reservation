@@ -7,23 +7,52 @@
         <x-backend.layouts.elements.breadcrumb>
             <x-slot name="pageHeader"> Driver </x-slot>
 
-            <li class="breadcrumb-item"><a href="{{ route('driver.index')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('drivers.index')}}">Dashboard</a></li>
             <li class="breadcrumb-item active">Add New</li>
 
         </x-backend.layouts.elements.breadcrumb>
     </x-slot>
-
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-           Driver Details <a class="btn btn-sm btn-info" href="{{ route('driver.index') }}">List</a>
+           Driver Details <a class="btn btn-sm btn-info" href="{{ route('drivers.index') }}">List</a>
         </div>
-        <div class="card-body">
-                <p><h4>Driver Name  : </h4>{{ $show_driver->driver_name }}</p>
+    <div class="container-fluid !direction !spacing">
+       <div class="row">
+        <div class="col-md-5">
+            <div class="card mb-4 mt-3">
+                <div class="card-body ">
+           <img src="{{ asset('storage/'.$show_driver->picture) }}" alt="">
+
+                </div>
+            </div>
+
+        </div>
+
+<div class="col-md-7">
+    <div class="card mb-4 mt-3">
+        <div class="card-body ">
+                   
+                <p><strong style="font-size: 1.5rem">Driver Name  : </strong>{{ $show_driver->name }}</p>
                 
-                <p><h4>Driver Code  : </h4>{{ $show_driver->contract_number }}</p>
+                <p><strong style="font-size: 1.5rem">Licence No  : </strong>{{ $show_driver->license_no }}</p>
+
+                <p><strong style="font-size: 1.5rem">Phone  : </strong>{{ $show_driver->phone }}</p>
+
+                <p><strong style="font-size: 1.5rem">Email  : </strong>{{ $show_driver->email }}</p>
+
+         
+
+
 
         </div>
     </div>
+</div>
+        
+       </div>
+    </div>
+
+    </div>
+    
 
 </x-backend.layouts.master>

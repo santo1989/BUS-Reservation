@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bus;
-use App\Models\Driver;
+
 use App\Models\Event;
 use Exception;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Image;
 
 class EventController extends Controller
 {
@@ -35,23 +33,40 @@ class EventController extends Controller
     public function create()
     {
         // $this->authorize('create-event');
-       
+
         return view('backend.events.create');
     }
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name' => 'required',
             'details' => 'required',
         ]);
-        
+
         try {
-            Event::create([
+            $event =  [
                 'name' => $request->name,
                 'details' => $request->details
-                
-            ]);
+
+            ];
+
+            $images = [];
+
+            if (count($request->images) > 0) {
+                // dd('check');
+                for ($i = 0; $i < count($request->images); $i++) {
+                    $image = $request->images[$i];
+                    $filename = time() . '.' . $image->getClientOriginalExtension();
+                    $location = public_path('images/events/' . $filename);
+                    $image->move($location, $filename);
+                    $images[$i] = $filename;
+                    sleep(1);
+                }
+                $event = array_merge($event, ['images' => json_encode($images)]);
+                Event::create($event);
+            }
 
             return redirect()->route('events.index')->withMessage('Successfully Created!');
         } catch (QueryException $e) {
@@ -59,40 +74,45 @@ class EventController extends Controller
         }
     }
 
-    public function show(Event $event)
+    public function show(Event $event_show)
     {
+        $event_show->images = json_decode($event_show->images);
+
         return view('backend.events.show', [
-            'events' => $event
+            'event_show' => $event_show,
+
         ]);
     }
 
-    public function edit($event_id)
+    public function edit($single_event)
     {
-        $event = Event::find($event_id);
+        $event = Event::find($single_event);
         return view('backend.events.edit', [
             'single_event' => $event
         ]);
     }
 
-    public function update(Request $request, $event_id)
+    public function update(Request $request, $update_event)
     {
-        
+
         // dd($request->all());
         try {
-            $event = Event::find($event_id);
+            $event = Event::find($update_event);
             $requestData = [
-                'title' => $request->title,
-                'description' => $request->description,
-                'date' => $request->date,
-                'time' => $request->time,
-                'fee' => $request->fee,
-                'location' => $request->location,
+                'name' => $request->name,
+                'details' => $request->details
             ];
-            if (request()->file('img1')) {
-                $requestData['img1'] = $this->uploadimg(request()->file('img1'));
-            }
-           
-            
+            // if (request()->hasfile('images[]')) {
+            //     for ($i = 0; $i < count($request->file('images[]')); $i++) {
+            //         $image = $request->file('images[]')[$i];
+            //         $filename = time() . '.' . $image->getClientOriginalExtension();
+            //         $location = public_path('storage/events/' . $filename);
+            //         Image::make($image)->resize(800, 400)->save($location);
+            //         $requestData['images'][] = $filename;
+            //     }
+            // }
+
+
             //  dd($requestData);
             $event->update($requestData);
 
@@ -103,10 +123,10 @@ class EventController extends Controller
         }
     }
 
-    public function destroy(Event $event)
+    public function destroy(Event $event_id)
     {
         try {
-            $event->delete();
+            $event_id->delete();
             return redirect()->route('events.index')->withMessage('Successfully Deleted!');
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -133,20 +153,11 @@ class EventController extends Controller
     public function delete($id)
     {
         $event = Event::onlyTrashed()->findOrFail($id);
-        unlink(public_path('storage/events/' . $event->img1));
+        // for($i = 0; $i < count(json_decode($event->images)); $i++){
+        //     $image = json_decode($event->images)[$i];
+        //     unlink(storage_path('/images/events/' . $image));
+        // }
         $event->forceDelete();
         return redirect()->route('events.trashed')->withMessage('Successfully Deleted Permanently!');
-    }
-
-    public function uploadimg($file)
-    {
-        
-         $fileName = time() . '.' . $file->getClientOriginalExtension();
-
-        Image::make($file)
-            ->resize(420, 420)
-            ->save(storage_path() . '/app/public/events/' . $fileName);
-
-        return $fileName;
     }
 }
