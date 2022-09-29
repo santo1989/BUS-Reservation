@@ -119,9 +119,10 @@
       parent.appendChild(div);
   }
 
-  const deleteDiv = () => {
-      alert("Need to be done");
-  }
+  let deleteDiv = (e) => {
+            e.parentNode.parentNode.removeChild(e.parentNode);
+            // console.log(e);
+        }
   
       
 </script>

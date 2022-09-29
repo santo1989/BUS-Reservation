@@ -86,7 +86,7 @@
         const aDelete = document.createElement("a");
         aDelete.setAttribute("class", "bg-danger d-flex align-items-center justify-content-center bordered rounded ml-1");
         aDelete.setAttribute("style", "width: 40px; color: black");
-        aDelete.setAttribute("onclick", "deleteDiv()");
+        aDelete.setAttribute("onclick", "deleteDiv(this)");
         
         const iDelete = document.createElement("i");
         iDelete.setAttribute("class", "fa fa-trash");
@@ -100,9 +100,10 @@
         parent.appendChild(div);
     }
 
-    const deleteDiv = () => {
-        alert("Need to be done");
-    }
+    let deleteDiv = (e) => {
+            e.parentNode.parentNode.removeChild(e.parentNode);
+            // console.log(e);
+        }
     
         
 </script>
