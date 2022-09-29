@@ -7,7 +7,7 @@
         <x-backend.layouts.elements.breadcrumb>
             <x-slot name="pageHeader"> Driver </x-slot>
 
-            <li class="breadcrumb-item"><a href="{{ route('drivers.index')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('home')}}">Dashboard</a></li>
             <li class="breadcrumb-item active">Driver</li>
 
         </x-backend.layouts.elements.breadcrumb>
@@ -29,7 +29,6 @@
 
             <!-- <table id="datatablesSimple"> -->
             <form method="GET" action="{{ route('drivers.index') }}">
-                <x-backend.form.input style="width: 200px;" name='search' />
 
             </form>
             <table class="table">
@@ -47,9 +46,9 @@
                     <tr>
                         <td>{{ ++$sl }}</td>
                        
-                        <td>{{ $driver->driver_name }}</td>
+                        <td>{{ $driver->name }}</td>
                         
-                        <td>{{ $driver->contract_number }}</td>                      
+                        <td>{{ $driver->phone }}</td>                      
                         
                         <td>
                             <a class="btn btn-info btn-sm" href="{{ route('drivers.show', ['driver' => $driver->id]) }}">Show</a>

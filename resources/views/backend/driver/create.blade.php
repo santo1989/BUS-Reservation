@@ -21,24 +21,24 @@
         </div>
         <div class="card-body">
 
-           <x-backend.layouts.elements.errors :errors="$errors"/>
+            <x-backend.layouts.elements.errors :errors="$errors"/>
 
             <form action="{{ route('drivers.store') }}" enctype="multipart/form-data" method="post">
                 @csrf
 
-                <x-backend.form.input name="name" type="text"/>
+                <x-backend.form.input name="name" type="text" label="Name"/>
 
-                <x-backend.form.input name="license_no" type="text"/>
+                <x-backend.form.input name="license_no" type="text" label="License Number"/>
 
-                <x-backend.form.input name="phone" type="text"/>
+                <x-backend.form.input name="phone" type="text" label="Phone"/>
 
-                <x-backend.form.input name="email" type="email"/>
+                <x-backend.form.input name="email" type="email" label="Email"/>
 
-                <x-backend.form.input name="password" type="password"/>
+                <x-backend.form.input name="password" type="password" label="Password"/>
 
-                <x-backend.form.input name="confirm_password" type="password"/>
+                <x-backend.form.input name="confirm_password" type="password" label="Confirm Password"/>
 
-                <x-backend.form.input name="picture" type="file"/>
+                <x-backend.form.input name="picture" type="file" label="Picture"/>
 
 
 

@@ -1,11 +1,6 @@
-@props(['name'])
+@props(['name', 'label'])
 
-<x-backend.form.field >
-
+<div class="form-group">
+    <label for="{{ $name }}">{{ $label ?? '' }}</label>
     <input name="{{ $name }}" class="form-control" id="{{ $name }}" {{ $attributes }}>
-
-    <x-backend.form.label name="{{ $name }}" />
-
-    <x-backend.form.error name="{{ $name }}" />
-
-</x-backend.form.field>
+</div>

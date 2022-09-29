@@ -26,26 +26,68 @@
             <form action="{{ route('events.store') }}" enctype="multipart/form-data" method="post">
                 @csrf
 
-                <x-backend.form.input name="title" type="text"/>
-
-                <x-backend.form.input name="img1" type="file"/>
+                <x-backend.form.input name="name" type="text" label="Title"/>
                 
-                <x-backend.form.textarea name="description" />
+                <x-backend.form.textarea name="details" label="Details" />
 
-                <x-backend.form.input name="date" type="date"/>
-
-                <x-backend.form.input name="time" type="time"/>
                 
-                <x-backend.form.input name="fee" type="number"/>
-
-                <x-backend.form.input name="location" type="text"/>
-
-                <x-backend.form.input name="phone_Number" type="text"/>
+                <div class="form-group" id="images">
+                    <label for="iamges">Image</label>
+                    <div class="d-flex">
+                        <input name="images[]" class="form-control" id="images" type="file">
+                        <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1" style="width: 40px; color: purple" onclick="createInput()"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+                
 
                 <x-backend.form.button>Save</x-backend.form.button>
             </form>
         </div>
     </div>
+
+    <script>
+
+        const createInput = () => {
+            const parent = document.getElementById("images");
+            const div = document.createElement("div");
+            div.setAttribute('class', 'd-flex mt-2');
+
+            const input = document.createElement("input");
+            input.setAttribute("type", "file");
+            input.setAttribute("class", "form-control");
+            input.setAttribute("name", "images[]");
+
+            const aPlus = document.createElement("a");
+            aPlus.setAttribute("class", "bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1");
+            aPlus.setAttribute("style", "width: 40px; color: purple");
+            aPlus.setAttribute("onclick", "createInput()");
+            
+            const iPlus = document.createElement("i");
+            iPlus.setAttribute("class", "fa fa-plus");
+
+            const aDelete = document.createElement("a");
+            aDelete.setAttribute("class", "bg-danger d-flex align-items-center justify-content-center bordered rounded ml-1");
+            aDelete.setAttribute("style", "width: 40px; color: black");
+            aDelete.setAttribute("onclick", "deleteDiv()");
+            
+            const iDelete = document.createElement("i");
+            iDelete.setAttribute("class", "fa fa-trash");
+
+
+            aPlus.appendChild(iPlus);
+            aDelete.appendChild(iDelete);
+            div.appendChild(input);
+            div.appendChild(aPlus);
+            div.appendChild(aDelete);
+            parent.appendChild(div);
+        }
+
+        const deleteDiv = () => {
+            alert("Need to be done");
+        }
+        
+            
+    </script>
 
 
 </x-backend.layouts.master>
