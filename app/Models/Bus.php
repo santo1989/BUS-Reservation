@@ -9,4 +9,9 @@ class Bus extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function trip()
+    {
+        return $this->belongsToMany(Trip::class);
+    }
 }
