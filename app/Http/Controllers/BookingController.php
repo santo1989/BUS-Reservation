@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Event;
 use App\Models\Trip;
 use Illuminate\Http\Request;
@@ -26,5 +27,11 @@ class BookingController extends Controller
         }
         // dd($events);
         return view('backend.bookings.index', compact('events'));
+    }
+
+    public function getBookings($trip_id)
+    {
+        $bookings = Booking::where('trip_id', $trip_id)->get();
+        return response()->json($bookings);
     }
 }

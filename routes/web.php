@@ -110,4 +110,6 @@ Route::middleware('auth')->group(function () {
 // Route::resource('/message', MessageController::class);
 Route::get('/notification/{message}/{notification}', [NotificationController::class, 'showForUpdating'])->name("/message.show");
 
+Route::get('/get-bookings/{trip_id}', [BookingController::class, 'getBookings']);
+
 require __DIR__ . '/auth.php';

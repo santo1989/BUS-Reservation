@@ -20,6 +20,8 @@
     </div>
     @endif
 
+      <input type="hidden" value="{{ url('') }}" id="base_url">
+
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -57,7 +59,7 @@
                               <th scope="row">{{ $index+1 }}</th>
                               <td>{{ $trip->start_date }}</td>
                               <td>{{ $trip->end_date }}</td>
-                              <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg">Show Bookings</button></td>
+                              <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="getBookings(<?php echo $trip->id;  ?>)">Show Bookings</button></td>
                             </tr>
                           @endforeach
                         </tbody>
@@ -102,5 +104,14 @@
     </div>
   </div>
 
+  <script>
+    const getBookings = (trip_id) => {
+      const base_url = $('#base_url').val();
+      const fethc_url = `${base_url}/get-bookings/${trip_id}`;
+      fetch(fethc_url)
+      .then(response => console.log(response))
+      // alert(fethc_url);
+    }
+  </script>
 
 </x-backend.layouts.master>
