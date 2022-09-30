@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', 'create')->name('events.create');
         Route::post('/store', 'store')->name('events.store');
         Route::get('/edit/{single_event}', 'edit')->name('events.edit');
-        Route::post('/update/{update_event}', 'update')->name('events.update');
+        Route::put('/update/{update_event}', 'update')->name('events.update');
         Route::get('/show/{event_show}', 'show')->name('events.show');
         Route::delete('/destroy/{event_id}', 'destroy')->name('events.destroy');
     });
@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', 'create')->name('buses.create');
         Route::post('/store', 'store')->name('buses.store');
         Route::get('/edit/{single_buse}', 'edit')->name('buses.edit');
-        Route::post('/update/{single_buse}', 'update')->name('buses.update');
+        Route::put('/update/{single_buse}', 'update')->name('buses.update');
         Route::delete('/delete/{buse}', 'destroy')->name('buses.destroy');
         Route::get('/show/{show_buse}', 'show')->name('buses.show');
     });
@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', 'create')->name('trips.create');
         Route::post('/store', 'store')->name('trips.store');
         Route::get('/edit/{trip_id}', 'edit')->name('trips.edit');
-        Route::post('/update/{trip_id}', 'update')->name('trips.update');
+        Route::put('/update/{trip_id}', 'update')->name('trips.update');
         Route::delete('/delete/{trip_id}', 'delete')->name('trips.destroy');
     });
 
@@ -102,7 +102,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', 'create')->name('bookings.create');
         Route::post('/store', 'store')->name('bookings.store');
         Route::get('/edit/{booking_id}', 'edit')->name('bookings.edit');
-        Route::post('/update/{booking_id}', 'update')->name('bookings.update');
+        Route::put('/update/{booking_id}', 'update')->name('bookings.update');
         Route::delete('/delete/{booking_id}', 'delete')->name('bookings.destroy');
     });
 });

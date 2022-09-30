@@ -65,8 +65,8 @@
             </div>
 
             <div class=col-md-4>
-                <label for="drivers_id" class="mt-2">Driver</label>
-                <select name="drivers_id" id="drivers_id" class="form-select">
+                <label for="driver_id" class="mt-2">Driver</label>
+                <select name="driver_id" id="driver_id" class="form-select">
                     <option value="">Select One...</option>
                     @foreach ($drivers as $driver)
                         <option value="{{ $driver->id }}">{{ $driver->name }}</option>
