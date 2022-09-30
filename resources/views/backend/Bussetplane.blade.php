@@ -50,18 +50,7 @@
         let right_seat = document.getElementById('right');
         let last_seat = document.getElementById('last');
 
-        for(let i=1; i<=left_seat; i++){
-            left_seat.innerHTML += `<div class="seat" id="left_seat_${i}">${i}</div>`;
-        }
-
-        for(let i=1; i<=right_seat; i++){
-            right_seat.innerHTML += `<div class="seat" id="right_seat_${i}">${i}</div>`;
-        }
-
-        for(let i=1; i<=last_seat; i++){
-            last_seat.innerHTML += `<div class="seat" id="last_seat_${i}">${i}</div>`;
-        }
-
+        
 
 
         
