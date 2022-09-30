@@ -15,7 +15,7 @@ class TripController extends Controller
     //
     public function index()
     {
-        $trips = Trip::all();
+        $trips = Trip::latest()->get();        
         return view('backend.trips.index', compact('trips'));
     }
 
@@ -33,11 +33,28 @@ class TripController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         try {
-            $data = $request->all();
-            $data['stoppages']  = json_encode($data['stoppages']); 
-            $trip = Trip::create($data);
+            $stoppages = [];
+            $limit = count($request->stoppages);            
+            for($i = 0; $i < $limit; $i++)
+            {
+                $stoppages[$request->stoppages[$i]] = $request->times[$i];
+            }
+
+            $tripCode = $this->generateTripCode($request->event_id, $request->start_date);
+
+            $trip = Trip::create([
+                'event_id' => $request->event_id,
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'stoppages' => json_encode($stoppages),
+                'start_location' => $request->start_location,
+                'end_location' => $request->end_location,
+                'bus_id'    => $request->bus_id,
+                'driver_id' => $request->driver_id,
+                'trip_details' => $request->trip_details,
+                'trip_code' => $tripCode
+            ]);
 
 
             return redirect()->route('trips.index')->withMessage("Successfully created trip");
@@ -50,11 +67,11 @@ class TripController extends Controller
 
     }
 
-    public function genereateTripCode($event_id, $trip_date)
+    public function generateTripCode($event_id, $trip_date)
     {
         $event = Event::find($event_id);
-        $trip_date = $trip_date->format('m-d-Y');
-        return $event->name.$trip_date;
+        $trip_date = $trip_date;
+        return str_replace(' ', '_', $event->name).'_'.$trip_date;
     
     }
 

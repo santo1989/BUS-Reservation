@@ -23,7 +23,7 @@ class CreateTripsTable extends Migration
             $table->string('start_location')->nullable();
             $table->string('end_location')->nullable();
             $table->unsignedBigInteger('bus_id')->nullable();
-            $table->unsignedBigInteger('drivers_id')->nullable();
+            $table->unsignedBigInteger('driver_id')->nullable();
             $table->string('trip_code')->nullable();
             $table->timestamps();
         });

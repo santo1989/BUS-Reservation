@@ -36,21 +36,25 @@
                 <thead>
                 <tr>
                     <th>Sl#</th>
+                    <th>Trip Code</th>
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Stoppages</th>
                     <th>Start Location</th>
                     <th>End Location</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                   @php $sl=0 @endphp
                   @foreach ($trips as $trip)
+                    @php $trip->stoppages = json_decode($trip->stoppages); @endphp
                     <tr>
                         <td>{{ ++$sl }}</td>
+                        <td>{{ $trip->trip_code }}</td>
                         <td>{{ $trip->start_date }}</td>
                         <td>{{ $trip->end_date }}</td>
-                        <td>{{ $trip->stoppages }}</td>
+                        <td>@foreach($trip->stoppages as $stoppage=>$time)<li>{{ $stoppage }} - {{ $time }}</li>@endforeach</td>
                         <td>{{ $trip->start_location }}</td>
                         <td>{{ $trip->end_location }}</td>
                       <td>
