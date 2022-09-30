@@ -21,8 +21,8 @@
         <div class="card-body">
            
                 <p>Image : <h3>
-                   @foreach ( $event_show->images as $image )
-                     <img src="{{ asset('pulic/images/events/'.$image) }}" alt="" width="100px" height="100px">
+                   @foreach ($event_show->images as $image)
+                     <img src="{{ asset('images/events/'.$image) }}" alt="" width="100px" height="100px">
                    @endforeach
                 </h3></p>
                 <p>Name : <h3>{{ $event_show->name }}</h3></p>
