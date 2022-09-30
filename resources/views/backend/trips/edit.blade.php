@@ -68,14 +68,26 @@
           @endforeach
       </select>
       
-      <div class="form-group" id="stoppages">
-          <label for="stoppages">Stopagges</label>
-          <div class="d-flex">
-              <input name="stoppages[]" class="form-control" id="stoppages" type="text">
-              <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1" style="width: 40px; color: purple" onclick="createInput()"><i class="fa fa-plus"></i></a>
-          </div>
+    
       </div>
-      </div>
+      <div class="form-group mt-3" id="stoppage">  
+        @foreach( $trip->stoppages as $key => $value)            
+        <div class="d-flex justify-content-between align-items-center">
+            <div style="width: 48%;">
+                <label for="stoppages">Stopagges</label>                    
+                <input name="stoppages[]" class="form-control" id="stoppages" type="text"
+                value={{ $key }}>
+            </div>
+            <div style="width: 48%;">
+                <label for="times">Expected Time</label>
+                <input name="times[]" class="form-control" id="times" type="time"
+                 value="{{$value}}">
+            </div>
+            <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1" style="width: 40px; height: 38px; color: purple; margin-top: 27px;" onclick="createInput()"><i class="fa fa-plus"></i></a>
+            <a class="bg-danger d-flex align-items-center justify-content-center bordered rounded ml-1" style="width: 40px; height: 38px; color: purple; margin-top: 27px;" onclick="deleteDiv(this)"><i class="fa fa-trash"></i></a>
+        </div>
+        @endforeach
+    </div>
       
   </div>
   <button type="submit" class="btn btn-primary" style="margin-left: 33px">Save</button>
@@ -84,48 +96,66 @@
 
 <script>
 
-  const createInput = () => {
-      const parent = document.getElementById("stoppages");
-      const div = document.createElement("div");
-      div.setAttribute('class', 'd-flex mt-2');
+    const createInput = () => {
+        const parent = document.getElementById("stoppage");
+        const div = document.createElement("div");
+        div.setAttribute('class', 'd-flex justify-content-between align-items-center');
 
-      const input = document.createElement("input");
-      input.setAttribute("type", "text");
-      input.setAttribute("class", "form-control");
-      input.setAttribute("name", "stoppages[]");
+        const div2 = document.createElement("div");
+        div2.setAttribute('style', 'width: 48%;');
 
-      const aPlus = document.createElement("a");
-      aPlus.setAttribute("class", "bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1");
-      aPlus.setAttribute("style", "width: 40px; color: purple");
-      aPlus.setAttribute("onclick", "createInput()");
-      
-      const iPlus = document.createElement("i");
-      iPlus.setAttribute("class", "fa fa-plus");
+        const labelPlace = document.createElement("label");
+        labelPlace.setAttribute("for", 'times');
+        labelPlace.innerHTML = "pected Time";
 
-      const aDelete = document.createElement("a");
-      aDelete.setAttribute("class", "bg-danger d-flex align-items-center justify-content-center bordered rounded ml-1");
-      aDelete.setAttribute("style", "width: 40px; color: black");
-      aDelete.setAttribute("onclick", "deleteDiv()");
-      
-      const iDelete = document.createElement("i");
-      iDelete.setAttribute("class", "fa fa-trash");
+        const labelTtime = document.createElement("label");
+        labelTtime.setAttribute("for", 'stoppages');
+        labelTtime.innerHTML = "Stoppages";
 
+        const inputPlace = document.createElement("input");
+        inputPlace.setAttribute("type", "text");
+        inputPlace.setAttribute("class", "form-control");
+        inputPlace.setAttribute("name", "stoppages[]");
 
-      aPlus.appendChild(iPlus);
-      aDelete.appendChild(iDelete);
-      div.appendChild(input);
-      div.appendChild(aPlus);
-      div.appendChild(aDelete);
-      parent.appendChild(div);
-  }
+        const inputTime = document.createElement("input");
+        inputTime.setAttribute("type", "time");
+        inputTime.setAttribute("class", "form-control");
+        inputTime.setAttribute("name", "times[]");
 
-  let deleteDiv = (e) => {
+        const aPlus = document.createElement("a");
+        aPlus.setAttribute("class", "bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1");
+        aPlus.setAttribute("style", "width: 40px; color: purple");
+        aPlus.setAttribute("onclick", "createInput()");
+        
+        const iPlus = document.createElement("i");
+        iPlus.setAttribute("class", "fa fa-plus");
+
+        const aDelete = document.createElement("a");
+        aDelete.setAttribute("class", "bg-danger d-flex align-items-center justify-content-center bordered rounded ml-1");
+        aDelete.setAttribute("style", "width: 40px; color: black");
+        aDelete.setAttribute("onclick", "deleteDiv(this)");
+        
+        const iDelete = document.createElement("i");
+        iDelete.setAttribute("class", "fa fa-trash");
+
+        parent.appendChild(div);
+        parent.appendChild(div2);
+       
+        aPlus.appendChild(iPlus);
+        aDelete.appendChild(iDelete);
+        div.appendChild(inputPlace);
+        div.appendChild(inputTime);
+        div.appendChild(aPlus);
+        div.appendChild(aDelete);
+
+    }
+
+    let deleteDiv = (e) => {
             e.parentNode.parentNode.removeChild(e.parentNode);
             // console.log(e);
         }
-  
-      
+    
+        
 </script>
-
 </x-backend.layouts.master>
 

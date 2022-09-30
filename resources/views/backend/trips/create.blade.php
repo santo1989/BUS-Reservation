@@ -75,17 +75,19 @@
             </div>
         </div>
         
-        <div class="form-group mt-3" id="stoppages">            
-            <div class="d-flex justify-content-between align-items-center">
-                <div style="width: 48%;">
+        <div class="form-group mt-3" id="stoppage">            
+            <div class="row">
+                <div class="col-md-6">
                     <label for="stoppages">Stopagges</label>                    
                     <input name="stoppages[]" class="form-control" id="stoppages" type="text">
                 </div>
-                <div style="width: 48%;">
+                <div class="col-md-5">
                     <label for="times">Expected Time</label>
                     <input name="times[]" class="form-control" id="times" type="time">
                 </div>
-                <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1" style="width: 40px; height: 38px; color: purple; margin-top: 27px;" onclick="createInput()"><i class="fa fa-plus"></i></a>
+                <div class="col-md-1">
+                    <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded w-100" style="width: 40px; height: 38px; color: purple; margin-top: 29px;" onclick="createInput()"><i class="fa fa-plus"></i></a>
+                </div>
             </div>
         </div>
         <x-backend.form.button>Save</x-backend.form.button>    </div>
@@ -94,17 +96,28 @@
 <script>
 
     const createInput = () => {
-        const parent = document.getElementById("stoppages");
+        const parent = document.getElementById("stoppage");
         const div = document.createElement("div");
-        div.setAttribute('class', 'd-flex mt-2');
+        div.setAttribute('class', 'row g-0 mt-2');
 
-        const input = document.createElement("input");
-        input.setAttribute("type", "text");
-        input.setAttribute("class", "form-control");
-        input.setAttribute("name", "stoppages[]");
+        const div2 = document.createElement("div");
+        div2.setAttribute('class', 'col-md-6');
+
+        const div3 = document.createElement("div");
+        div3.setAttribute('class', 'col-md-5');        
+
+        const inputPlace = document.createElement("input");
+        inputPlace.setAttribute("type", "text");
+        inputPlace.setAttribute("class", "form-control");
+        inputPlace.setAttribute("name", "stoppages[]");
+
+        const inputTime = document.createElement("input");
+        inputTime.setAttribute("type", "time");
+        inputTime.setAttribute("class", "form-control");
+        inputTime.setAttribute("name", "times[]");
 
         const aPlus = document.createElement("a");
-        aPlus.setAttribute("class", "bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1");
+        aPlus.setAttribute("class", "bg-warning d-flex align-items-center justify-content-center bordered rounded");
         aPlus.setAttribute("style", "width: 40px; color: purple");
         aPlus.setAttribute("onclick", "createInput()");
         
@@ -112,19 +125,27 @@
         iPlus.setAttribute("class", "fa fa-plus");
 
         const aDelete = document.createElement("a");
-        aDelete.setAttribute("class", "bg-danger d-flex align-items-center justify-content-center bordered rounded ml-1");
+        aDelete.setAttribute("class", "bg-danger d-flex align-items-center justify-content-center bordered rounded");
         aDelete.setAttribute("style", "width: 40px; color: black");
         aDelete.setAttribute("onclick", "deleteDiv(this)");
+
+        const btnDiv = document.createElement("div");
+        btnDiv.setAttribute("class", "col-md-1 d-flex justify-content-between")
         
         const iDelete = document.createElement("i");
         iDelete.setAttribute("class", "fa fa-trash");
 
 
+
+        div2.appendChild(inputPlace);
+        div3.appendChild(inputTime);
+        div.appendChild(div2);
+        div.appendChild(div3);
         aPlus.appendChild(iPlus);
         aDelete.appendChild(iDelete);
-        div.appendChild(input);
-        div.appendChild(aPlus);
-        div.appendChild(aDelete);
+        btnDiv.appendChild(aPlus)
+        btnDiv.appendChild(aDelete)
+        div.appendChild(btnDiv);
         parent.appendChild(div);
     }
 

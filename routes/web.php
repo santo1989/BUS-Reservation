@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', 'create')->name('trips.create');
         Route::post('/store', 'store')->name('trips.store');
         Route::get('/edit/{trip_id}', 'edit')->name('trips.edit');
-        Route::put('/update/{trip_id}', 'update')->name('trips.update');
+        Route::post('/update/{trip_id}', 'update')->name('trips.update');
         Route::delete('/delete/{trip_id}', 'delete')->name('trips.destroy');
     });
 

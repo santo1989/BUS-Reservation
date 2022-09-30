@@ -81,6 +81,8 @@ class TripController extends Controller
         $buses = Bus::all();
         $drivers = Driver::all();
         $trip = Trip::where("id", $trip_id)->first();
+        $trip->stoppages = json_decode( $trip->stoppages);
+       // dd($trip);
         return view('backend.trips.edit', [
             'events' =>  $events, 
             'buses' =>  $buses, 
@@ -93,16 +95,22 @@ class TripController extends Controller
     {
        
         $trip = Trip::where("id", $trip_id)->first();
+        $stoppages = [];
+        $limit = count($request->stoppages);            
+        for($i = 0; $i < $limit; $i++)
+        {
+            $stoppages[$request->stoppages[$i]] = $request->times[$i];
+        }
         $trip->update([
             'event_id' => $request->event_id,
             'trip_details' => $request->trip_details,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'stoppages' => $request->stoppages,
+            'stoppages' => json_encode($stoppages),
             'start_location' => $request->start_location,
             'end_location' => $request->end_location,
             'bus_id' => $request->bus_id,
-            'drivers_id' => $request->drivers_id
+            'driver_id' => $request->drivers_id
         ]);
 
         
