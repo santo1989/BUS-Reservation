@@ -15,6 +15,10 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('passenger_id')->nullable();
+            $table->unsignedBigInteger('trip_id')->nullable();
+            $table->string('seat')->nullable();
+            $table->string('stoppage')->nullable();
             $table->timestamps();
         });
     }

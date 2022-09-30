@@ -46,26 +46,26 @@ class EventController extends Controller
         ]);
 
         try {
-            $event =  [
+            $event =  Event::create([
                 'name' => $request->name,
                 'details' => $request->details
+            ]);
 
-            ];
+           
 
-            $images = [];
-
-            if (count($request->images) > 0) {
-                // dd('check');
+            if ($request->images && count($request->images) > 0) {
+                $images = [];
                 for ($i = 0; $i < count($request->images); $i++) {
                     $image = $request->images[$i];
                     $filename = time() . '.' . $image->getClientOriginalExtension();
-                    $location = public_path('images/events/' . $filename);
+                    $location = public_path('images/events/');
                     $image->move($location, $filename);
                     $images[$i] = $filename;
                     sleep(1);
                 }
-                $event = array_merge($event, ['images' => json_encode($images)]);
-                Event::create($event);
+                $event->update([
+                    'images' => json_encode($images),
+                ]);
             }
 
             return redirect()->route('events.index')->withMessage('Successfully Created!');
@@ -77,7 +77,7 @@ class EventController extends Controller
     public function show(Event $event_show)
     {
         $event_show->images = json_decode($event_show->images);
-
+        // dd($event_show);
         return view('backend.events.show', [
             'event_show' => $event_show,
 

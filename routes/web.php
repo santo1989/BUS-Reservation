@@ -96,6 +96,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{trip_id}', 'update')->name('trips.update');
         Route::delete('/delete/{trip_id}', 'delete')->name('trips.destroy');
     });
+
+    //bookings
+    Route::controller(BookingsController::class)->prefix('bookings')->group(function () {
+        Route::get('/', 'index')->name('bookings.index');
+        Route::get('/create', 'create')->name('bookings.create');
+        Route::post('/store', 'store')->name('bookings.store');
+        Route::get('/edit/{booking_id}', 'edit')->name('bookings.edit');
+        Route::post('/update/{booking_id}', 'update')->name('bookings.update');
+        Route::delete('/delete/{booking_id}', 'delete')->name('bookings.destroy');
+    });
 });
 
 // Route::resource('/message', MessageController::class);

@@ -33,7 +33,7 @@ class TripController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request);
+        dd($request->all());
         try {
             $data = $request->all();
             $data['stoppages']  = json_encode($data['stoppages']); 
@@ -48,6 +48,14 @@ class TripController extends Controller
             return redirect()->back()->withErrors($e->getMessage());
         }
 
+    }
+
+    public function genereateTripCode($event_id, $trip_date)
+    {
+        $event = Event::find($event_id);
+        $trip_date = $trip_date->format('m-d-Y');
+        return $event->name.$trip_date;
+    
     }
 
     public function edit($trip_id)
