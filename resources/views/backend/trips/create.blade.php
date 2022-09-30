@@ -1,6 +1,6 @@
 <x-backend.layouts.master>
     <x-slot name="pageTitle">
-       Create Trip
+        Create Trip
     </x-slot>
 
     <x-slot name='breadCrumb'>
@@ -10,10 +10,10 @@
           <li class="breadcrumb-item"><a href="{{ route('trips.index') }}">Trip</a></li>
           <li class="breadcrumb-item active">Create Trip</li>
       </x-backend.layouts.elements.breadcrumb>
-  </x-slot>
+    </x-slot>
 
 
-  @if ($errors->any())
+    @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -21,78 +21,77 @@
                 @endforeach
             </ul>
         </div>
-  @endif
-  <form action="{{ route('trips.store') }}"  method="post">
-    <div>
-        @csrf
-
-        <div class="row">
-            <div class="col-md-6">
-                <x-backend.form.input name="start_date" type="date" label="Start Date"/>                
-            </div>
-            <div class="col-md-6">
-                <x-backend.form.input name="end_date" type="date" label="End Date"/>                
-            </div>
-            <div class="col-md-6">
-                <x-backend.form.input name="start_location" type="text" label="Start Location"/>
-            </div>
-            <div class="col-md-6">
-                <x-backend.form.input name="end_location" type="text" label="End Location"/>
-            </div>
-        </div>        
-        
-        <x-backend.form.textarea name="trip_details" label="Trip Details"/>
-
-        <div class="row">        
-            <div class=col-md-4>
-                <label for="event_id" class="mt-2">Event</label>
-                <select name="event_id" id="event_id" class="form-select">
-                    <option value="">Select One...</option>
-                    @foreach ($events as $event)
-                        <option value="{{ $event->id }}">{{ $event->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class=col-md-4>
-                <label for="bus_id" class="mt-2">Bus</label>
-                <select name="bus_id" id="bus_id" class="form-select">
-                    <option value="">Select One...</option>
-                    @foreach ($buses as $bus)
-                        <option value="{{ $bus->id }}">{{ $bus->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class=col-md-4>
-                <label for="driver_id" class="mt-2">Driver</label>
-                <select name="driver_id" id="driver_id" class="form-select">
-                    <option value="">Select One...</option>
-                    @foreach ($drivers as $driver)
-                        <option value="{{ $driver->id }}">{{ $driver->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        
-        <div class="form-group mt-3" id="stoppage">            
+    @endif
+    <form action="{{ route('trips.store') }}"  method="post">
+        <div>
+            @csrf
             <div class="row">
                 <div class="col-md-6">
-                    <label for="stoppages">Stopagges</label>                    
-                    <input name="stoppages[]" class="form-control" id="stoppages" type="text">
+                    <x-backend.form.input name="start_date" type="date" label="Start Date"/>                
                 </div>
-                <div class="col-md-5">
-                    <label for="times">Expected Time</label>
-                    <input name="times[]" class="form-control" id="times" type="time">
+                <div class="col-md-6">
+                    <x-backend.form.input name="end_date" type="date" label="End Date"/>                
                 </div>
-                <div class="col-md-1">
-                    <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded w-100" style="width: 40px; height: 38px; color: purple; margin-top: 29px;" onclick="createInput()"><i class="fa fa-plus"></i></a>
+                <div class="col-md-6">
+                    <x-backend.form.input name="start_location" type="text" label="Start Location"/>
+                </div>
+                <div class="col-md-6">
+                    <x-backend.form.input name="end_location" type="text" label="End Location"/>
+                </div>
+            </div>        
+            
+            <x-backend.form.textarea name="trip_details" label="Trip Details"/>
+
+            <div class="row">        
+                <div class=col-md-4>
+                    <label for="event_id" class="mt-2">Event</label>
+                    <select name="event_id" id="event_id" class="form-select">
+                        <option value="">Select One...</option>
+                        @foreach ($events as $event)
+                            <option value="{{ $event->id }}">{{ $event->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class=col-md-4>
+                    <label for="bus_id" class="mt-2">Bus</label>
+                    <select name="bus_id" id="bus_id" class="form-select">
+                        <option value="">Select One...</option>
+                        @foreach ($buses as $bus)
+                            <option value="{{ $bus->id }}">{{ $bus->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class=col-md-4>
+                    <label for="driver_id" class="mt-2">Driver</label>
+                    <select name="driver_id" id="driver_id" class="form-select">
+                        <option value="">Select One...</option>
+                        @foreach ($drivers as $driver)
+                            <option value="{{ $driver->id }}">{{ $driver->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
+            
+            <div class="form-group mt-3" id="stoppage">            
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="stoppages">Stopagges</label>                    
+                        <input name="stoppages[]" class="form-control" id="stoppages" type="text">
+                    </div>
+                    <div class="col-md-5">
+                        <label for="times">Expected Time</label>
+                        <input name="times[]" class="form-control" id="times" type="time">
+                    </div>
+                    <div class="col-md-1">
+                        <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded w-100" style="width: 40px; height: 38px; color: purple; margin-top: 29px;" onclick="createInput()"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <x-backend.form.button>Save</x-backend.form.button>    
         </div>
-        <x-backend.form.button>Save</x-backend.form.button>    </div>
-
-</form>
+    </form>
 <script>
 
     const createInput = () => {
@@ -134,8 +133,6 @@
         
         const iDelete = document.createElement("i");
         iDelete.setAttribute("class", "fa fa-trash");
-
-
 
         div2.appendChild(inputPlace);
         div3.appendChild(inputTime);

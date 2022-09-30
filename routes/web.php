@@ -112,6 +112,10 @@ Route::get('/notification/{message}/{notification}', [NotificationController::cl
 
 Route::get('/get-bookings/{trip_id}', [BookingController::class, 'getBookings']);
 
+Route::get('/get-trips/{event_id}', [BookingController::class, 'getTrips']);
+
+Route::get('/get-stoppages/{trip_id}', [BookingController::class, 'getStoppages']);
+
 Route::get('/setplane', function () {
     return view('backend.setplane');
 });

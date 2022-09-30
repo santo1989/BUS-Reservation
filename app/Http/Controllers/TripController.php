@@ -42,6 +42,7 @@ class TripController extends Controller
             }
 
             $tripCode = $this->generateTripCode($request->event_id, $request->start_date);
+            $availableSeats = Bus::where('id', $request->bus_id)->first();
 
             $trip = Trip::create([
                 'event_id' => $request->event_id,
@@ -53,7 +54,8 @@ class TripController extends Controller
                 'bus_id'    => $request->bus_id,
                 'driver_id' => $request->driver_id,
                 'trip_details' => $request->trip_details,
-                'trip_code' => $tripCode
+                'trip_code' => $tripCode,
+                'available_seats' => $availableSeats,
             ]);
 
 

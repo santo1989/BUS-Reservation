@@ -95,15 +95,14 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          
-<div class="table-responsive">
-  <table class="table table-bordered table-striped table-hover datatable datatable-User" id="book_table">
-    
-     
+        <div class="modal-body">          
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover datatable datatable-User" id="book_table">
+              
+              
 
-  </table>
-</div>
+            </table>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -125,34 +124,7 @@
             </button>
           </div>
           <div class="modal-body">
-            {{-- <form action="{{ route('bookings.update') }}" method="POST">
-              @csrf
-              <input type="hidden" name="id" id="id">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
-              </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email">
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter Phone">
-              </div>
-              <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="Enter Address">
-              </div>
-              <div class="form-group">
-                <label for="status">Status</label>
-                <select name="status" id="status" class="form-control">
-                  <option value="1">Active</option>
-                  <option value="0">Inactive</option>
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Update</button>
-            </form> --}}
+            
           </div>
         </div>
       </div>
@@ -179,10 +151,8 @@
         const th4 = document.createElement('th');
         th4.innerHTML = 'Stopage';
         const th5 = document.createElement('th');
-        th5.innerHTML = 'Seat';
-        const th6 = document.createElement('th');
-        th6.innerHTML = 'Action';
-        tr.append(th1, th2, th3, th4, th5, th6);
+        th5.innerHTML = 'Action';
+        tr.append(th1, th2, th3, th4, th5);
         thead.append(tr);
         table.append(thead);
         const tbody = document.createElement('tbody');
@@ -198,8 +168,6 @@
           const td4 = document.createElement('td');
           td4.innerHTML = booking.stoppage;
           const td5 = document.createElement('td');
-          td5.innerHTML = booking.seat;
-          const td6 = document.createElement('td');
           const a = document.createElement('a');
           a.href = `${base_url}/bookings/${booking.id}/edit`;
           // // send to edit modal 
@@ -215,8 +183,8 @@
           // a.href = 
           a.setAttribute('class', 'btn btn-sm btn-info');
           a.innerHTML = 'Edit';
-          td6.append(a);
-          tr.append(td1, td2, td3, td4, td5, td6);
+          td5.append(a);
+          tr.append(td1, td2, td3, td4, td5);
           tbody.append(tr);
         });
         table.append(tbody);

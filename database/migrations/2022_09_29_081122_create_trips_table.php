@@ -25,6 +25,7 @@ class CreateTripsTable extends Migration
             $table->unsignedBigInteger('bus_id')->nullable();
             $table->unsignedBigInteger('driver_id')->nullable();
             $table->string('trip_code')->nullable();
+            $table->integer('available_seats')->nullable();
             $table->timestamps();
         });
     }
