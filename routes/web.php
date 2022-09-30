@@ -112,4 +112,12 @@ Route::get('/notification/{message}/{notification}', [NotificationController::cl
 
 Route::get('/get-bookings/{trip_id}', [BookingController::class, 'getBookings']);
 
+Route::get('/setplane', function () {
+    return view('backend.setplane');
+});
+
+Route::get('/Bussetplane', function () {
+    return view('backend.Bussetplane');
+});
+
 require __DIR__ . '/auth.php';
