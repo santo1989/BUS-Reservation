@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Passenger;
 use App\Models\Event;
 use App\Models\Trip;
 use Illuminate\Http\Request;
@@ -41,5 +42,17 @@ class BookingController extends Controller
 
 
         return response()->json($bookings);
+    }
+
+    public function create()
+    {
+        $passangers = Passenger::all();
+        $events = Event::all();
+        $trips = Trip::all();
+        return view('backend.bookings.create', [
+            'passangers' =>  $passangers, 
+            'events' =>  $events, 
+            'trips' =>  $trips
+        ]);
     }
 }
