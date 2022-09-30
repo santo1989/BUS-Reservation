@@ -24,5 +24,15 @@ class Trip extends Model
     {
         return $this->belongsTo(Driver::class);
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function passengers()
+    {
+        return $this->hasMany(Passenger::class);
+    }
 }
 

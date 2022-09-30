@@ -85,10 +85,24 @@
   </section>
 
   <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    {{-- <script>
+      function getBookings(trip_id) {
+        var base_url = $('#base_url').val();
+        $.ajax({
+          url: base_url + '/bookings/getBookings',
+          type: 'GET',
+          data: {
+            trip_id: trip_id
+          },
+          success: function (data) {
+            $('.modal-body').html(data);
+          }
+        });
+      } --}}
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -109,7 +123,10 @@
       const base_url = $('#base_url').val();
       const fethc_url = `${base_url}/get-bookings/${trip_id}`;
       fetch(fethc_url)
-      .then(response => console.log(response))
+      .then(response => response.json())
+      .then(data => {console.log(data)
+  
+      })
       // alert(fethc_url);
     }
   </script>

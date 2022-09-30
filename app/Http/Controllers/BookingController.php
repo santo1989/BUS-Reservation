@@ -32,6 +32,14 @@ class BookingController extends Controller
     public function getBookings($trip_id)
     {
         $bookings = Booking::where('trip_id', $trip_id)->get();
+
+        foreach ($bookings as $booking)
+        {
+            $booking->passenger = $booking->passenger;
+            $booking->trip = $booking->trip;
+        }
+
+
         return response()->json($bookings);
     }
 }

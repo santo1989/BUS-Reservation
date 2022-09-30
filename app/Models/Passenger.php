@@ -20,4 +20,14 @@ class Passenger extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function trips()
+    {
+        return $this->hasMany(Trip::class);
+    }
+
 }

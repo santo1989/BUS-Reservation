@@ -11,4 +11,14 @@ class Booking extends Model
 
     protected $table = 'bookings';
     protected $guarded = [];
+
+    public function passenger()
+    {
+        return $this->belongsTo(Passenger::class);
+    }
+
+    public function trip()
+    {
+        return $this->belongsTo(Trip::class);
+    }
 }
