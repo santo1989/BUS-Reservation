@@ -9,6 +9,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\UploadedFile;
 
 class DriverController extends Controller
 {
@@ -61,11 +62,12 @@ class DriverController extends Controller
                     'email'   => $request->email,
                     'user_id' => $user->id,
                     'license_no' => $request->license_no,
-                    'picture' => $request->picture
+                    'picture' => $this->uploadpdf(request()->file('picture')),
+                   
 
                 ];
 
-
+                
                 Driver::create($driverData);
 
                 return redirect()->route('drivers.index')->withMessage("Successfully created driver with user");
@@ -131,10 +133,21 @@ class DriverController extends Controller
     public function destroy(Driver $driver)
     {
         try {
+            $user = User::find($driver->user_id);
+            $user->delete();
+            unlink(public_path('storage/drivers/' . $driver->picture));
             $driver->delete();
             return redirect()->route('drivers.index')->withMessage('Successfully Deleted!');
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
+    public function uploadpdf($file)
+    {
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $destinationPath = storage_path('/app/public/drivers/');
+        $file->move($destinationPath, $fileName);
+        return $fileName;
+    }
+
 }

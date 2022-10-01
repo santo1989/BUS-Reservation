@@ -81,7 +81,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', 'create')->name('buses.create');
         Route::post('/store', 'store')->name('buses.store');
         Route::get('/edit/{single_buse}', 'edit')->name('buses.edit');
-        Route::put('/update/{single_buse}', 'update')->name('buses.update');
+        Route::post('/update/{single_buse}', 'update')->name('buses.update');
         Route::delete('/delete/{buse}', 'destroy')->name('buses.destroy');
         Route::get('/show/{show_buse}', 'show')->name('buses.show');
     });

@@ -21,9 +21,8 @@
        <div class="row">
         <div class="col-md-5">
             <div class="card mb-4 mt-3">
-                <div class="card-body ">
-           <img src="{{ asset('storage/'.$show_driver->picture) }}" alt="">
-
+                <div class="card-body text-center">
+           <img src="{{ asset('storage/drivers/'.$show_driver->picture) }}" alt="" class="img" style="height: 250px; width:250px; border-radius: 50%;">
                 </div>
             </div>
 

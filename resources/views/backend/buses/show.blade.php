@@ -44,14 +44,14 @@
                     <th>Number of Seat</th>
                     <td>{{ $show_buse->no_of_seat }}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <th>Left Part</th>
                     <td>{{ $show_buse->left_part }}</td>
                 </tr>
                 <tr>
                     <th>Right Part</th>
                     <td>{{ $show_buse->right_part }}</td>
-                </tr>
+                </tr> --}}
             </table>
 
           </div>

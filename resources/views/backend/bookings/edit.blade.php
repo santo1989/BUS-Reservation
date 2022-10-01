@@ -160,6 +160,7 @@
         {
           newAvailable = parseInt(tripAvailableSeat) - parseInt(selectedSeat);
         }else{
+
           newAvailable = parseInt(<?php echo $booking->trip->available_seats; ?>) - parseInt(selectedSeat);
           alert(newAvailable);        
         }

@@ -28,7 +28,9 @@
 
         <x-backend.form.input name="name" type="text" label="Name"/>
         <x-backend.form.input name="reg_number" type="text" label="Registration Number"/>
-        <x-backend.form.input name="no_of_seat" type="number" label="Number of Seat"/>
+         <x-backend.form.input name="no_of_seat" type="number" label="Number of Seat"/>
+       {{-- <x-backend.form.input name="left_part" type="number" label="Right Side Seat"/>
+        <x-backend.form.input name="right_part" type="number" label="Left Side Seat"/> --}}
 
         <x-backend.form.button>Save</x-backend.form.button>    </div>
 </form>
