@@ -18,6 +18,7 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('passenger_id')->nullable();
             $table->unsignedBigInteger('trip_id')->nullable();
             $table->unsignedBigInteger('event_id')->nullable();
+            $table->integer('no_of_seat')->nullable();
             $table->string('seat')->nullable();
             $table->string('stoppage')->nullable();
             $table->timestamps();

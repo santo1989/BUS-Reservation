@@ -48,6 +48,7 @@
                         <thead>
                           <tr>
                             <th scope="col">Sl</th>
+                            <th scope="col">Trip Code</th>
                             <th scope="col">Start Date</th>
                             <th scope="col">End Date</th>
                             <th scope="col">Action</th>
@@ -57,6 +58,7 @@
                           @foreach ($event->trips as $index => $trip)
                             <tr>
                               <th scope="row">{{ $index+1 }}</th>
+                              <th>{{ $trip->trip_code }}</th>
                               <td>{{ $trip->start_date }}</td>
                               <td>{{ $trip->end_date }}</td>
                               <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="getBookings(<?php echo $trip->id;  ?>)">Show Bookings</button></td>
@@ -151,8 +153,10 @@
         const th4 = document.createElement('th');
         th4.innerHTML = 'Stopage';
         const th5 = document.createElement('th');
-        th5.innerHTML = 'Action';
-        tr.append(th1, th2, th3, th4, th5);
+        th5.innerHTML = 'No of Seat';
+        const th6 = document.createElement('th');
+        th6.innerHTML = 'Action';
+        tr.append(th1, th2, th3, th4, th5, th6);
         thead.append(tr);
         table.append(thead);
         const tbody = document.createElement('tbody');
@@ -167,24 +171,38 @@
           td3.innerHTML = booking.passenger.phone;
           const td4 = document.createElement('td');
           td4.innerHTML = booking.stoppage;
+          const td6 = document.createElement('td');
+          td6.innerHTML = booking.no_of_seat;
           const td5 = document.createElement('td');
           const a = document.createElement('a');
-          a.href = `${base_url}/bookings/${booking.id}/edit`;
-          // // send to edit modal 
-          // a.href = '#';
-          // a.setAttribute('data-toggle', 'modal');
-          // a.setAttribute('data-target', '#editModal');
-          // a.setAttribute('data-id', booking.id);
-          // a.setAttribute('data-name', booking.passenger.name);
-          // a.setAttribute('data-email', booking.passenger.email);
-          // a.setAttribute('data-phone', booking.passenger.phone);
-          // a.setAttribute('data-address', booking.passenger.address);
-          // a.setAttribute('data-status', booking.passenger.status);
-          // a.href = 
+          a.href = `${base_url}/bookings/edit/${booking.id}`;
+          
           a.setAttribute('class', 'btn btn-sm btn-info');
           a.innerHTML = 'Edit';
-          td5.append(a);
-          tr.append(td1, td2, td3, td4, td5);
+          
+          const deleteForm = document.createElement("form");
+          deleteForm.setAttribute('action', `${base_url}/bookings/delete/${booking.id}`);
+          deleteForm.setAttribute('method', 'POST');
+          deleteForm.innerHTML = 
+          `@csrf
+           @method('delete')
+          `;
+          const deleteButton = document.createElement('button');
+          deleteButton.setAttribute('type', 'submit');
+          deleteButton.setAttribute('class', 'btn btn-sm btn-danger');
+          deleteButton.onclick = () => confirm('Are you sure you want to delete this');
+          deleteButton.innerHTML = 'Delete';
+
+          deleteForm.appendChild(deleteButton);
+
+          const btnDiv = document.createElement('div');
+          btnDiv.setAttribute('class', 'd-flex justify-content-around');
+
+          btnDiv.appendChild(a);
+          btnDiv.appendChild(deleteForm);
+          
+          td5.appendChild(btnDiv);
+          tr.append(td1, td2, td3, td4, td6, td5);
           tbody.append(tr);
         });
         table.append(tbody);

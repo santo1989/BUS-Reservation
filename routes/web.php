@@ -116,6 +116,8 @@ Route::get('/get-trips/{event_id}', [BookingController::class, 'getTrips']);
 
 Route::get('/get-stoppages/{trip_id}', [BookingController::class, 'getStoppages']);
 
+Route::get('/get-available-seat/{trip_id}', [BookingController::class, 'getAvailableSeat']);
+
 Route::get('/setplane', function () {
     return view('backend.setplane');
 });

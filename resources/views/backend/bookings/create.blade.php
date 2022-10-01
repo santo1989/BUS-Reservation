@@ -54,12 +54,22 @@
                 </div>
             </div> 
 
-            <div class="row mb-3">        
+            <div class="row mb-3"> 
+                
+                <div class="col-md-4">
+                    <label for="no_of_seat" class="mt-2"> Number Of Seat</label>
+                    <input type="number" name="no_of_seat" id="no_of_seat" class="form-control">
+                </div>
+
                 <div class=col-md-4>
                     <label for="stoppage" class="mt-2">Stoppage</label>
                     <select name="stoppage" id="stoppage" class="form-select">
                         <option value="">Select One...</option>                        
                     </select>
+                </div>
+
+                <div class="col-md-4 mt-5" style="display:none;" id="avail_div">
+                    <strong>Available seat: <span id="new_available"></span></strong> 
                 </div>
             </div>            
             
@@ -70,6 +80,7 @@
     <input type="hidden" value="{{ url('') }}" id="base_url">
     
     <script>
+        let tripAvailableSeat = '';
         $('#event_id').on('change', function(){
             var event_id = $(this).val();
             const base_url = $("#base_url").val();
@@ -86,7 +97,7 @@
                 data.map(datam => {
                     const option = document.createElement('option');
                     option.value = datam.id;
-                    option.innerHTML = datam.trip_code;
+                    option.innerHTML = `${datam.trip_code} - ${datam.available_seats}`;
                     tripSelect.appendChild(option);
                 })
             })
@@ -96,7 +107,7 @@
         $('#trip_id').on('change', function(){
             var trip_id = $(this).val();
             const base_url = $("#base_url").val();
-            const fethc_url = `${base_url}/get-stoppages/${trip_id}`
+            const fethc_url = `${base_url}/get-stoppages/${trip_id}`;
             fetch(fethc_url)
             .then(response => response.json())
             .then(data => {
@@ -118,6 +129,32 @@
                     stoppagesSelect.appendChild(option);
                 }
             })
+
+            const fethc_url_seat = `${base_url}/get-available-seat/${trip_id}`;
+            fetch(fethc_url_seat)
+            .then(response => response.json())
+            .then(data => {
+                tripAvailableSeat = data;
+                $("#avail_div").show();
+                $("#new_available").html(tripAvailableSeat);
+            })
+        })
+
+        $("#no_of_seat").on('change', function() {
+            $("#avail_div").show();
+            
+            
+            const selectedSeat = this.value;
+            // alert(selectedSeat);
+            const newAvailable = parseInt(tripAvailableSeat) - parseInt(selectedSeat);
+            if(newAvailable < 0){
+                $("#new_available").attr('class', 'bg-danger p-2');
+                $("#new_available").html(newAvailable);
+            }else{
+                $("#new_available").attr('class', 'bg-warning p-2');
+                $("#new_available").html(newAvailable);
+            }
+            // alert(newAvailable);
         })
     </script>     
 

@@ -58,19 +58,71 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         try {
             $data = $request->all();
             unset($data['_token']);
 
             $booking = Booking::create($data);
 
+            $trip = Trip::where('id', $request->trip_id)->first();
+            $newAvailable = $trip->available_seats - $request->no_of_seat;
+            $trip->update([
+                'available_seats' => $newAvailable
+            ]);
+            
             return redirect()->route('bookings.index')->withMessage("Successfully created a booking");
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
+    }
+
+    public function edit($booking_id)
+    {
+        $booking = Booking::where('id', $booking_id)->first();
+        $passengers = Passenger::all();
+        $events = Event::all();
+        $trips = Trip::where('event_id', $booking->event_id)->get();
+        $stoppages = json_decode($booking->trip->stoppages, true);
+        // dd($stoppages);
+        $sl = 0; 
+        $modStoppages = [];
+        foreach ($stoppages as $location => $time)
+        {
+            $modStoppages[$sl] = "$location:$time";
+        }
+        // dd($modStoppages);
+        return view('backend.bookings.edit', compact('booking', 'passengers', 'events', 'trips', 'modStoppages'));
+    }
+
+    public function update(Request $request, $booking_id)
+    {
+        // dd($request->all());
+        try {
+            $booking = Booking::where('id', $booking_id)->first();
+            $data = $request->all();
+            unset($data['_token']);
+            unset($data['_method']);
+
+            $booking->update($data);
+
+            return redirect()->route('bookings.edit', ['booking_id' => $booking_id])->withMessage("Successfully created a booking");
+        } catch (QueryException $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+
+    public function delete($booking_id)
+    {
+        // dd($booking_id);
+        $booking = Booking::where('id', $booking_id)->first();
+
+        $booking->delete();
+
+        return redirect()->route('bookings.index')->withMessage('Booking deleted');
     }
 
     public function getTrips($event_id)
@@ -92,6 +144,12 @@ class BookingController extends Controller
         //     $stoppages[$location] = $time;
         // }
         return response()->json($stoppagesJson);
+    }
+
+    public function getAvailableSeat($trip_id)
+    {
+        $availableSeat = Trip::where('id', $trip_id)->first()->available_seats;
+        return response()->json($availableSeat);
     }
 
 
