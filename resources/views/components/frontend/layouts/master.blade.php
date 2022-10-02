@@ -14,7 +14,8 @@
     </head>
     <body>
         <!-- Navigation-->
-        @include('frontend.layouts.partials.nav')
+        {{-- @include('frontend.layouts.partials.nav') --}}
+        <x-frontend.layouts.partials.nav />
 
         <!-- Section-->
         <section class="py-5">

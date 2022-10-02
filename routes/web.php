@@ -4,6 +4,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\frontend\HomePageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PassengerController;
@@ -12,9 +13,16 @@ use App\Http\Controllers\TripController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//frontend
+
+Route::get('/', [HomePageController::class, 'index']);
+
+
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/home', function () {
