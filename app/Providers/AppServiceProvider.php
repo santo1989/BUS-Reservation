@@ -26,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
+        view()->composer('*', function ($events) {
+            $events->with('events', \App\Models\Event::all());
+        });
+
+
        
 
 

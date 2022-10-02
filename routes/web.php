@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomePageController::class, 'index']);
 Route::get('/contactUs', [HomePageController::class, 'contactUS']);
+Route::get('/events', [HomePageController::class, 'events']);
+Route::get('/event-details/{id}', [HomePageController::class, 'event_details'])->name('event_details');
 
 
 
