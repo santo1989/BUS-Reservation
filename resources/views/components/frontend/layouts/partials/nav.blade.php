@@ -22,10 +22,11 @@
 
                     </ul>
                 </li> --}}
-            </ul>
+            {{-- </ul> --}}
         {{-- </div> --}} 
         <div class="collapse navbar-collapse" id="navbarScroll">
-            <img src="./public/ui/oldFile/WEBSITE/images/logo.png" alt="Phantom Tranzit" title="" style="height: 3.8rem;">
+            <img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" class="img-circule" >
+            
             <a class="nav-link text-white" href="#"><strong>Phantom Tranzit</strong></a>
             
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
