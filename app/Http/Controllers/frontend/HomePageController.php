@@ -11,4 +11,10 @@ class HomePageController extends Controller
     {
         return view('frontend.index');
     }
+
+    public function contactUS()
+    {
+        return view('frontend.contact-us');
+    }
 }
+

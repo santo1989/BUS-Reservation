@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 //frontend
 
 Route::get('/', [HomePageController::class, 'index']);
+Route::get('/contactUs', [HomePageController::class, 'contactUS']);
+
 
 
 
