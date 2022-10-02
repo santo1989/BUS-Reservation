@@ -1,13 +1,13 @@
-<footer class="py-5" style="background-color: #400859">
+<footer class="footer py-5" style="background-color: #400859">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-center text-white">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
                 <ul class="list-unstyled mb-0">
                     <li><img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" class="img-circule" ></li>
                     
                 </ul>
             </div>
-            <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-center text-white">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
                     <h5 class="pb-3">P.O. Box 161<br>
                       SILVER LAKE MN 55381</h5><br>
               <p >US 
@@ -16,7 +16,7 @@
                 </p>
                     
             </div>
-            <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-center text-white">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
                     <h5 class="pb-3"><a href="#">Fleet</a><br>
                       <br>
                       <a href="#">Contact Us</a><br>
