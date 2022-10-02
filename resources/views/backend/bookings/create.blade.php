@@ -6,7 +6,7 @@
     <x-slot name='breadCrumb'>
       <x-backend.layouts.elements.breadcrumb>
           <x-slot name="pageHeader"> Booking </x-slot>
-          <li class="breadcrumb-item"><a href="{{ route('bookings.index') }}">Role</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('bookings.index') }}">Booking</a></li>
           <li class="breadcrumb-item active">Create Booking</li>
       </x-backend.layouts.elements.breadcrumb>
     </x-slot>

@@ -62,14 +62,18 @@ class BookingController extends Controller
             $data = $request->all();
             unset($data['_token']);
 
-            $booking = Booking::create($data);
-
             $trip = Trip::where('id', $request->trip_id)->first();
             $newAvailable = $trip->available_seats - $request->no_of_seat;
+            if($newAvailable < 0)
+            {
+                return redirect()->back()->withError('No of seats not available');
+            }
             $trip->update([
                 'available_seats' => $newAvailable
             ]);
-            
+
+            $booking = Booking::create($data);
+
             return redirect()->route('bookings.index')->withMessage("Successfully created a booking");
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -105,9 +109,19 @@ class BookingController extends Controller
             unset($data['_token']);
             unset($data['_method']);
 
+            $trip = Trip::where('id', $request->trip_id)->first();
+            $newAvailable = $trip->available_seats - $request->no_of_seat;
+            if($newAvailable < 0)
+            {
+                return redirect()->back()->withError('No of seats not available');
+            }
+            $trip->update([
+                'available_seats' => $newAvailable
+            ]);
+
             $booking->update($data);
 
-            return redirect()->route('bookings.edit', ['booking_id' => $booking_id])->withMessage("Successfully created a booking");
+            return redirect()->route('bookings.index')->withMessage("Successfully updated booking");
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         } catch (Exception $e) {
@@ -119,6 +133,11 @@ class BookingController extends Controller
     {
         // dd($booking_id);
         $booking = Booking::where('id', $booking_id)->first();
+
+        $trip = Trip::where('id', $booking->trip_id)->first();
+        $trip->update([
+            'available_seats' => $trip->available_seats + $booking->no_of_seat
+        ]);
 
         $booking->delete();
 

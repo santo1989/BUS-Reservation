@@ -59,7 +59,7 @@
               <select name="trip_id" id="trip_id" class="form-select">
                   <option value="">Select One...</option>  
                   @foreach ($trips as $trip)
-                      <option value="{{ $trip->id }}" {{ $trip->id == $booking->trip_id ? ' selected' : '' }}>{{ $trip->trip_code }}</option>
+                      <option value="{{ $trip->id }}" {{ $trip->id == $booking->trip_id ? ' selected' : '' }}>{{ $trip->trip_code }} - {{ $trip->available_seats }}</option>
                   @endforeach                      
               </select>
           </div>
@@ -111,7 +111,7 @@
             data.map(datam => {
                 const option = document.createElement('option');
                 option.value = datam.id;
-                option.innerHTML = datam.trip_code;
+                option.innerHTML = datam.trip_code + " - " + datam.available_seats;
                 tripSelect.appendChild(option);
             })
         })
@@ -155,24 +155,40 @@
 
       $("#no_of_seat").on('change', function() {
         const selectedSeat = this.value;
-        const newAvailable = '';
-        if(tripAvailableSeat.length > 0)
-        {
-          newAvailable = parseInt(tripAvailableSeat) - parseInt(selectedSeat);
-        }else{
+        // alert(tripAvailableSeat);
 
-          newAvailable = parseInt(<?php echo $booking->trip->available_seats; ?>) - parseInt(selectedSeat);
-          alert(newAvailable);        
-        }
-        if(newAvailable < 0){
-          // $("#new_available").attr('class', 'bg-danger p-2');
-          // $("#new_available").html(newAvailable);
+        // if(selectedSeat > tripAvailableSeat){
+        //     alert("You can't select more than available seat");
+        //     this.value = "";
+        // }
+
+        // alert(typeof(tripAvailableSeat));
+
+        if(typeof(tripAvailableSeat) =='number')
+        {
+            let newAvailable = parseInt(tripAvailableSeat) - parseInt(selectedSeat);
+            if(newAvailable < 0){
+                $("#new_available").attr('class', 'bg-danger p-2');
+                $("#new_available").html(newAvailable);
+            }else{
+                $("#new_available").attr('class', 'bg-warning p-2');
+                $("#new_available").html(newAvailable);
+            }
         }else{
-            $("#new_available").attr('class', 'bg-warning p-2');
-            $("#new_available").html(newAvailable);
+            let newAvailable = parseInt(<?php echo $booking->trip->available_seats; ?>) - parseInt(selectedSeat);
+
+            if(newAvailable < 0){
+                $("#new_available").attr('class', 'bg-danger p-2');
+                $("#new_available").html(newAvailable);
+            }else{
+                $("#new_available").attr('class', 'bg-warning p-2');
+                $("#new_available").html(newAvailable);
+            }
         }
-        // alert(newAvailable);
       })
+
+
+    
       
   </script>
 
