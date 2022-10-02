@@ -37,7 +37,7 @@
                 <a class="nav-link text-white" href="#"><strong>Contact Us</strong></a>
               </li>
               <li>
-                <a class="btn btn-sm text-secindary rounded-pill" href="#" style="background: #ffffff;"> 
+                <a class="btn btn-bg text-secindary rounded-pill" href="#" style="background: #ffffff;"> 
                     <strong>Get a Quote</strong> </a>
               </li>
             </ul>
