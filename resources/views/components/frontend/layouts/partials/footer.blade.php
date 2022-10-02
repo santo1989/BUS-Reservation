@@ -17,12 +17,13 @@
                     
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
-                    <h5 class="pb-3"><a href="#">Fleet</a><br>
+                    <h5 class="pb-3">
+                        <a class="text-white" href="#">Fleet</a><br>
                       <br>
-                      <a href="#">Contact Us</a><br>
+                      <a class="text-white" href="#">Contact Us</a><br>
                       <br>
-                      <a href="#">Get a Quote</a><br>
-                      <a href="#"><br>
+                      <a class="text-white" href="#">Get a Quote</a><br>
+                      <a class="text-white" href="#"><br>
                       </a><br>
                       <br>
                     </h5>
@@ -41,8 +42,9 @@
         </div>
         <div class="media-container-row mbr-white"> 
           <div class="col-sm-6 copyright"> 
-            <p class="text-white"> © Copyright 2018-2023 Phantom Tranzit LLC- All Rights Reserved </p>
-          </div>
+            <p class="text-white"> © Copyright 2018-{{ now()->year }} Phantom Tranzit LLC- All Rights Reserved </p> &nbsp; &nbsp; &nbsp; &nbsp;
+            <a class="text-white" href="https://breakitsolution.com/" traget="_blank">Break-IT</a>
+            </div>
           <div class="col-md-6"> </div>
         </div>
       </div>
