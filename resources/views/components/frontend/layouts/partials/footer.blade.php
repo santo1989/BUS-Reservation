@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
                 <ul class="list-unstyled mb-0">
-                    <li><img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" class="img-circule" ></li>
+                    <li><img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" class="img-circule" height=100px;></li>
                     
                 </ul>
             </div>
@@ -35,6 +35,9 @@
             </div> --}}
 
     </div>
+
+   
+    
     <div class="footer-lower"> 
         <div class="media-container-row"> 
           <div class="col-sm-12"> 
