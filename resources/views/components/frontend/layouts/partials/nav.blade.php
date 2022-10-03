@@ -23,6 +23,8 @@
 </div>
 </nav>--}}
 
+
+{{--new navbar--}}
 <header class="nav-header">
    <div class="navvv">
    <img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" heigt=50px; width=60px; class="logo-image" >
