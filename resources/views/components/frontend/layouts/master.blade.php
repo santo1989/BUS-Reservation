@@ -18,7 +18,7 @@
        
         <!-- Section-->
         <section>
-            <div class="container ">
+            <div class="container">
                 {{ $slot }}
             </div>
         </section>

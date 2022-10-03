@@ -31,4 +31,9 @@ class HomePageController extends Controller
         $event->images = json_decode($event->images, true);
         return view('frontend.events.fleets-details', compact('event'));
     }
+
+    public function trip()
+    {
+        return view('frontend.trip');
+    }
 }
