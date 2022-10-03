@@ -13,11 +13,14 @@
     </head>
     <body>
         <!-- Navigation-->
+        {{-- @include('frontend.layouts.partials.nav') --}}
+
         <x-frontend.layouts.partials.nav />
+     
        
         <!-- Section-->
         <section class="py-5">
-            <div class="container mt-1">
+            <div class="container px-4 px-lg-5 mt-5">
                 {{ $slot }}
             </div>
         </section>

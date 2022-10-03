@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background: #400859;">
+{{--<nav class="navbar navbar-expand-lg navbar-light" style="background: #400859;">
     <div class="container px-4 px-lg-5">
-   {{--     <a class="navbar-brand" href="#!"></a>
+        <a class="navbar-brand" href="#!"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" class="img-circule" >
@@ -19,11 +19,10 @@
       <strong>Get a Quote</strong> </a>
   </li>
 </ul>
-</div>--}}
+</div>
+</div>
+</nav>--}}
 
-
-
-{{--new navbar--}}
 <header class="nav-header">
    <div class="navvv">
     
@@ -63,5 +62,3 @@
     navBar.classList.toggle("active");
   }
 </script>
-</div>
-</nav>
