@@ -40,7 +40,8 @@
                                                     <td>Otto</td>
                                                     <td>
                                                         <!-- Button trigger modal -->
-                                                    <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="myfunction()">Show Bookings</button></td>
+                                                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="myfunction()">Show Bookings</button>
+                                                    </td>
 
                                                     <!-- Modal -->
                                                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -48,10 +49,100 @@
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
+                                                                    <h5 class="modal-title text-dark">Trip Booking</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="">
+                                                                        <div class="container-fluid">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        <label for="exampleFormControlInput1" class="form-label  tex-dark">Passenger Name</label>
+                                                                                        <input type="email" class="form-control" id="exampleFormControlInput1">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        <label for="exampleFormControlInput1" class="form-label  tex-dark">Phone Number</label>
+                                                                                        <input type="text" class="form-control" id="exampleFormControlInput1">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        <label for="exampleFormControlInput1" class="form-label  tex-dark">Address</label>
+                                                                                        <input type="text" class="form-control" id="exampleFormControlInput1">
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        Events
+                                                                                        <select class="form-select" aria-label="Default select example">
+                                                                                            <option selected>Event</option>
+                                                                                            <option value="1">One</option>
+                                                                                            <option value="2">Two</option>
+                                                                                            <option value="3">Three</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        Trips
+                                                                                        <select class="form-select" aria-label="Default select example">
+                                                                                            <option selected>Open this select menu</option>
+                                                                                            <option value="1">One</option>
+                                                                                            <option value="2">Two</option>
+                                                                                            <option value="3">Three</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        Stoppages
+                                                                                        <select class="form-select" aria-label="Default select example">
+                                                                                            <option selected>Open this select menu</option>
+                                                                                            <option value="1">One</option>
+                                                                                            <option value="2">Two</option>
+                                                                                            <option value="3">Three</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+                                                                                    <div class="mb-3">
+                                                                                        Number of Seats
+                                                                                        <select class="form-select" aria-label="Default select example">
+                                                                                            <option selected>Event</option>
+                                                                                            <option value="1">One</option>
+                                                                                            <option value="2">Two</option>
+                                                                                            <option value="3">Three</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+
+                                                                                </div>
+                                                                                <div class="col-md-4 col-sm-6 col-lg-4">
+
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+
+
                                                                 </div>
                     </td>
                 </tr>
@@ -71,16 +162,98 @@
 
     <script>
         function myfunction() {
-         let modal = document.getElementById('exampleModalLabel');
+            let modal = document.getElementById('exampleModalLabel');
             modal.innerHTML = "Somudro Bilash";
 
 
         }
-
-
-
-        
-        
     </script>
 
 </x-frontend.layouts.master>
+
+
+{{--old modal--}}
+<form action="">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-lg-4">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label  tex-dark">Passenger Name</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label  tex-dark">Phone Number</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1">
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label  tex-dark">Address</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-lg-4">
+                <div class="mb-3">
+                    Events
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Event</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4">
+                <div class="mb-3">
+                    Trips
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4">
+                <div class="mb-3">
+                    Stoppages
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-lg-4">
+                <div class="mb-3">
+                    Number of Seats
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Event</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4">
+
+            </div>
+            <div class="col-md-4 col-sm-6 col-lg-4">
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+</form>
