@@ -40,7 +40,7 @@
                                                     <td>Otto</td>
                                                     <td>
                                                         <!-- Button trigger modal -->
-                                                    <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" >Show Bookings</button></td>
+                                                    <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="myfunction()">Show Bookings</button></td>
 
                                                     <!-- Modal -->
                                                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -70,6 +70,15 @@
     </div>
 
     <script>
+        function myfunction() {
+         let modal = document.getElementById('exampleModalLabel');
+            modal.innerHTML = "Somudro Bilash";
+
+
+        }
+
+
+
         
         
     </script>
