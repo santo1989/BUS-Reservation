@@ -18,15 +18,17 @@ class HomePageController extends Controller
         return view('frontend.contact-us');
     }
 
-    public function events()
+    public function fleets()
     {
-        return view('frontend.events');
+        $events = Event::all();
+        // dd($events);
+        return view('frontend.events.fleet', compact('events'));
     }
 
-    public function event_details($id)
+    public function fleet_details($id)
     {
         $event = Event::find($id);
-        return view('frontend.events-details', compact('event'));
+        $event->images = json_decode($event->images, true);
+        return view('frontend.events.fleets-details', compact('event'));
     }
 }
-
