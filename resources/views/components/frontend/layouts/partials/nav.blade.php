@@ -24,25 +24,29 @@
 </nav>--}}
 
 <header class="nav-header">
-<img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" heigt=80px; width=70px; class="logo-image" >
-  <div class="logo">Phantom Tranzit</div>
+   <div class="navvv">
+   <img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" heigt=50px; width=60px; class="logo-image" >
+
+  <div class="logo"><strong>Phantom Tranzit</strong></div>
+  </div>
   <div class="tranzit">
     <div class="line"> </div>
     <div class="line"></div>
     <div class="line"></div>
   </div>
+
   
   <nav class="bla-bar">
  
     <ul>
       <li>
-        <a href="" >Fleet</a>
+        <a href="" ><strong>Fleet</strong></a>
       </li>
       <li>
-        <a href="">Contact Us</a>
+        <a href=""><strong>Contact Us</strong></a>
       </li>
       <li>
-        <a href="" class="active">Get a Quote</a>
+        <a href="" class="active"><strong>Get a Quote</strong></a>
       </li>
     </ul>
   </nav>
