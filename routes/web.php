@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BusController;
+use App\Http\Controllers\ContractMessageController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\frontend\HomePageController;
@@ -19,10 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 //frontend
 
-Route::get('/', [HomePageController::class, 'index']);
-Route::get('/contactUs', [HomePageController::class, 'contactUS']);
-Route::get('/events', [HomePageController::class, 'events']);
-Route::get('/event-details/{id}', [HomePageController::class, 'event_details'])->name('event_details');
+Route::get('/', [HomePageController::class, 'index'])->name('Phantom-Tranzit');
+Route::get('/contactUs', [HomePageController::class, 'contactUS'])->name('contactUS');
+Route::get('/fleets', [HomePageController::class, 'fleets'])->name('fleets');
+Route::get('/fleet-details/{id}', [HomePageController::class, 'fleet_details'])->name('fleet_details');
 
 
 
@@ -119,7 +120,23 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Route::resource('/message', MessageController::class);
+
+
+Route::get('/contract-message', [ContractMessageController::class, 'index'])->name('contract_message.index');
+
+Route::get('/contract-message/create', [ContractMessageController::class, 'create'])->name('contract_message.create');
+
+Route::post('/contract-message', [ContractMessageController::class, 'store'])->name('contract_message.store');
+
+Route::get('/contract-message/{message}', [ContractMessageController::class, 'show'])->name('contract_message.show');
+
+Route::get('/contract-message/{message}/edit', [ContractMessageController::class, 'edit'])->name('contract_message.edit');
+
+Route::put('/contract-message/{message}', [ContractMessageController::class, 'update'])->name('contract_message.update');
+
+Route::delete('/contract-message/{message}', [ContractMessageController::class, 'destroy'])->name('contract_message.destroy');
+
+
 Route::get('/notification/{message}/{notification}', [NotificationController::class, 'showForUpdating'])->name("/message.show");
 
 Route::get('/get-bookings/{trip_id}', [BookingController::class, 'getBookings']);
@@ -130,12 +147,12 @@ Route::get('/get-stoppages/{trip_id}', [BookingController::class, 'getStoppages'
 
 Route::get('/get-available-seat/{trip_id}', [BookingController::class, 'getAvailableSeat']);
 
-Route::get('/setplane', function () {
-    return view('backend.setplane');
-});
+// Route::get('/setplane', function () {
+//     return view('backend.setplane');
+// });
 
-Route::get('/Bussetplane', function () {
-    return view('backend.Bussetplane');
-});
+// Route::get('/Bussetplane', function () {
+//     return view('backend.Bussetplane');
+// });
 
 require __DIR__ . '/auth.php';

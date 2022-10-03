@@ -31,7 +31,7 @@
             <!-- /.card-header -->
             <div class="card-body">
               <div id="accordion">
-                @foreach($events as $index => $event)
+                @foreach($evs as $index => $event)
                 <div class="card mt-2">
                   <div class="card-header d-flex justify-content-between" id="heading{{ $event->id }}">                  
                     <h5 class="mb-0">
@@ -55,6 +55,7 @@
                           </tr>
                         </thead>
                         <tbody>
+                          {{-- @dd($event->trips) --}}
                           @foreach ($event->trips as $index => $trip)
                             <tr>
                               <th scope="row">{{ $index+1 }}</th>

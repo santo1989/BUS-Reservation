@@ -25,9 +25,11 @@
 
 <header class="nav-header">
    <div class="navvv">
+    
    <img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" heigt=50px; width=60px; class="logo-image" >
 
-  <div class="logo"><strong>Phantom Tranzit</strong></div>
+  <div class="logo"><a href="{{ route('Phantom-Tranzit') }} "class="text-white text-decoration-none"><strong>Phantom Tranzit</strong></a></div>
+
   </div>
   <div class="tranzit">
     <div class="line"> </div>
@@ -40,13 +42,13 @@
  
     <ul>
       <li>
-        <a href="" ><strong>Fleet</strong></a>
+        <a href="{{ route('fleets') }}" ><strong>Fleet</strong></a>
       </li>
       <li>
-        <a href=""><strong>Contact Us</strong></a>
+        <a href="{{ route('contactUS') }}"><strong>Contact Us</strong></a>
       </li>
       <li>
-        <a href="" class="active"><strong>Get a Quote</strong></a>
+        <a href="#" class="active"><strong>Get a Quote</strong></a>
       </li>
     </ul>
   </nav>

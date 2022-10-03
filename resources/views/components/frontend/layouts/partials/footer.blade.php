@@ -18,15 +18,16 @@
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
                     <h5 class="pb-3">
-                        <a class="text-white text-decoration-none" href="#">Fleet</a><br>
+                        <a class="text-white text-decoration-none" href="{{ route('fleets') }}">Fleet</a><br>
                       <br>
-                      <a class="text-white text-decoration-none" href="#">Contact Us</a><br>
+                      <a class="text-white text-decoration-none" href="{{ route('contactUS') }}">Contact Us</a><br>
                       <br>
                       <a class="text-white text-decoration-none" href="#">Get a Quote</a><br>
                       <a class="text-white text-decoration-none" href="#"><br>
                       </a><br>
                       <br>
                     </h5>
+                
                     
             </div>
             {{-- <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-center text-white">

@@ -18,26 +18,23 @@ class BookingController extends Controller
         $date = date("Y-m-d");
         $unq_event_ids = Trip::where('start_date', '>=', $date)->pluck('event_id')->unique();
         $events = array();
-        foreach ($unq_event_ids as $event_id)
-        {
+        foreach ($unq_event_ids as $event_id) {
             $event = Event::where('id', $event_id)->first();
             array_push($events, $event);
         }
-        foreach ($events as $event)
-        {
+        foreach ($events as $event) {
             $event->trips = Trip::where('event_id', $event->id)->where('start_date', '>=', $date)->get();
             $event->trip_count = $event->trips->count();
         }
-        // dd($events);
-        return view('backend.bookings.index', compact('events'));
+        //dd($events);
+        return view('backend.bookings.index', ['evs' => $events]);
     }
 
     public function getBookings($trip_id)
     {
         $bookings = Booking::where('trip_id', $trip_id)->get();
 
-        foreach ($bookings as $booking)
-        {
+        foreach ($bookings as $booking) {
             $booking->passenger = $booking->passenger;
             $booking->trip = $booking->trip;
         }
@@ -51,8 +48,8 @@ class BookingController extends Controller
         $passengers = Passenger::all();
         $events = Event::all();
         return view('backend.bookings.create', [
-            'passengers' =>  $passengers, 
-            'events' =>  $events, 
+            'passengers' =>  $passengers,
+            'events' =>  $events,
         ]);
     }
 
@@ -64,8 +61,7 @@ class BookingController extends Controller
 
             $trip = Trip::where('id', $request->trip_id)->first();
             $newAvailable = $trip->available_seats - $request->no_of_seat;
-            if($newAvailable < 0)
-            {
+            if ($newAvailable < 0) {
                 return redirect()->back()->withError('No of seats not available');
             }
             $trip->update([
@@ -90,10 +86,9 @@ class BookingController extends Controller
         $trips = Trip::where('event_id', $booking->event_id)->get();
         $stoppages = json_decode($booking->trip->stoppages, true);
         // dd($stoppages);
-        $sl = 0; 
+        $sl = 0;
         $modStoppages = [];
-        foreach ($stoppages as $location => $time)
-        {
+        foreach ($stoppages as $location => $time) {
             $modStoppages[$sl] = "$location:$time";
         }
         // dd($modStoppages);
@@ -111,8 +106,7 @@ class BookingController extends Controller
 
             $trip = Trip::where('id', $request->trip_id)->first();
             $newAvailable = $trip->available_seats - $request->no_of_seat;
-            if($newAvailable < 0)
-            {
+            if ($newAvailable < 0) {
                 return redirect()->back()->withError('No of seats not available');
             }
             $trip->update([
@@ -149,7 +143,6 @@ class BookingController extends Controller
         $date = date('Y-m-d');
         $trips = Trip::where('start_date', '>=', $date)->where('event_id', '=', $event_id)->get();
         return response()->json($trips);
-
     }
 
     public function getStoppages($trip_id)
@@ -170,6 +163,4 @@ class BookingController extends Controller
         $availableSeat = Trip::where('id', $trip_id)->first()->available_seats;
         return response()->json($availableSeat);
     }
-
-
 }
