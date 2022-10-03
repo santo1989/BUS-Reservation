@@ -14,17 +14,14 @@
     <body>
         <!-- Navigation-->
         {{-- @include('frontend.layouts.partials.nav') --}}
-
         <x-frontend.layouts.partials.nav />
-        <div class="container">
-
+       
         <!-- Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
+        <section>
+            <div class="container ">
                 {{ $slot }}
             </div>
         </section>
-        </div>
         <!-- Footer-->
         <x-frontend.layouts.partials.footer/>
         <!-- Bootstrap core JS-->
