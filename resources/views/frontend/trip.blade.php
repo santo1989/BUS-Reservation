@@ -6,8 +6,8 @@
         <table class="table table-dark table-striped">
             <thead>
                 <!-- <tr>
-                    <th scope="col">Book a Seat</th>
-                </tr> -->
+<th scope="col">Book a Seat</th>
+</tr> -->
             </thead>
             <tbody>
                 <tr>
@@ -173,87 +173,87 @@
 
 
 {{--old modal--}}
-<form action="">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-lg-4">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label  tex-dark">Passenger Name</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1">
+{{--<form action="">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-4 col-sm-6 col-lg-4">
+<div class="mb-3">
+<label for="exampleFormControlInput1" class="form-label  tex-dark">Passenger Name</label>
+<input type="email" class="form-control" id="exampleFormControlInput1">
 
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-lg-4">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label  tex-dark">Phone Number</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1">
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-lg-4">
+<div class="mb-3">
+<label for="exampleFormControlInput1" class="form-label  tex-dark">Phone Number</label>
+<input type="text" class="form-control" id="exampleFormControlInput1">
 
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-lg-4">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label  tex-dark">Address</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1">
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-lg-4">
+<div class="mb-3">
+<label for="exampleFormControlInput1" class="form-label  tex-dark">Address</label>
+<input type="text" class="form-control" id="exampleFormControlInput1">
 
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-lg-4">
-                <div class="mb-3">
-                    Events
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Event</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-lg-4">
-                <div class="mb-3">
-                    Trips
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-lg-4">
-                <div class="mb-3">
-                    Stoppages
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4 col-sm-6 col-lg-4">
+<div class="mb-3">
+Events
+<select class="form-select" aria-label="Default select example">
+<option selected>Event</option>
+<option value="1">One</option>
+<option value="2">Two</option>
+<option value="3">Three</option>
+</select>
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-lg-4">
+<div class="mb-3">
+Trips
+<select class="form-select" aria-label="Default select example">
+<option selected>Open this select menu</option>
+<option value="1">One</option>
+<option value="2">Two</option>
+<option value="3">Three</option>
+</select>
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-lg-4">
+<div class="mb-3">
+Stoppages
+<select class="form-select" aria-label="Default select example">
+<option selected>Open this select menu</option>
+<option value="1">One</option>
+<option value="2">Two</option>
+<option value="3">Three</option>
+</select>
+</div>
+</div>
 
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-lg-4">
-                <div class="mb-3">
-                    Number of Seats
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Event</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-lg-4">
+</div>
+<div class="row">
+<div class="col-md-4 col-sm-6 col-lg-4">
+<div class="mb-3">
+Number of Seats
+<select class="form-select" aria-label="Default select example">
+<option selected>Event</option>
+<option value="1">One</option>
+<option value="2">Two</option>
+<option value="3">Three</option>
+</select>
+</div>
+</div>
+<div class="col-md-4 col-sm-6 col-lg-4">
 
-            </div>
-            <div class="col-md-4 col-sm-6 col-lg-4">
+</div>
+<div class="col-md-4 col-sm-6 col-lg-4">
 
-            </div>
-        </div>
+</div>
+</div>
 
-    </div>
-    </div>
-</form>
+</div>
+</div>
+</form>--}}
