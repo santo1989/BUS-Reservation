@@ -32,9 +32,12 @@
         <br>
       <x-backend.form.input name="no_of_seat" type="number" label="Number of Seat" :value="$single_buse->no_of_seat"/>
         <br>
-      {{-- <x-backend.form.input name="left_part" type="number" label="Left Part" :value="$single_buse->left_part"/>
-        <br>
-      <x-backend.form.input name="right_part" type="number" label="Rigt Part" :value="$single_buse->right_part"/> --}}
+
+      <x-backend.form.input name="features_details" type="text" label="Features Details" :value="$single_buse->features_details"/>
+
+      <x-backend.form.input name="other_details" type="text" label="Other Details" :value="$single_buse->other_details"/>
+
+        
         <br>
 
       <x-backend.form.button>Save</x-backend.form.button>    </div>

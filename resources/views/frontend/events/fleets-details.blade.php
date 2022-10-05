@@ -1,4 +1,9 @@
 <x-frontend.layouts.master>
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+   @endif
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">

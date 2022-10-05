@@ -18,6 +18,9 @@ class CreateBusesTable extends Migration
             $table->string('name')->nullable();
             $table->string('reg_number')->unique();
             $table->integer('no_of_seat')->nullable();
+            $table->text('features_details')->nullable();
+            $table->string('images')->nullable();
+            $table->text('other_details')->nullable();
             $table->timestamps();
         });
     }

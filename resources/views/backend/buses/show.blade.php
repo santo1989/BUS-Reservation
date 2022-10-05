@@ -44,14 +44,15 @@
                     <th>Number of Seat</th>
                     <td>{{ $show_buse->no_of_seat }}</td>
                 </tr>
-                {{-- <tr>
-                    <th>Left Part</th>
-                    <td>{{ $show_buse->left_part }}</td>
+                <tr>
+                    <th>Features Details</th>
+                    <td>{{ $show_buse->features_details }}</td>
                 </tr>
                 <tr>
-                    <th>Right Part</th>
-                    <td>{{ $show_buse->right_part }}</td>
-                </tr> --}}
+                    <th>Other Details</th>
+                    <td>{{ $show_buse->other_details }}</td>
+                </tr>
+
             </table>
 
           </div>

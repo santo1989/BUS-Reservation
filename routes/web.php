@@ -22,9 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomePageController::class, 'index'])->name('Phantom-Tranzit');
 Route::get('/contactUs', [HomePageController::class, 'contactUS'])->name('contactUS');
-Route::get('/trip', [HomePageController::class, 'trip'])->name('trip');
+Route::get('/trip/{id}', [HomePageController::class, 'trip'])->name('trip');
 Route::get('/fleets', [HomePageController::class, 'fleets'])->name('fleets');
 Route::get('/fleet-details/{id}', [HomePageController::class, 'fleet_details'])->name('fleet_details');
+Route::post('/trip/newBooking/', [BookingController::class, 'newBooking'])->name('newBooking');
 
 
 
@@ -155,5 +156,9 @@ Route::get('/get-available-seat/{trip_id}', [BookingController::class, 'getAvail
 // Route::get('/Bussetplane', function () {
 //     return view('backend.Bussetplane');
 // });
+
+Route::get('/driver_passenger_index', function () {
+    return view('backend.passenger.driver_passenger_index');
+});
 
 require __DIR__ . '/auth.php';

@@ -24,8 +24,29 @@ class BusController extends Controller
     {
         try {
             $data = $request->all();
-            unset($data['_token']);
-            $bus = Bus::create($data);
+            // unset($data['_token']);
+          $busdata =  Bus::create([
+                'name' => $data['name'],
+                'reg_number' => $data['reg_number'],
+                'no_of_seat' => $data['no_of_seat'],
+                'features_details' => $data['features_details'],
+                'other_details' => $data['other_details'],
+            ]);
+
+            if ($request->images && count($request->images) > 0) {
+                $images = [];
+                for ($i = 0; $i < count($request->images); $i++) {
+                    $image = $request->images[$i];
+                    $filename = time() . '.' . $image->getClientOriginalExtension();
+                    $location = public_path('images/Buses/');
+                    $image->move($location, $filename);
+                    $images[$i] = $filename;
+                    sleep(1);
+                }
+                $busdata->update([
+                    'images' => json_encode($images),
+                ]);
+            }
 
             return redirect()->route('buses.index')->withMessage("Successfully created driver with user");
             
@@ -49,7 +70,13 @@ class BusController extends Controller
             $data = $request->all();
             unset($data['_token']);
             $bus = Bus::find($id);
-            $bus->update($data);
+            $bus->update([
+                'name' => $data['name'],
+                'reg_number' => $data['reg_number'],
+                'no_of_seat' => $data['no_of_seat'],
+                'features_details' => $data['features_details'],
+                'other_details' => $data['other_details'],
+            ]);
 
             return redirect()->route('buses.index')->withMessage("Successfully updated bus");
             
@@ -65,6 +92,12 @@ class BusController extends Controller
         try {
             $bus = Bus::find($id);
             $bus->delete();
+            foreach (json_decode($bus->images) as $image) {
+                $location = public_path('images/Buses/' . $image);
+                if (file_exists($location)) {
+                    unlink($location);
+                }
+            }
 
             return redirect()->route('buses.index')->withMessage("Successfully deleted bus");
             

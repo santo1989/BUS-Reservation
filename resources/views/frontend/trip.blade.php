@@ -5,6 +5,9 @@
         <p class="text-center"
         style="padding-top:10px; padding-bottom:20px; font-family:Verdana, Geneva, Tahoma, sans-serif">Take a
         Trip</p>
+        
+                
+       
         <table class="table table-dark table-striped">
         <thead>
         <!-- <tr>
@@ -16,11 +19,10 @@
 
 
         <td>
-
         <p>
         <a class="btn btn-outline-light" data-bs-toggle="collapse" href="#multiCollapseExample1"
-        role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Somudro
-        Bilash</a>
+        role="button" aria-expanded="false" aria-controls="multiCollapseExample1">{{ $event->name }}</a>
+      </a>
         </p>
         <div class="row">
         <div class="col">
@@ -38,17 +40,21 @@
         </thead>
         <tbody>
         <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>Otto</td>
-        <td>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-sm btn-warning"
-        data-toggle="modal" data-target=".bd-example-modal-lg"
-        onclick="myfunction()">Show Bookings</button>
+              @forelse ($trips as $index => $trip)
+                <tr>
+                  <th scope="row">{{ $index+1 }}</th>
+                  <th>{{ $trip->trip_code }}</th>
+                  <td>{{ $trip->start_date }}</td>
+                  <td>{{ $trip->end_date }}</td> 
+                    <!-- Button trigger modal -->
+                  <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="myfunction(<?php echo $trip->id;  ?>)">Show Bookings</button></td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="5" class="text-center">No Trips Found</td>
+                </tr>
+              @endforelse
         </td>
-
         <!-- Modal -->
         <div class="modal fade bd-example-modal-lg" tabindex="-1"
         role="dialog" aria-labelledby="myLargeModalLabel"
@@ -62,7 +68,19 @@
          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        <form action="">
+        <form action="{{ route('newBooking') }}" method="POST">
+        @csrf
+
+        {{-- hidden --}}
+         @forelse ($trips as $index => $trip)
+        <input type="hidden" name="trip_id" id="trip_id" value="<?php echo $trip->id;  ?>">
+        @empty
+        <tr>
+        <td colspan="5" class="text-center">No Trips Found</td>
+        </tr>
+        @endforelse
+
+        {{-- <form action="" method="POST"> --}}
         <div class="container-fluid">
         <div class="row">
         <div
@@ -74,7 +92,7 @@
         Name</label>
         <input type="text"
         class="form-control"
-        id="exampleFormControlInput1">
+        id="exampleFormControlInput1" name="name">
 
         </div>
         </div>
@@ -87,7 +105,7 @@
         Number</label>
         <input type="text"
         class="form-control"
-        id="exampleFormControlInput1">
+        id="exampleFormControlInput1" name="phone">
 
         </div>
         </div>
@@ -99,7 +117,7 @@
         class="form-label  tex-dark">Address</label>
         <input type="textarea"
         class="form-control"
-        id="exampleFormControlInput1">
+        id="exampleFormControlInput1" name="address">
 
         </div>
         </div>
@@ -110,15 +128,14 @@
         <div class="mb-3 text-dark">
         Events
         <select class="form-select"
-        aria-label="Default select example">
-        <option selected>Event
-        </option>
-        <option value="1">
-        One</option>
-        <option value="2">
-        Two</option>
-        <option value="3">
-        Three</option>
+        aria-label="Default select example" name="event_id" >
+        @forelse ( $events_name as $events)
+          
+        <option value="{{ $events->id }}">{{ $events->name }}</option>
+        @empty
+        <option value="0">No Event Found</option>
+        @endforelse
+      
         </select>
         </div>
         </div>
@@ -127,70 +144,70 @@
         <div class="mb-3 text-dark">
         Trips
         <select class="form-select"
-        aria-label="Default select example">
-        <option selected>Open
-        this select menu
-        </option>
-        <option value="1">
-        One</option>
-        <option value="2">
-        Two</option>
-        <option value="3">
-        Three</option>
+        aria-label="Default select example" name="trip_id">
+        @forelse ( $trips as $trip)
+
+        <option value="{{ $trip->id }}">{{ $trip->trip_code }}</option>
+        @empty
+        <option value="0">No Trip Found</option>
+        @endforelse
+
         </select>
         </div>
         </div>
+
         <div
         class="col-md-4 col-sm-6 col-lg-4">
         <div class="mb-3 text-dark">
         Stoppages
         <select class="form-select"
-        aria-label="Default select example">
-        <option selected>Open
-        this select menu
-        </option>
-        <option value="1">
-        One</option>
-        <option value="2">
-        Two</option>
-        <option value="3">
-        Three</option>
+        aria-label="Default select example" name="stoppage">
+        @forelse ( $trips as $trip)
+        @foreach ( $trip->stoppages as $key => $value)
+        <option value="{{ $value }}">{{ $key .'-'. $value }}</option>  
+        @endforeach
+        @empty
+        <option value="0">No Stoppage Found</option>
+        @endforelse
         </select>
         </div>
         </div>
-
+        
         </div>
         <div class="row">
         <div
-        class="col-md-4 col-sm-6 col-lg-4">
-        <div class="mb-3 text-dark">
+        class="col-md-4 col-sm-6 col-lg-4" id="new_seat_Data">
+        <div class="mb-3 text-dark" >
         Number of Seats
-        <input type="number" min="1"  max="10" class="form-control" id="exampleFormControlInput1">  
+        <input type="number" min="1"  class="form-control" id="available_seats_old" name="no_of_seat">  
         </div>
+       @php
+        $seat = 0;
+        $seat = $trip->available_seats;
+        $seat = $seat - $trip->booked_seats;
+        @endphp
         </div>
         <div
-        class="col-md-4 col-sm-6 col-lg-4">
-
-        </div>
-        <div
-        class="col-md-4 col-sm-6 col-lg-4">
+        class="col-md-4 col-sm-6 col-lg-4" id="available_seats">
 
         </div>
         </div>
 
 
         </div>
-        </form>
-        </div>
+        
+        </div>  
+       
         <div class="modal-footer">
         {{-- <button type="button"
         class="btn btn-secondary"
         data-bs-dismiss="modal">Close</button> --}}
-        <button type="button"
-        class="btn btn-primary">Booking Conform</button>
+        <button type="submit"
+        class="btn btn-primary" id="bookDta">Booking Confirm</button>
 
 
         </div>
+  </form> 
         </td>
         </tr>
         </tbody>
@@ -206,9 +223,45 @@
         </tbody>
         </table>
         </div>
-
+ 
         <script>
-      
+          let seat = <?php echo $seat; ?>;
+          let seat_old = document.getElementById('available_seats_old');
+          seat_old.addEventListener('change', function(){
+            if(seat_old.value > 0 && seat_old.value <= seat){
+              let seat_new = seat - seat_old.value;
+            let p = document.createElement('p');
+            p.innerHTML = 'Only '+seat_new+' seats are available';
+            
+            document.getElementById('new_seat_Data').appendChild(p);
+            }
+            else
+            {
+              alert('Please enter valid number of seats');
+              document.getElementById('new_seat_Data').removeChild(p);
+            }
+            
+          });
+
+          // let bookDta = document.getElementById('bookDta');
+          // bookDta.addEventListener('click', function(){
+          //   let url = "{{ route('newBooking') }}";
+          //   fetch(url){
+          //     method: 'POST',
+          //     headers: {
+          //       'Content-Type': 'application/json'
+          //     },
+          //     body: JSON.stringify({
+          //       name: name,
+          //       phone: phone,
+          //       address: address,
+          //       event_id: event_id,
+          //       trip_id: trip_id,
+          //       stoppage: stoppage,
+          //       no_of_seat: no_of_seat
+          //     })
+          //   }
+          // });
         
         </script>
 
