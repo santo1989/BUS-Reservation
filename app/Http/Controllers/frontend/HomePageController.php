@@ -36,4 +36,14 @@ class HomePageController extends Controller
     {
         return view('frontend.trip');
     }
+
+    public function transport()
+    {
+        return view('frontend.transport');
+    }
+
+    public function transport_details()
+    {
+        return view('frontend.transport-details');
+    }
 }

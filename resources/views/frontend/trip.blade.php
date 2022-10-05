@@ -3,8 +3,8 @@
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
         <p class="text-center"
-        style="padding-top:10px; padding-bottom:20px; font-family:Verdana, Geneva, Tahoma, sans-serif">Take a
-        Trip</p>
+        style="padding-top:10px; padding-bottom:20px; font-family: 'Inconsolata', monospace;  font-size: 25px;
+            letter-spacing: 1px; border: 2px solid black">TAKE A TRIP</p>
         <table class="table table-dark table-striped">
         <thead>
         <!-- <tr>

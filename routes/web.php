@@ -25,8 +25,8 @@ Route::get('/contactUs', [HomePageController::class, 'contactUS'])->name('contac
 Route::get('/trip', [HomePageController::class, 'trip'])->name('trip');
 Route::get('/fleets', [HomePageController::class, 'fleets'])->name('fleets');
 Route::get('/fleet-details/{id}', [HomePageController::class, 'fleet_details'])->name('fleet_details');
-
-
+Route::get('/transport', [HomePageController::class, 'transport'])->name('transport');
+Route::get('/transport-details', [HomePageController::class, 'transport_details'])->name('transport_details');
 
 
 Route::middleware('auth')->group(function () {
