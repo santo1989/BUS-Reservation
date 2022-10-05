@@ -1,5 +1,4 @@
-
-{{--<nav class="navbar navbar-expand-lg navbar-light" style="background: #400859;">
+{{-- <nav class="navbar navbar-expand-lg navbar-light" style="background: #400859;">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#!"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -22,48 +21,67 @@
 </ul>
 </div>
 </div>
-</nav>--}}
+</nav> --}}
 
 
 
-{{--2nd Navbar--}}
+{{-- 2nd Navbar --}}
 <header class="nav-header">
-   <div class="navvv">
-    
-   <img src="{{ asset('ui/frontend/images/logo_small.png')}}" alt="" heigt=50px; width=60px; class="logo-image" >
+    <div class="navvv">
 
-  <div class="logo"><a href="{{ route('Phantom-Tranzit') }} "class="text-white text-decoration-none"><strong>Phantom Tranzit</strong></a></div>
+        <img src="{{ asset('ui/frontend/images/logo_small.png') }}" alt="" heigt=50px; width=60px;
+            class="logo-image">
 
-  </div>
-  <div class="tranzit">
-    <div class="line"> </div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </div>
+        <div class="logo"><a
+                href="{{ route('Phantom-Tranzit') }} "class="text-white text-decoration-none"><strong>Phantom
+                    Tranzit</strong></a></div>
 
-  
-  <nav class="bla-bar">
- 
-    <ul>
-      <li>
-        <a href="{{ route('fleets') }}" ><strong>Fleet</strong></a>
-      </li>
-      <li>
-        <a href="{{ route('contactUS') }}"><strong>Contact Us</strong></a>
-      </li>
-      <li>
-        <a href="#" class="active"><strong>Get a Quote</strong></a>
-      </li>
-    </ul>
-  </nav>
+    </div>
+    <div class="tranzit">
+        <div class="line"> </div>
+        <div class="line"></div>
+        <div class="line">
+
+        </div>
+    </div>
+
+    <nav class="bla-bar">
+
+        <ul>
+            <li>
+                <a href="{{ route('fleets') }}"><strong>Fleet</strong></a>
+            </li>
+            <li>
+                <a href="{{ route('contactUS') }}"><strong>Contact Us</strong></a>
+            </li>
+            {{-- <li>
+                <a href="#" class="active"><strong>Get a Quote</strong></a>
+            </li> --}}
+            @if (Route::has('login'))
+                @auth
+                    <li>
+                        <a href="{{ route('home') }}"><strong>Dashboard</strong></a>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login') }}"><strong>Login</strong></a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li>
+                            <a href="{{ route('register') }}"><strong>Registration</strong></a>
+                        </li>
+                    @endif
+                @endauth
+            @endif
+        </ul>
+
+    </nav>
 </header>
 
 <script>
-  tranzit = document.querySelector(".tranzit");
-  tranzit.onclick = function()
-  {
-    navBar = document.querySelector(".bla-bar");
-    navBar.classList.toggle("active");
-  }
+    tranzit = document.querySelector(".tranzit");
+    tranzit.onclick = function() {
+        navBar = document.querySelector(".bla-bar");
+        navBar.classList.toggle("active");
+    }
 </script>
-

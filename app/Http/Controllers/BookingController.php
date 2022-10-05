@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Bus;
 use App\Models\Passenger;
 use App\Models\Event;
 use App\Models\Trip;
@@ -162,5 +163,45 @@ class BookingController extends Controller
     {
         $availableSeat = Trip::where('id', $trip_id)->first()->available_seats;
         return response()->json($availableSeat);
+    }
+
+    public function getTripfromFrontend($trip_id)
+    {
+        $trip = Trip::where('id', $trip_id)->first();
+        return response()->json($trip);
+    }
+
+    public function newBooking(Request $request)
+    {
+        // $newAvailable= Trip::where('id', $request->trip_id)->first()->update([
+        //     'available_seats' => Trip::where('id', $request->trip_id)->first()->available_seats - $request->no_of_seat
+        // ]);
+        $trip = Trip::where('id', $request->trip_id)->first();
+        $newAvailable = $trip->available_seats - $request->no_of_seat;
+        if ($newAvailable < 0) {
+            return redirect()->back()->withError('No of seats not available');
+        }
+        $trip->update([
+            'available_seats' => $newAvailable
+        ]);
+        
+        $passengerdata = [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address
+        ];
+        $passenger = Passenger::create($passengerdata);
+        $bookingdata = [
+            'passenger_id' => $passenger->id,
+            'trip_id' => $request->trip_id,
+            'event_id' => $request->event_id,
+            'no_of_seat' => $request->no_of_seat,
+            'seat' => $newAvailable,
+            'stoppage' => $request->stoppage,
+        ];
+        $booking = Booking::create($bookingdata);
+
+        return redirect()->route('Phantom-Tranzit')->withMessage("Successfully created a booking");
+
     }
 }

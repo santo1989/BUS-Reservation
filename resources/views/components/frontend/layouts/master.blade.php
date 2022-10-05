@@ -18,6 +18,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ asset('ui/frontend/css/styles.css') }}" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('ui/frontend/css/customstyle.css') }}">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
         <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> -->
 
         @stack('css')

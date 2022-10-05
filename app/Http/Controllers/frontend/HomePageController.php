@@ -4,6 +4,8 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Trip;
+use Exception;
 use Illuminate\Http\Request;
 
 class HomePageController extends Controller
@@ -20,9 +22,19 @@ class HomePageController extends Controller
 
     public function fleets()
     {
-        $events = Event::all();
-        // dd($events);
-        return view('frontend.events.fleet', compact('events'));
+
+        $eventCollection = Event::all();
+
+        if (request('search')) {
+            $eventCollection = $eventCollection
+                ->where('name', 'like', '%' . request('search') . '%');
+        }
+
+        $events = $eventCollection;
+
+        return view('frontend.events.fleet', [
+            'events' => $events
+        ]);
     }
 
     public function fleet_details($id)
@@ -32,9 +44,38 @@ class HomePageController extends Controller
         return view('frontend.events.fleets-details', compact('event'));
     }
 
-    public function trip()
+    public function trip($id)
     {
-        return view('frontend.trip');
+
+        $event = Event::find($id);
+        $trips = Trip::where('event_id', $event->id)->get();
+        // dd($trips);
+        if (!$trips->count() > 0) {
+            return redirect()->route('login');
+        } else {
+
+            try {
+                $event_trips_count = Trip::where('event_id', $id)->count();
+
+
+
+                // dd($trips);
+                $stoppages = $trips->map(function ($trip) {
+                    $trip->stoppages == null ? $trip->stoppages = [] : $trip->stoppages = json_decode($trip->stoppages, true);
+                    // $trip->stoppages = json_decode($trip->stoppages, true);
+                    return $trip;
+                });
+
+                $events_name = Event::where('id', $id)->get(); //get event name
+
+
+                return view('frontend.trip', compact('trips', 'event_trips_count', 'event', 'events_name'));
+            } catch (Exception $e) {
+                $event->trips = null;
+                $event->trip_count = 0;
+                return back()->with('error', 'No trips found for this event');
+            }
+        }
     }
 
     public function transport()

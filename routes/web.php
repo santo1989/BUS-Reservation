@@ -22,11 +22,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomePageController::class, 'index'])->name('Phantom-Tranzit');
 Route::get('/contactUs', [HomePageController::class, 'contactUS'])->name('contactUS');
-Route::get('/trip', [HomePageController::class, 'trip'])->name('trip');
+Route::get('/trip/{id}', [HomePageController::class, 'trip'])->name('trip');
 Route::get('/fleets', [HomePageController::class, 'fleets'])->name('fleets');
 Route::get('/fleet-details/{id}', [HomePageController::class, 'fleet_details'])->name('fleet_details');
 Route::get('/transport', [HomePageController::class, 'transport'])->name('transport');
 Route::get('/transport-details', [HomePageController::class, 'transport_details'])->name('transport_details');
+Route::post('/trip/newBooking/', [BookingController::class, 'newBooking'])->name('newBooking');
+
+
+
 
 
 Route::middleware('auth')->group(function () {
@@ -60,6 +64,8 @@ Route::middleware('auth')->group(function () {
 
     //passenger
     Route::resource('/passengers', PassengerController::class);
+    Route::get('/checkPassengers', [PassengerController::class, 'checkPassengers'])->name('driver.trip.passenger');
+    Route::get('/passengerList/{trip_id}', [PassengerController::class, 'passengerList'])->name('driver.trip.passengerList');
 
     //event    
     // Route::get('/events/trashed-events', [EventController::class, 'trash'])->name('events.trashed');
@@ -155,5 +161,9 @@ Route::get('/get-available-seat/{trip_id}', [BookingController::class, 'getAvail
 // Route::get('/Bussetplane', function () {
 //     return view('backend.Bussetplane');
 // });
+
+Route::get('/driver_passenger_index', function () {
+    return view('backend.passenger.driver_passenger_index');
+});
 
 require __DIR__ . '/auth.php';

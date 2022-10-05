@@ -52,27 +52,31 @@
                       </div>
                       <div class="row">
                         <div class="col-md-12 form-group">
-                          <input type="submit" value="Send Message" class="btn btn-primary rounded-0 py-2 px-4">
-                          <span class="submitting"></span>
+                          <input type="submit" value="Send Message" class="btn btn-primary rounded-0 py-2 px-4" id="submitfrom">
+                          <span class="submitting" ></span>
                         </div>
                       </div>
                     </form>
         
                     <div id="form-message-warning mt-4">
-                  <script>
-                    let contactForm = document.getElementById('contactForm');
-                    if(contactForm = null){
-                      contactForm.addEventListener('submit', function(e){
-                      alert('Your message has been sent successfully');
-                      });
-                    }
-                    </script>
+
                      </div> 
                   </div>
                 </div>
               </div>
             </div>
-        
+<script>
+    let submitfrom = document.getElementById('submitfrom');
+    submitfrom.addEventListener('click', function(){
+        swal.fire({
+            title: 'Message Sent!',
+            text: 'Thank you for contacting us. We will get back to you soon.',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+            time : 5000;
+        })
+    })
+  </script>
           </div>
 
           @push('css')

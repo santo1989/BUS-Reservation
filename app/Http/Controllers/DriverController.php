@@ -41,8 +41,13 @@ class DriverController extends Controller
 
     public function store(Request $request)
     {
+
         // dd($request->all());
         try {
+            if (User::where('email', $request->email)->first()) {
+                // dd('email already exist');
+                return redirect()->back()->withErrors('Email already exists');
+            }
             $password = $request->password;
             $confirmedPassword  = $request->confirm_password;
             if ($password === $confirmedPassword) {
@@ -52,6 +57,10 @@ class DriverController extends Controller
                     'password' => Hash::make($request->password),
                     'role_id'  => 2
                 ];
+
+
+
+
 
                 $user = User::create($userData);
                 event(new Registered($user));
@@ -63,11 +72,11 @@ class DriverController extends Controller
                     'user_id' => $user->id,
                     'license_no' => $request->license_no,
                     'picture' => $this->uploadpdf(request()->file('picture')),
-                   
+
 
                 ];
 
-                
+
                 Driver::create($driverData);
 
                 return redirect()->route('drivers.index')->withMessage("Successfully created driver with user");
@@ -149,5 +158,4 @@ class DriverController extends Controller
         $file->move($destinationPath, $fileName);
         return $fileName;
     }
-
 }
