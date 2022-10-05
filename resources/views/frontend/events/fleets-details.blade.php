@@ -12,10 +12,22 @@
             <div class="col-md-6">
                 <div class="card m-1 p-1">
                     <div class="card-body">
-                        <h3>{{ $event->name }}</h3>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h3>{{ $event->name }}</h3>
+                                
+                            </div>
+                       
+                        <div class="col-md-4">
+                            {{-- Book Now --}}
+                        <a href="{{ route('trip', ['id'=>$event->id]) }}" class="btn btn-warning float-right inline">Book Now</a>
+                        </div>
+                         </div>
+                        <hr>
                         <p>{{ $event->details }}</p>
                         
                     </div>
+                    
                 </div>
             </div>
 
