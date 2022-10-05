@@ -59,20 +59,18 @@
                     </form>
         
                     <div id="form-message-warning mt-4">
-                  <script>
-                    let contactForm = document.getElementById('contactForm');
-                    if(contactForm = null){
-                      contactForm.addEventListener('submit', function(e){
-                      alert('Your message has been sent successfully');
-                      });
-                    }
-                    </script>
+
                      </div> 
                   </div>
                 </div>
               </div>
             </div>
-        
+                          @if (session('message'))
+<div class="alert alert-success">
+    <span class="close" data-dismiss="alert">&times;</span>
+    <strong>{{ session('message') }}.</strong>
+</div>
+@endif
           </div>
 
           @push('css')

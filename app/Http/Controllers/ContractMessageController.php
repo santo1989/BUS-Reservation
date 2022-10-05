@@ -38,7 +38,7 @@ class ContractMessageController extends Controller
         // return redirect()->route('backend.contract-message.index')
         //     ->with('success', 'Message sent successfully.');
         return redirect()->back()
-            ->with('success', 'Message sent successfully.');
+            ->withMessage( 'Message sent successfully.');
     }
 
     public function show($id)
