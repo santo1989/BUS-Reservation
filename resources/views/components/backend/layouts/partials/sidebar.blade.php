@@ -79,9 +79,9 @@
                 </a>
 
 
-                 <a class="nav-link" href="{{ route('passengers.index') }}">
+                 <a class="nav-link" href="{{ route('driver.trip.passenger') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    check Passenger List
+                    Check Passenger List
                 </a>
                
             </div>
