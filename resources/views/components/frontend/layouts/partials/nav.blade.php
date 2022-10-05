@@ -38,23 +38,41 @@
   <div class="tranzit">
     <div class="line"> </div>
     <div class="line"></div>
-    <div class="line"></div>
+    <div class="line">
+      
+    </div>
   </div>
-
   
   <nav class="bla-bar">
- 
+
     <ul>
       <li>
         <a href="{{ route('fleets') }}" ><strong>Fleet</strong></a>
       </li>
       <li>
         <a href="{{ route('contactUS') }}"><strong>Contact Us</strong></a>
-      </li>
+      </li>     
       <li>
         <a href="#" class="active"><strong>Get a Quote</strong></a>
       </li>
+      @if (Route::has('login'))
+       @auth
+      <li>
+        <a href="{{ route('/home') }}" ><strong>Dashboard</strong></a>
+      </li>
+      @else
+      <li>
+        <a href="{{ route('login') }}" ><strong>Login</strong></a>
+      </li>
+      @if (Route::has('register'))
+      <li>
+        <a href="{{ route('register') }}"><strong>Registration</strong></a>
+      </li> 
+      @endif
+       @endauth 
+       @endif
     </ul>
+   
   </nav>
 </header>
 

@@ -13,13 +13,14 @@
         </x-backend.layouts.elements.breadcrumb>
     </x-slot>
 
-
+<x-backend.layouts.elements.message :fmessage="session('message')" />
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
             Create Driver <a class="btn btn-sm btn-info" href="{{ route('drivers.index') }}">List</a>
         </div>
         <div class="card-body">
+            
 
             <x-backend.layouts.elements.errors :errors="$errors"/>
 

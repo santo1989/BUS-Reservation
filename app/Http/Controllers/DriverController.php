@@ -43,6 +43,10 @@ class DriverController extends Controller
     {
         // dd($request->all());
         try {
+             if($request->email == User::where('email', $request->email)->first()){
+                // dd('email already exist');
+                    return redirect()->back()->withErrors( 'Email already exists');
+                } else{
             $password = $request->password;
             $confirmedPassword  = $request->confirm_password;
             if ($password === $confirmedPassword) {
@@ -53,6 +57,10 @@ class DriverController extends Controller
                     'role_id'  => 2
                 ];
 
+                
+               
+
+               
                 $user = User::create($userData);
                 event(new Registered($user));
 
@@ -71,11 +79,12 @@ class DriverController extends Controller
                 Driver::create($driverData);
 
                 return redirect()->route('drivers.index')->withMessage("Successfully created driver with user");
+             
             } else {
                 // dd("Check");
                 return redirect()->back()->withErrors("Password didn't match");
             }
-        } catch (QueryException $e) {
+        }} catch (QueryException $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
