@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
 
     //passenger
     Route::resource('/passengers', PassengerController::class);
+    Route::get('/checkPassengers', [PassengerController::class, 'checkPassengers'])->name('driver.trip.passenger');
+    Route::get('/passengerList/{trip_id}', [PassengerController::class, 'passengerList'])->name('driver.trip.passengerList');
 
     //event    
     // Route::get('/events/trashed-events', [EventController::class, 'trash'])->name('events.trashed');

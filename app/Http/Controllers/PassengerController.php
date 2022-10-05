@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Driver;
 use App\Models\Passenger;
+use App\Models\Trip;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -108,5 +110,28 @@ class PassengerController extends Controller
         return view('backend.passenger.show', [
             'show_passenger' => $passenger,
         ]);
+    }
+    public function checkPassengers()
+    {
+
+        $driverId = auth()->user()->driver->id;
+        $currentDate = date('Y-m-d');
+        $trips = Trip::where('driver_id',$driverId)
+                ->where('start_date', '>=', $currentDate)->orderBy('start_date')->get();
+      
+        return view('backend.driver.trips', [
+            'trips' => $trips
+        ]);
+    }
+
+    public function passengerList($trip_id)
+    {
+
+        //dd($trip_id);
+        $bookings = Booking::where('trip_id', $trip_id)->get();
+        return view('backend.driver.passenger_list', [
+            'bookings' => $bookings
+        ]);
+        
     }
 }
