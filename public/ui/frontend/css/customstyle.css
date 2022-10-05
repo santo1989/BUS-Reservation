@@ -70,18 +70,20 @@
     background : #fefefe;
 }
 
-.bla-bar ul li a.active {
-    color:darkgray;
-    background: #fefefe;
+.bla-bar ul li a.active1 {
+    color:white;
+    background:darkcyan;
     padding-top:2px;
     padding-bottom:2px;
     margin-top:7px;;
    
 }
 
-.bla-bar ul li a.active:hover{
+
+.bla-bar ul li a.active1:hover{
     color:#400859;
 }
+
 
 @media only screen and (max-width :1320px) {
     .nav-header {

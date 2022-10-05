@@ -10,8 +10,10 @@
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
                     <h5 class="pb-3 text-white">P.O. Box 161<br>
                       SILVER LAKE MN 55381</h5><br>
-              <p > <a href="https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&original_query_param=NAME&query_string=2140983&original_query_string=NMATHEWS%20INC%20-%20PHANTOM%20TRANZIT">US DOT 2140983<br></p>
-              <p >MN DOT 382429<br></p>
+              <p ><a class="text-decoration-none text-white" href="https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&original_query_param=NAME&query_string=2140983&original_query_string=NMATHEWS%20INC%20-%20PHANTOM%20TRANZIT">US 
+                DOT 2140983<br></a></p>
+              <p >MN DOT 382429<br> 
+                </p>
                     
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
@@ -33,6 +35,8 @@
             </div> --}}
 
     </div>
+
+   
 
    
     

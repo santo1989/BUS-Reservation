@@ -49,7 +49,10 @@
 
         <ul>
             <li>
-                <a href="{{ route('fleets') }}"><strong>Fleet</strong></a>
+                <a href="{{ route('transport') }}"><strong>Fleet</strong></a>
+            </li>
+            <li>
+                <a href="{{ route('fleets') }}"><strong>Events</strong></a>
             </li>
             <li>
                 <a href="{{ route('contactUS') }}"><strong>Contact Us</strong></a>
@@ -64,13 +67,13 @@
                     </li>
                 @else
                     <li>
-                        <a href="{{ route('login') }}"><strong>Login</strong></a>
+                        <a href="{{ route('login') }} " class="active1"><strong>Log In</strong></a>
                     </li>
-                    @if (Route::has('register'))
+                    {{--@if (Route::has('register'))
                         <li>
-                            <a href="{{ route('register') }}"><strong>Registration</strong></a>
+                            <a href="{{ route('register') }}" class="active2"><strong>Register</strong></a>
                         </li>
-                    @endif
+                    @endif--}}
                 @endauth
             @endif
         </ul>

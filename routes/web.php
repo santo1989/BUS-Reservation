@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomePageController::class, 'index'])->name('Phantom-Tranzit');
 Route::get('/contactUs', [HomePageController::class, 'contactUS'])->name('contactUS');
+// Route::get('/trip', [HomePageController::class, 'trip'])->name('trip');
 Route::get('/trip/{id}', [HomePageController::class, 'trip'])->name('trip');
 Route::get('/fleets', [HomePageController::class, 'fleets'])->name('fleets');
 Route::get('/fleet-details/{id}', [HomePageController::class, 'fleet_details'])->name('fleet_details');
