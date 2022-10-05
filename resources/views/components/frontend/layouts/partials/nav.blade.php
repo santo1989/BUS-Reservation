@@ -1,3 +1,4 @@
+
 {{--<nav class="navbar navbar-expand-lg navbar-light" style="background: #400859;">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#!"></a>
@@ -23,6 +24,9 @@
 </div>
 </nav>--}}
 
+
+
+{{--2nd Navbar--}}
 <header class="nav-header">
    <div class="navvv">
     
@@ -62,3 +66,4 @@
     navBar.classList.toggle("active");
   }
 </script>
+

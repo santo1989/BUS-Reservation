@@ -8,7 +8,7 @@
                 </ul>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
-                    <h5 class="pb-3">P.O. Box 161<br>
+                    <h5 class="pb-3 text-white">P.O. Box 161<br>
                       SILVER LAKE MN 55381</h5><br>
               <p >US 
                 DOT 2140983<br></p>
