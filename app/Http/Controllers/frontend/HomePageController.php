@@ -22,9 +22,19 @@ class HomePageController extends Controller
 
     public function fleets()
     {
-        $events = Event::all();
-        // dd($events);
-        return view('frontend.events.fleet', compact('events'));
+
+        $eventCollection = Event::all();
+
+        if (request('search')) {
+            $eventCollection = $eventCollection
+                ->where('name', 'like', '%' . request('search') . '%');
+        }
+
+        $events = $eventCollection;
+
+        return view('frontend.events.fleet', [
+            'events' => $events
+        ]);
     }
 
     public function fleet_details($id)

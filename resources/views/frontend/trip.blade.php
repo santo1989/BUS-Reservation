@@ -15,14 +15,15 @@
         </tr> -->
         </thead>
         <tbody>
+           @foreach ($trips as $index => $trip)
         <tr>
 
 
         <td>
-        <p>
+        <p class="d-flex justify-content-between">
+        <a>{{ $trip->trip_code }}</a>
         <a class="btn btn-outline-light" data-bs-toggle="collapse" href="#multiCollapseExample1"
-        role="button" aria-expanded="false" aria-controls="multiCollapseExample1">{{ $event->name }}</a>
-      </a>
+        role="button" aria-expanded="false" aria-controls="multiCollapseExample1" >Book Now</a>
         </p>
         <div class="row">
         <div class="col">
@@ -47,15 +48,30 @@
                   <td>{{ $trip->start_date }}</td>
                   <td>{{ $trip->end_date }}</td> 
                     <!-- Button trigger modal -->
-                  <td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="myfunction(<?php echo $trip->id;  ?>)">Show Bookings</button></td>
+                    
+                  <td>
+                     @if (Route::has('login'))
+                   @auth
+                   <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="myfunction(<?php echo $trip->id;  ?>)">Book a Seat</button>
+                  @else
+                   <a type="button" class="btn btn-sm btn-warning" href="{{ route('login') }}" >Book a Seat</a>
+                   @endauth
+                  </td>
+                  @endif
+                
                 </tr>
               @empty
                 <tr>
                   <td colspan="5" class="text-center">No Trips Found</td>
                 </tr>
               @endforelse
+              @endforeach
         </td>
+
+
         <!-- Modal -->
+
+
         <div class="modal fade bd-example-modal-lg" tabindex="-1"
         role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
@@ -202,9 +218,10 @@
         {{-- <button type="button"
         class="btn btn-secondary"
         data-bs-dismiss="modal">Close</button> --}}
+        
         <button type="submit"
         class="btn btn-primary" id="bookDta">Booking Confirm</button>
-
+        
 
         </div>
   </form> 
