@@ -87,4 +87,9 @@ class HomePageController extends Controller
     {
         return view('frontend.transport-details');
     }
+    
+    public function transport_details2()
+    {
+        return view('frontend.transport-details2');
+    }
 }

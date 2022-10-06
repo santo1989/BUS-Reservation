@@ -28,6 +28,7 @@ Route::get('/fleets', [HomePageController::class, 'fleets'])->name('fleets');
 Route::get('/fleet-details/{id}', [HomePageController::class, 'fleet_details'])->name('fleet_details');
 Route::get('/transport', [HomePageController::class, 'transport'])->name('transport');
 Route::get('/transport-details', [HomePageController::class, 'transport_details'])->name('transport_details');
+Route::get('/transport-details2', [HomePageController::class, 'transport_details2'])->name('transport_details2');
 Route::post('/trip/newBooking/', [BookingController::class, 'newBooking'])->name('newBooking');
 
 

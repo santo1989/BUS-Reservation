@@ -7,22 +7,17 @@
 <div class="wrapper">
 <div class="media">
 <div class="layer">
-    <p>+ Paul Gilmore</p>
+<a href="{{ route('transport_details')}}"><p style="text-decoration:none; color:black;">BUS 1</p></a>
   </div>
-<img src="https://images.unsplash.com/photo-1431818563807-927945852ab6?dpr=1&auto=format&fit=crop&w=1199&h=899&q=80&cs=tinysrgb&crop=" alt="" />
+<img src="{{ asset('ui/frontend/images/b2_select.jpg')}}" alt="" />
 </div>
  <div class="media">
 <div class="layer">
-    <p>+ M. O' Neil</p>
+<a href="{{ route('transport_details2')}}"><p style="text-decoration:none; color:black;">BUS 2</p></a>
   </div>
-<img src="https://images.unsplash.com/photo-1443397646383-16272048780e?dpr=1&auto=format&fit=crop&w=1199&h=899&q=80&cs=tinysrgb&crop=" alt="" />
+<img src="{{ asset('ui/frontend/images/b3_select.jpg')}}" alt="" />
 </div>
-   <div class="media">
-<div class="layer">
-    <p>+ N. Mehta</p>
-  </div>
-<img src="https://images.unsplash.com/photo-1442965416224-f6a7eca980fa?dpr=1&auto=format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=" alt="" />
-</div>
+   
 </div>
 
 <style>
