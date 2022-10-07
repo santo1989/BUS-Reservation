@@ -55,7 +55,27 @@
 
 @case('Driver')
 <x-backend.layouts.master>
-<x-slot name="pageTitle">
+
+  {{-- @php
+  $trip_table = App\Models\Trip::all();
+  echo '<pre>';
+  // var_dump($trip_table);
+  
+    $driver = App\Models\Driver::where('user_id', auth()->user()->id)->first();
+    // var_dump($driver);
+    
+    $driverinfo = App\Models\Driver::where('id', $driver->id)->first();
+    // var_dump($driverinfo);
+   
+    $eventinfo = App\Models\Event::where('id', $trip_table->event_id)->get();
+    // var_dump($eventinfo);
+     echo '</pre>';
+  die();
+    $passanger = App\Models\Passanger::where('id', $trip_table->passanger_id)->get();
+    var_dump($passanger, $event, $driver, $trip);
+  @endphp --}}
+
+{{-- <x-slot name="pageTitle">
   Driver Portal
     </x-slot>
 
@@ -99,7 +119,7 @@
           @endforelse
         </div>
         
-      </div>
+      </div> --}}
   {{-- </div> --}}
 </x-backend.layouts.master>
 @break
@@ -127,7 +147,7 @@
 @default
 
 <x-backend.layouts.master>
-  <x-slot name="pageTitle">
+  {{-- <x-slot name="pageTitle">
           Passenger Portal
       </x-slot>
   
@@ -170,7 +190,49 @@
           @endforelse
         </div>
         
-      </div>
+      </div> --}}
+@php
+  $events = App\Models\Event::all();
+@endphp
+          <div class="row justify-content-center">
+        @foreach ($events as $event)
+            {{-- <x-frontend.event-card :event="$event" /> --}}
+            <div class="col-md-3 col-sm-12 col-xl-3 mb-5">
+             <div class="card h-100">
+        <!-- event image-->
+        @php
+            $event->images = json_decode($event->images, true);
+        @endphp
+        <img class="card-img-top" src="{{ asset('images/events/'.$event->images[0]) }}" height="180" alt="..." />
+        <!-- event details-->
+        <div class="card-body p-4">
+            <div class="text-center">
+                <!-- event name-->
+                <h5 class="fw-bolder">
+                    <a href="{{ route('fleet_details', ['id'=>$event->id]) }}">{{ $event->name }}</a>
+                </h5>
+                <!-- event reviews-->
+                <div class="d-flex justify-content-center small text-warning mb-2">
+                    {{-- short description from long description of the event will be here --}}
+
+                    <div class="text-muted">
+                        {{ Str::limit($event->details, 50) }}
+                    </div>
+                </div>
+                <!-- event price-->
+            </div>
+        </div>
+        <!-- event footer-->
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+                <a class="btn btn-outline-warning mt-auto" href="{{ route('fleet_details', ['id'=>$event->id]) }}">View Details</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+        @endforeach
+    </div>
 
   </x-backend.layouts.master>
 

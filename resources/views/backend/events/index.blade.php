@@ -16,12 +16,13 @@
     <div class="card" style="width:100%" >
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Events
+            Events  
+             @can('admin')
             <a class="btn btn-sm btn-danger" href="{{ route('events.trashed') }}">Trashed List</a>
 
-            {{-- @can('create-category') --}}
+         
             <a class="btn btn-sm btn-info" href="{{ route('events.create') }}">Add New</a>
-            {{-- @endcan --}}
+            @endcan
 
         </div>
         <div class="card-body " >
@@ -50,6 +51,10 @@
                         <td>
                             <a class="btn btn-info btn-sm" href="{{ route('events.show', ['event_show' => $event->id]) }}">Show</a>
 
+                            @can('admin')
+                                
+                           
+
                             <a class="btn btn-warning btn-sm" href="{{ route('events.edit', ['single_event' => $event->id]) }}">Edit</a>
 
                              <form style="display:inline" action="{{ route('events.destroy', ['event_id' => $event->id]) }}" method="post">
@@ -58,7 +63,7 @@
 
                                 <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-sm btn-danger" type="submit">Delete</button>
                             </form>
-
+ @endcan
                             {{-- <!-- <a href="{{ route('events.destroy', ['events' => $events->id]) }}" >Delete</a> --> --}}
 
 
