@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function passenger()
     {
-        return $this->hasMany(Passenger::class);
+        return $this->hasOne(Passenger::class);
     }
 
     public function driver()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Passenger;
 use App\Models\Trip;
 use Exception;
 use Illuminate\Http\Request;
@@ -94,5 +95,16 @@ class HomePageController extends Controller
     public function transport_details2()
     {
         return view('frontend.transport-details2');
+    }
+
+    public function getPassenger($user_id, $trip_id)
+    {
+        $passenger = Passenger::where('user_id', $user_id)->first();
+        $trip = Trip::where('id', $trip_id)->first();
+        $trip->bus = $trip->bus;
+        $trip->driver = $trip->driver;
+        $trip->event = $trip->event;
+        $trip->stoppages = json_decode($trip->stoppages, true);
+        return response()->json([$passenger, $trip]);
     }
 }
