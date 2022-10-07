@@ -156,6 +156,8 @@ Route::get('/get-stoppages/{trip_id}', [BookingController::class, 'getStoppages'
 
 Route::get('/get-available-seat/{trip_id}', [BookingController::class, 'getAvailableSeat']);
 
+Route::get('/get-passenger/{user_id}/{trip_id}', [HomePageController::class, 'getPassenger']);
+
 // Route::get('/setplane', function () {
 //     return view('backend.setplane');
 // });
