@@ -39,7 +39,7 @@
                 <div class="row "> 
                     @foreach ($event->images as $image)
                     {{-- @dd($event) --}}
-                    <div class="col-md-4 ">
+                    <div class="col-md-4 col-sm-6">
                          
                         <div class="card m-1 p-1">
                             <div class="card-body  m-1 p-1  " data-toggle='modal' data-target='#staticBackdrop' id="modalBtn">
