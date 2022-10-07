@@ -173,6 +173,7 @@ class BookingController extends Controller
 
     public function newBooking(Request $request)
     {
+        // dd($request->all());
         // $newAvailable= Trip::where('id', $request->trip_id)->first()->update([
         //     'available_seats' => Trip::where('id', $request->trip_id)->first()->available_seats - $request->no_of_seat
         // ]);
@@ -185,14 +186,14 @@ class BookingController extends Controller
             'available_seats' => $newAvailable
         ]);
         
-        $passengerdata = [
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'address' => $request->address
-        ];
-        $passenger = Passenger::create($passengerdata);
+        // $passengerdata = [
+        //     'name' => $request->name,
+        //     'phone' => $request->phone,
+        //     'address' => $request->address
+        // ];
+        // $passenger = Passenger::create($passengerdata);
         $bookingdata = [
-            'passenger_id' => $passenger->id,
+            'passenger_id' => $request->passenger_id,
             'trip_id' => $request->trip_id,
             'event_id' => $request->event_id,
             'no_of_seat' => $request->no_of_seat,
