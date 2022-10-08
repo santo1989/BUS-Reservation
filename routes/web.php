@@ -171,3 +171,7 @@ Route::get('/driver_passenger_index', function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Route::get('/passenger-login', [HomePageController::class, 'passengerLogin'])->name('passenger_login');
+
+Route::post('/passenger_login_post', [UserController::class, 'passengerLoginPost'])->name('passenger_login_post');

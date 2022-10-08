@@ -9,6 +9,7 @@ use App\Models\Passenger;
 use App\Models\Trip;
 use Exception;
 use Illuminate\Http\Request;
+use Mockery\Generator\Parameter;
 
 class HomePageController extends Controller
 {
@@ -106,4 +107,15 @@ class HomePageController extends Controller
         $trip->stoppages = json_decode($trip->stoppages, true);
         return response()->json([$passenger, $trip]);
     }
+
+    public function passengerLogin()
+    {
+        $newRoute = app('router')->getRoutes()->match(app('request')->create(url()->previous()));
+        dd($newRoute->parameters);
+        
+        // app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
+        // dd(app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName());
+        return view('frontend.passenger_login');
+    }
+
 }

@@ -280,7 +280,7 @@
                     })
                 myModal.show();
             } else {
-                window.location.href = "{{ URL::to('/login') }}"
+                window.location.href = "{{ URL::to('/passenger-login') }}"
             }
 
         }
