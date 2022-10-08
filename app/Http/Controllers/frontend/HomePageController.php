@@ -110,8 +110,8 @@ class HomePageController extends Controller
 
     public function passengerLogin()
     {
-        $newRoute = app('router')->getRoutes()->match(app('request')->create(url()->previous()));
-        dd($newRoute->parameters);
+        // $newRoute = app('router')->getRoutes()->match(app('request')->create(url()->previous()));
+        // dd($newRoute->parameters);
         
         // app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
         // dd(app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName());
