@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bus;
 use App\Models\Event;
 use App\Models\Passenger;
 use App\Models\Trip;
 use Exception;
 use Illuminate\Http\Request;
+use Mockery\Generator\Parameter;
 
 class HomePageController extends Controller
 {
@@ -84,17 +86,15 @@ class HomePageController extends Controller
 
     public function transport()
     {
-        return view('frontend.transport');
+        $buses = Bus::all();
+        return view('frontend.transport', compact('buses'));
     }
 
-    public function transport_details()
+    public function transport_details($bus_id)
     {
-        return view('frontend.transport-details');
-    }
-    
-    public function transport_details2()
-    {
-        return view('frontend.transport-details2');
+        $bus = Bus::find($bus_id);
+        $bus->images = json_decode($bus->images, true);
+        return view('frontend.transport-details', compact('bus'));
     }
 
     public function getPassenger($user_id, $trip_id)
@@ -107,4 +107,15 @@ class HomePageController extends Controller
         $trip->stoppages = json_decode($trip->stoppages, true);
         return response()->json([$passenger, $trip]);
     }
+
+    public function passengerLogin()
+    {
+        $newRoute = app('router')->getRoutes()->match(app('request')->create(url()->previous()));
+        dd($newRoute->parameters);
+        
+        // app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
+        // dd(app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName());
+        return view('frontend.passenger_login');
+    }
+
 }

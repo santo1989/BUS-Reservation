@@ -57,10 +57,13 @@
             <li>
                 <a href="{{ route('contactUS') }}"><strong>Contact Us</strong></a>
             </li>
+            <li>
+                <a href="{{ route('passenger_login') }}" class="active1"><strong>Login</strong></a>
+            </li>
             {{-- <li>
                 <a href="#" class="active"><strong>Get a Quote</strong></a>
             </li> --}}
-            @if (Route::has('login'))
+            {{-- @if (Route::has('login'))
                 @auth
                     <li>
                         <a href="{{ route('home') }}"><strong>Dashboard</strong></a>
@@ -69,13 +72,13 @@
                     <li>
                         <a href="{{ route('login') }} " class="active1"><strong>Log In</strong></a>
                     </li>
-                    {{--@if (Route::has('register'))
+                   @if (Route::has('register'))
                         <li>
                             <a href="{{ route('register') }}" class="active2"><strong>Register</strong></a>
                         </li>
-                    @endif--}}
+                    @endif
                 @endauth
-            @endif
+            @endif --}}
         </ul>
 
     </nav>

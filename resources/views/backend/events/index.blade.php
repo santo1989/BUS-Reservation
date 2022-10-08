@@ -17,7 +17,7 @@
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
             Events  
-             @can('admin')
+             @can('Admin')
             <a class="btn btn-sm btn-danger" href="{{ route('events.trashed') }}">Trashed List</a>
 
          
@@ -51,7 +51,7 @@
                         <td>
                             <a class="btn btn-info btn-sm" href="{{ route('events.show', ['event_show' => $event->id]) }}">Show</a>
 
-                            @can('admin')
+                            @can('Admin')
                                 
                            
 

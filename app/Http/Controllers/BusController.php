@@ -37,7 +37,7 @@ class BusController extends Controller
                 $images = [];
                 for ($i = 0; $i < count($request->images); $i++) {
                     $image = $request->images[$i];
-                    $filename = time() . '.' . $image->getClientOriginalExtension();
+                    $filename = time() . $i . '.' . $image->getClientOriginalExtension();
                     $location = public_path('images/Buses/');
                     $image->move($location, $filename);
                     $images[$i] = $filename;

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use App\Models\Role;
 use App\Models\User;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -78,5 +80,31 @@ class UserController extends Controller
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
+    }
+
+    public function passengerLoginPost(Request $request)
+    {
+        // dd($request->all());
+
+        
+
+
+        try{
+            $passenger = User::where('email', request('email'))->first();
+            if($passenger){
+                if(Hash::check(request('password'), $passenger->password)){
+                    session()->put('passenger', $passenger);
+                    return redirect()->route('Phantom-Tranzit');
+                }else{
+                    return redirect()->back()->withInput()->withErrors('Invalid Password');
+                }
+            }else{
+                return redirect()->back()->withInput()->withErrors('Invalid Email');
+            }
+        }catch(Exception $e){
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
+        }
+
+        
     }
 }
