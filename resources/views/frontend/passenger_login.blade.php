@@ -32,6 +32,9 @@
                 <span class="fas fa-key"></span>
                 <input type="password" name="password" id="pwd" placeholder="Password">
             </div>
+            <input type="hidden" name="routeName" value="{{ $route['routeName'] }}">
+            <input type="hidden" name="parameter" value="{{ $route['parameter'] }}">
+
             <button type="submit" class="btn mt-3">Login</button>
         </form>
         <div class="text-center fs-6">

@@ -123,10 +123,14 @@
 
     </div>
 
-    <input type="hidden" value="{{ isset(auth()->user()->id) ? auth()->user()->id : '' }}" id="pass_id">
+    @php
+        $user_id = (session('user')->id ?? '');
+    @endphp
+
+    <input type="hidden" value="{{ $user_id }}" id="user_id">
     <input type="hidden" value="{{ url('') }}" id="base_url">
 
-    {{-- //Image modal --}}
+    {{-- Image modal --}}
     <div class="modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdrop" aria-hidden="false">
         <div class="modal-dialog">
@@ -142,9 +146,7 @@
             </div>
         </div>
     </div>
-    {{-- //end
-
-    //booking modal --}}
+    {{-- end booking modal --}}
     <div class="modal" tabindex="-1" id="booking_modal">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <form action="{{ route('newBooking') }}" method="post"> 
@@ -197,7 +199,7 @@
                         </div>
                         <input type="hidden" name="trip_id" id="trip_id">
                         <input type="hidden" name="passenger_id" id="passenger_id">
-                         <input type="hidden" name="event_id" id="event_id">
+                        <input type="hidden" name="event_id" id="event_id">
 
 
                     </div>
@@ -243,11 +245,11 @@
 
     <script>
         const modalOpen = (trip_id) => {
-            const user_id = ($("#pass_id").val());
+            const user_id = ($("#user_id").val());
             if (user_id.length > 0) {
                 const base_url = $("#base_url").val();
                 const fethc_url = `${base_url}/get-passenger/${user_id}/${trip_id}`;
-                // alert(fethc_url);
+                alert(fethc_url);
                 var myModal = new bootstrap.Modal(document.getElementById('booking_modal'), {
                     keyboard: false
                 })
@@ -280,7 +282,10 @@
                     })
                 myModal.show();
             } else {
-                window.location.href = "{{ URL::to('/passenger-login') }}"
+                const ans = confirm("You have to log in first. Login now?");
+                if(ans == true) {
+                    window.location.href = "{{ URL::to('/passenger-login') }}";
+                }
             }
 
         }

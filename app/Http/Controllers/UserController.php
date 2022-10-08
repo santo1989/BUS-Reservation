@@ -90,10 +90,11 @@ class UserController extends Controller
 
 
         try{
-            $passenger = User::where('email', request('email'))->first();
-            if($passenger){
-                if(Hash::check(request('password'), $passenger->password)){
-                    session()->put('passenger', $passenger);
+            $user = User::where('email', request('email'))->first();
+            if($user){
+                if(Hash::check(request('password'), $user->password)){  
+                    // dd("check");
+                    session()->put('user', $user);
                     return redirect()->route('Phantom-Tranzit');
                 }else{
                     return redirect()->back()->withInput()->withErrors('Invalid Password');
