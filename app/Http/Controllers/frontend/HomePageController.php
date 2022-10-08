@@ -15,6 +15,7 @@ class HomePageController extends Controller
 {
     public function index()
     {
+        // dd(session('passenger'));
         return view('frontend.index');
     }
 
@@ -110,12 +111,14 @@ class HomePageController extends Controller
 
     public function passengerLogin()
     {
-        $newRoute = app('router')->getRoutes()->match(app('request')->create(url()->previous()));
-        dd($newRoute->parameters);
+        $prevRoute = app('router')->getRoutes()->match(app('request')->create(url()->previous()));
+
+        $route['routeName'] = $prevRoute->getName();
+        $route['parameter'] = $prevRoute->parameters['id'] ?? '';
+        // dd($route);
+
         
-        // app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName();
-        // dd(app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName());
-        return view('frontend.passenger_login');
+        return view('frontend.passenger_login', compact('prevRoute', 'route'));
     }
 
 }
