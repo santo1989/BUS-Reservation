@@ -109,7 +109,7 @@
     <input type="hidden" value="{{ isset(auth()->user()->id) ? auth()->user()->id : '' }}" id="pass_id">
     <input type="hidden" value="{{ url('') }}" id="base_url">
 
-    //Image modal
+    <!-- Image modal -->
     <div class="modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop" aria-hidden="false">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -124,9 +124,9 @@
         </div>
       </div>
     </div>
-    //end
+    <!-- end -->
 
-    //booking modal
+    <!-- booking modal -->
     <div class="modal" tabindex="-1" id="booking_modal">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -184,7 +184,7 @@
             </div>
         </div>
     </div>
-    //end modal
+    <!-- end modal -->
     <script>
         let images = document.querySelectorAll('.card-img-top');
         let modalBtn = document.querySelector('#modalBtn');
