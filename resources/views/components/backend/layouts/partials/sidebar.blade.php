@@ -36,6 +36,11 @@
                     Bookings Details
                 </a>
 
+                <a class="nav-link" href="{{ route('contract_message.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Message
+                </a>
+
 
                 
 

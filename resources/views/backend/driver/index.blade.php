@@ -31,7 +31,7 @@
             <form method="GET" action="{{ route('drivers.index') }}">
 
             </form>
-            <table class="table">
+            <table class="table" id="datatablesSimple">
                 <thead>
                     <tr>
                         <th>Sl#</th>

@@ -174,4 +174,10 @@ require __DIR__ . '/auth.php';
 
 Route::get('/passenger-login', [HomePageController::class, 'passengerLogin'])->name('passenger_login');
 
+Route::get('/passenger_register', [HomePageController::class, 'passengerRegister'])->name('passenger_registerHome');
+
 Route::post('/passenger_login_post', [UserController::class, 'passengerLoginPost'])->name('passenger_login_post');
+
+Route::post('/passenger-logout', [UserController::class, 'passengerLogout'])->name('passenger_logout');
+
+Route::post('/passenger-register', [UserController::class, 'passengerRegisterPost'])->name('passenger_register');

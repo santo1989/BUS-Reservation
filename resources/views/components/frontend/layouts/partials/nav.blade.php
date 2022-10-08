@@ -57,20 +57,23 @@
             <li>
                 <a href="{{ route('contactUS') }}"><strong>Contact Us</strong></a>
             </li>
-            
-            {{-- <li>
-                <a href="#" class="active"><strong>Get a Quote</strong></a>
-            </li> --}}
-            {{-- @dd(session()->all()) --}}
-             @if (isset(Auth::user()->id))
-                <li>
-                    <a href="{{ route('logout') }}" class="active"><strong>Logout</strong></a>
-                </li>
-            @else
-                <li>
-                    <a href="{{ route('passenger_login') }}" class="active"><strong>Login</strong></a>
-                </li>
-            @endif
+                    
+
+                      @if (Session::has('user'))
+                      <li>
+                          <form method="POST" action="{{ route('passenger_logout') }}">
+                                 @csrf
+                                    <a class="dropdown-item" onclick="event.preventDefault();
+                                    this.closest('form').submit();">Logout</a>
+
+                            </form> 
+                        </li>
+                        
+                    @else
+                        <li>
+                          <a href="{{ route('passenger_login') }}"><strong>Login</strong></a>
+                        </li>
+                    @endif
         </ul>
 
     </nav>

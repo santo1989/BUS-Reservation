@@ -29,7 +29,7 @@
 
             <x-backend.layouts.elements.message :fmessage="session('message')" />
             
-            <table class="table ">
+            <table class="table " id="datatablesSimple">
                 <thead>
                     <tr>
                         <th>Sl#</th>

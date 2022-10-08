@@ -121,4 +121,9 @@ class HomePageController extends Controller
         return view('frontend.passenger_login', compact('prevRoute', 'route'));
     }
 
+    public function passengerRegister()
+    {
+        return view('frontend.passenger_register');
+    }
+
 }

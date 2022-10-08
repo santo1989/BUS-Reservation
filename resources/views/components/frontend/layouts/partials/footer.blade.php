@@ -22,7 +22,7 @@
                       <br>
                       <a class="text-white text-decoration-none" href="{{ route('contactUS') }}">Contact Us</a><br>
                       <br>
-                      {{-- <a class="text-white text-decoration-none" href="#">Get a Quote</a><br> --}}
+                      <a class="text-white text-decoration-none" href="{{ route('login') }}">Admin</a><br>
                       <a class="text-white text-decoration-none" href="#"><br>
                       </a><br>
                       <br>

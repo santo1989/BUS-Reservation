@@ -32,7 +32,7 @@
           <div class="card-body">
               {{-- bus Table goes here --}}
 
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="datatablesSimple" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>Sl#</th>

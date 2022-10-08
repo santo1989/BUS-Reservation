@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notification;
+use App\Models\Passenger;
 use App\Models\Role;
 use App\Models\User;
 use Exception;
@@ -107,5 +108,36 @@ class UserController extends Controller
         }
 
         
+    }
+
+    public function passengerLogout()
+    {
+        session()->forget('user');
+        return redirect()->route('Phantom-Tranzit');
+    }
+
+    public function passengerRegisterPost(Request $request)
+    {
+        // dd($request->all());
+        try{
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_id' => 3,
+            ]);
+
+            $passenger = Passenger::create([
+                'user_id' => $user->id,
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
+
+            session()->put('user', $user);
+            return redirect()->route('Phantom-Tranzit');
+        }catch(Exception $e){
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
+        }
     }
 }
