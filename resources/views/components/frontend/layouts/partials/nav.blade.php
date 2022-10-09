@@ -60,6 +60,10 @@
                     
 
                       @if (Session::has('user'))
+                      
+                        <li>
+                          <a href="{{ route('mybooking') }}"><strong>My Booking</strong></a>
+                        </li>
                       <li>
                           <form method="POST" action="{{ route('passenger_logout') }}">
                                  @csrf
@@ -68,6 +72,7 @@
 
                             </form> 
                         </li>
+                        
                         
                     @else
                         <li>

@@ -11,6 +11,9 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TripController;
+use App\Models\Event;
+use App\Models\Trip;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -127,9 +130,14 @@ Route::middleware('auth')->group(function () {
         Route::put('/update/{booking_id}', 'update')->name('bookings.update');
         Route::delete('/delete/{booking_id}', 'delete')->name('bookings.destroy');
     });
+
+   
+        
+
 });
 
-
+ //passengers Bookings
+    Route::get('/mybooking', [BookingController::class, 'mybooking'])->name('mybooking');
 
 Route::get('/contract-message', [ContractMessageController::class, 'index'])->name('contract_message.index');
 

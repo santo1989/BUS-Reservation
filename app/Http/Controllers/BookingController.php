@@ -10,6 +10,7 @@ use App\Models\Trip;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
 class BookingController extends Controller
@@ -204,5 +205,32 @@ class BookingController extends Controller
 
         return redirect()->route('Phantom-Tranzit')->withMessage("Successfully created a booking");
 
+    }
+
+    public function mybooking()
+    {
+        // dd(session('user'));
+        $booking = Booking::where('passenger_id', session('user')->id)->get();
+        $bookinfo = array();
+        
+        //  dd($booking);
+        if($booking->count() == 0){
+            return redirect()->route('Phantom-Tranzit')->withError('No Booking Found');
+        }else {
+            
+             foreach ($booking as $bookings) {
+                array_push( $bookinfo,$bookings);
+                $event_details = Event::where('id', $bookings->event_id)->first();
+                array_push($bookinfo, $event_details);
+                $trip_details = Trip::where('id', $bookings->trip_id)->first();
+                array_push($bookinfo, $trip_details);
+                $passenger_details = Passenger::where('id', $bookings->passenger_id)->first();
+                array_push($bookinfo, $passenger_details);
+            
+            }
+                // dd($bookinfo);
+                return view('frontend.mybooking', compact('bookinfo'));
+        }
+       
     }
 }
