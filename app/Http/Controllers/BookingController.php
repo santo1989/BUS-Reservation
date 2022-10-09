@@ -213,7 +213,7 @@ class BookingController extends Controller
         $booking = Booking::where('passenger_id', session('user')->id)->get();
         $bookinfo = array();
         
-        //  dd($booking);
+         dd($booking);
         if($booking->count() == 0){
             return redirect()->route('Phantom-Tranzit')->withError('No Booking Found');
         }else {

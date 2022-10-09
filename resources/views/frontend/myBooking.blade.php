@@ -27,7 +27,7 @@
                                     <td> {{ $booking->start_date }}</td>
                                     <td> {{ $booking->name }}</td>
                                     <td> {{ $booking->trip_code }}</td>
-                                    <td> {{ $booking->stoppages }} ,Start Location:{{ $booking->start_location }}</td>
+                                    <td> {{ $booking->stoppages }} {{ $booking->start_location }}</td>
 
                                     <td> {{ $booking->no_of_seat}}</td>
                                     {{-- </tr> --}}
