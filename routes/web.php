@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TripController;
 use App\Models\Event;
 use App\Models\Trip;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -130,14 +131,10 @@ Route::middleware('auth')->group(function () {
         Route::put('/update/{booking_id}', 'update')->name('bookings.update');
         Route::delete('/delete/{booking_id}', 'delete')->name('bookings.destroy');
     });
-
-   
-        
-
 });
 
- //passengers Bookings
-    Route::get('/mybooking', [BookingController::class, 'mybooking'])->name('mybooking');
+//passengers Bookings
+Route::get('/mybooking', [BookingController::class, 'mybooking'])->name('mybooking');
 
 Route::get('/contract-message', [ContractMessageController::class, 'index'])->name('contract_message.index');
 
@@ -195,3 +192,18 @@ Route::get('/mybooking/edit/{id}', [BookingController::class, 'editBooking'])->n
 Route::put('/mybooking/update/{id}', [BookingController::class, 'updateBooking'])->name('updateBooking');
 
 Route::delete('/mybooking/cancel/{id}', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
+
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});
+
+Route::get('/cleareverything', function () {
+    $clearcache = Artisan::call('cache:clear');
+    echo "Cache cleared<br>";
+
+    $clearview = Artisan::call('view:clear');
+    echo "View cleared<br>";
+
+    $clearconfig = Artisan::call('config:cache');
+    echo "Config cleared<br>";
+});

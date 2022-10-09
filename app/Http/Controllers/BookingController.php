@@ -186,7 +186,7 @@ class BookingController extends Controller
         $trip->update([
             'available_seats' => $newAvailable
         ]);
-        
+
         // $passengerdata = [
         //     'name' => $request->name,
         //     'phone' => $request->phone,
@@ -203,8 +203,7 @@ class BookingController extends Controller
         ];
         $booking = Booking::create($bookingdata);
 
-        return redirect()->route('Phantom-Tranzit')->withMessage("Successfully created a booking");
-
+        return redirect()->route('mybooking')->withMessage("Successfully created a booking");
     }
 
     public function mybooking()
@@ -213,7 +212,7 @@ class BookingController extends Controller
         $bookings = Booking::where('passenger_id', session('user')->id)->get();
         // $bookinfo = array();
 
-        
+
         // //   dd($booking);
         //      foreach ($booking as $bookings) {
         //         // array_push( $bookinfo,$bookings);
@@ -224,11 +223,10 @@ class BookingController extends Controller
         //         $passenger_details = Passenger::where('id', $bookings->passenger_id)->first();
         //         // array_push($bookinfo, $passenger_details);
         //     }
-                // dd($booking, $event_details, $trip_details, $passenger_details);
-                // return view('frontend.mybooking', compact('booking', 'event_details', 'trip_details', 'passenger_details'));
+        // dd($booking, $event_details, $trip_details, $passenger_details);
+        // return view('frontend.mybooking', compact('booking', 'event_details', 'trip_details', 'passenger_details'));
 
         return view('frontend.mybooking', compact('bookings'));
-       
     }
 
     public function cancelBooking($id)

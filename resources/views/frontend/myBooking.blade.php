@@ -1,5 +1,12 @@
 <x-frontend.layouts.master>
-
+@if (Session::has('message'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>Success !</strong> {{ session('message') }}
+    </div>
+    @endif
  
     <div class="container">
         @if(is_null($bookings) || empty($bookings))    
