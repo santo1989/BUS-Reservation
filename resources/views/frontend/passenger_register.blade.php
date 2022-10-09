@@ -46,10 +46,27 @@
             </div>
              <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="password_confirmation" id="pwd" placeholder="Password">
+                <input type="password" name="password_confirmation" id="pwd2" placeholder="Password Confirmation">
             </div>
             {{-- <input type="hidden" name="routeName" value="{{ $route['routeName'] }}">
             <input type="hidden" name="parameter" value="{{ $route['parameter'] }}"> --}}
+            <script>
+                // check match password
+                var password = document.getElementById("pwd")
+                  , confirm_password = document.getElementById("pwd2");
+                function validatePassword(){
+                    if(password.value != confirm_password.value) {
+                        confirm_password.setCustomValidity("Passwords Don't Match");
+                    } else {
+                        confirm_password.setCustomValidity('');
+                    }
+                    }
+                    password.onchange = validatePassword;
+                    confirm_password.onkeyup = validatePassword;
+            </script>
+                
+                
+
 
             <button type="submit" class="btn mt-3">Sign up</button>
         </form>
