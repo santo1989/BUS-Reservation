@@ -190,8 +190,8 @@ Route::post('/passenger-logout', [UserController::class, 'passengerLogout'])->na
 
 Route::post('/passenger-register', [UserController::class, 'passengerRegisterPost'])->name('passenger_register');
 
-Route::get('/mybooking/{booking_id}', [BookingController::class, 'editBooking'])->name('mybooking');
+Route::get('/mybooking/edit/{id}', [BookingController::class, 'editBooking'])->name('editBooking');
 
-Route::put('/mybooking/{booking_id}', [BookingController::class, 'updateBooking'])->name('mybooking');
+Route::put('/mybooking/update/{id}', [BookingController::class, 'updateBooking'])->name('updateBooking');
 
-Route::delete('/mybooking/{booking_id}', [BookingController::class, 'cancelBooking'])->name('mybooking');
+Route::delete('/mybooking/cancel/{id}', [BookingController::class, 'cancelBooking'])->name('cancelBooking');

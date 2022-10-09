@@ -29,8 +29,8 @@
                                 </thead>
                                 <tbody>
                                 @php $sl=0 @endphp
-                                    @forelse ($bookings as $booking)
-                                    {{-- @dd($booking->trip()) --}}
+                                    @foreach ($bookings as $booking)
+                                    {{-- @dd($booking) --}}
                                     <tr>
                                     <td>{{ ++$sl }}</td>
                                     <td> {{$booking->trip->start_date }}</td>
@@ -41,16 +41,23 @@
 
                                     <td> {{ $booking->no_of_seat}}</td>
                                     <td>
-                                        <a href="{{ route('front_booking', ['booking_id', $booking->id]) }}" class="btn btn-sucess">Edit</a>
+                                        <a href="{{ route('editBooking', ['id'=> $booking->id]) }}" class="btn btn-success">Edit</a>
 
-                                        <a href="{{ route('front_booking',['booking_id', $booking->id]) }}" class="btn btn-danger">Cancel</a>
+                                        {{-- <a href="{{ route('cancelBooking',['id'=> $booking->id]) }}" class="btn btn-danger">Cancel</a> --}}
+
+                                            <form style="display:inline" action="{{ route('cancelBooking', ['id' => $booking->id]) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+
+                                                <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-sm btn-danger" type="submit">Cancel Booking</button>
+                                            </form>
                                     </td>
                                     </tr>
-                                    @empty
+                                    {{-- @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">You do not have any booking currently!</td>
+                                        <td colspan="7" class="text-center">You do not have any booking currently!</td> --}}
 
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

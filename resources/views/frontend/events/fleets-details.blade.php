@@ -196,16 +196,6 @@
                                 <label for="no_of_seat">Number of Seat</label>
                                 <input type="number" class="form-control" id="no_of_seat" name="no_of_seat">
                             </div>
-                            @foreach ($trips as $trip)
-                        
-                            @php
-                                 $seat = 0;
-                                 $seat = $trip->available_seats;
-                                 $seat = $seat - $trip->booked_seats;   
-                                //   dd($seat);
-                             @endphp
-                             @endforeach
-
                               <div class="col-md-6" id="available_seats">
 
                                 
@@ -226,6 +216,15 @@
             </form>
         </div>
     </div>
+     @foreach ($trips as $trip)
+                        
+                            @php
+                                 $seat = 0;
+                                 $seat = $trip->available_seats;
+                                 $seat = $seat - $trip->booked_seats;   
+                                //   dd($seat);
+                             @endphp
+                             @endforeach
     {{-- //end modal --}}
     <script>
         let images = document.querySelectorAll('.card-img-top');

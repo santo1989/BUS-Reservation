@@ -231,9 +231,9 @@ class BookingController extends Controller
        
     }
 
-    public function cancelBooking($booking_id)
+    public function cancelBooking($id)
     {
-        $booking = Booking::where('id', $booking_id)->first();
+        $booking = Booking::where('id', $id)->first();
 
         $trip = Trip::where('id', $booking->trip_id)->first();
         $trip->update([
@@ -245,18 +245,21 @@ class BookingController extends Controller
         return redirect()->route('mybooking')->withMessage('Booking deleted');
     }
 
-    public function editBooking($booking_id)
+    public function editBooking($id)
     {
-        $booking = Booking::where('id', $booking_id)->first();
+        $booking = Booking::where('id', $id)->first();
         $events = Event::all();
         $trips = Trip::all();
         $passengers = Passenger::all();
+        // $trip = Trip::where('id', $booking->trip_id)->first();
+        // $stoppagesJson = json_decode($trip->stoppages, true);
         return view('frontend.editbooking', compact('booking', 'events', 'trips', 'passengers'));
     }
 
-    public function updateBooking(Request $request, $booking_id)
+    public function updateBooking(Request $request, $id)
     {
-        $booking = Booking::where('id', $booking_id)->first();
+        // dd($request->all());
+        $booking = Booking::where('id', $id)->first();
         $trip = Trip::where('id', $booking->trip_id)->first();
         $trip->update([
             'available_seats' => $trip->available_seats + $booking->no_of_seat
@@ -272,9 +275,6 @@ class BookingController extends Controller
         ]);
 
         $booking->update([
-            'passenger_id' => $request->passenger_id,
-            'trip_id' => $request->trip_id,
-            'event_id' => $request->event_id,
             'no_of_seat' => $request->no_of_seat,
             'seat' => $newAvailable,
             'stoppage' => $request->stoppage,

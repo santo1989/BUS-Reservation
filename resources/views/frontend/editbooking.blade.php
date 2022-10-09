@@ -2,13 +2,6 @@
 
  
     <div class="container">
-        @if(is_null($bookings) || empty($bookings))    
-        <div class="row">
-            <div class="col-md-12 col-lg-12 col-sm-12">
-                <h1 class="text-danger"> <strong>You do not have any booking currently!</strong> </h1>
-            </div>
-        </div>
-        @else
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -16,42 +9,78 @@
                             <h3 class="card-title">Edit Booking</h3>
                         </div>
                         <div class="card-body">
-                            <from action="{{ route('front_booking', ['booking_id', $booking->id]) }}" method="put">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="no_of_seat">No of Seat</label>
+                            <form action="{{ route('updateBooking', ['id'=> $booking->id]) }}" method="post" enctype="multipart/form-data">
+                             @csrf
+                             @method('put')
+                                <div class="row">
+                                    <div class="col-md-6">
+                                     <label for="no_of_seat">No of Seat</label>
                                     <input type="number" name="no_of_seat" id="no_of_seat" class="form-control" value="{{ $booking->no_of_seat }}">
+
+                                    </div>
+                                   
+                                    <div class="col-md-6" id="available_seats">
+                                        
+                                    </div>
                                 </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="stoppages">Shuttle Time</label>
+                                    <select name="stoppages" id="stoppages" class="form-control">
+                                        @php
+                                            $stoppages = explode(',', $booking->trip->stoppages);
+
+                                        @endphp
+                                        @foreach ($stoppages as $stoppage)
+                                            <option value="{{ $stoppage }}" {{ $stoppage == $booking->stoppages ? 'selected' : '' }}>{{ $stoppage }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <input type="hidden" name="trip_id" id="trip_id" value="{{ $booking->trip->id }}">
+                                <br>
+
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
-                            </from>
-                            {{-- <input type="hidden" name="booking_id" value="{{ $booking->id }}">
-                            <div class="form-group">
-                                <label for="no_of_seat">Booked Seat</label>
-                                <select name="no_of_seat" id="no_of_seat" class="form-control">
-                                    <option value="">Select Booked Seat</option>
-                                    @foreach ($trips as $trip)
-                                        <option value="{{ $trip->id }}" {{ $trip->id == $booking->trip->id ? 'selected' : '' }}>{{ $trip->no_of_seat }}</option>
-                                    @endforeach
-                                </select>
-                               
-                            </div>
-                            <div class="form-group">
-                                <label for="stoppages">shuttle time</label>
-                                <select name="stoppages" id="stoppages" class="form-control">
-                                    <option value="">Select shuttle time</option>
-                                    @foreach ($trips as $trip)
-                                        <option value="{{ $trip->id }}" {{ $trip->id == $booking->trip->id ? 'selected' : '' }}>{{ $trip->stoppages }}</option>
-                                    @endforeach
-                                </select> --}}
-                               
+                            </form>
                             </div>
                     </div>
                 </div>
             </div>
         </div>
+            @foreach ($trips as $trip)
 
-        @endif
+            @php
+                $seat = 0;
+                $seat = $trip->available_seats;
+                $seat = $seat - $trip->booked_seats;   
+                //   dd($seat);
+            @endphp
+            @endforeach      
+  <script>
+        
+       let seat = <?php echo $seat; ?>;
+          let seat_old = document.getElementById('no_of_seat');
+          let newSeat = document.getElementById('available_seats').innerHTML = " ";
+          newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat}</div>`;
+          seat_old.addEventListener('change', function(){
+            if(seat_old.value > 0 && seat_old.value <= seat){
+              let seat_new = seat - seat_old.value;
+              if(seat_new <6){
+                newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
+              }else{
+                newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
+              }
+            }
+            else
+            {
+              alert('Please enter valid number of seats');
+            //   document.getElementById('available_seats').removeChild(p);
+            document.getElementById('available_seats').innerHTML = " ";
+            }
+            
+          });
 
+    </script>
     </x-frontend.layouts.master>
