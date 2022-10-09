@@ -2,7 +2,7 @@
 
  
     <div class="container">
-        @if(is_null($bookinfo) || empty($bookinfo))    
+        @if(is_null($bookings) || empty($bookings))    
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12">
                 <h1 class="text-danger"> <strong>You do not have any booking currently!</strong> </h1>
@@ -20,7 +20,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sl#</th>
-                                        <th>Trip Date <th>                         <th>Event Name</th>
+                                        <th>Trip Date </th>                         <th>Event Name</th>
                                         <th>Trip Name</th>
                                         <th>Stopage Name</th>
                                         <th>Booked Seat</th>
@@ -29,16 +29,19 @@
                                 </thead>
                                 <tbody>
                                 @php $sl=0 @endphp
-                                    @foreach ($bookinfo as $booking)
-                                    {{-- <tr> --}}
+                                    @foreach ($bookings as $booking)
+                                    {{-- @dd($booking->trip()) --}}
+                                    <tr>
                                     <td>{{ ++$sl }}</td>
-                                    <td> {{ $booking->start_date }}</td>
-                                    <td> {{ $booking->name }}</td>
-                                    <td> {{ $booking->trip_code }}</td>
-                                    <td> {{ $booking->stoppages }} ,Start Location:{{ $booking->start_location }}</td>
+                                    <td> {{$booking->trip->start_date }}</td>
+                                    <td> {{ $booking->event->name }}</td>
+                                    <td> {{ $booking->trip->trip_code }}</td>
+                
+                                    <td> {{$booking->trip->stoppages }}</td>
 
                                     <td> {{ $booking->no_of_seat}}</td>
-                                    {{-- </tr> --}}
+                                    
+                                    </tr>
 
 
                                     @endforeach

@@ -20,4 +20,24 @@ class Driver extends Model
     {
         return $this->belongsToMany(Passenger::class);
     }
+
+    public function trip()
+    {
+        return $this->belongsToMany(Trip::class);
+    }
+
+    public function bus()
+    {
+        return $this->belongsToMany(Bus::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
+    public function passengers()
+    {
+        return $this->hasMany(Passenger::class);
+    }
 }

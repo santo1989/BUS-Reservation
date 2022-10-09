@@ -30,4 +30,16 @@ class Passenger extends Model
         return $this->hasMany(Trip::class);
     }
 
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
+    public function buses()
+    {
+        return $this->belongsToMany(Bus::class);
+    }
+
+    
+
 }
