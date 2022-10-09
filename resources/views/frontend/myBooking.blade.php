@@ -1,6 +1,14 @@
 <x-frontend.layouts.master>
 
-        <div class="container">
+ 
+    <div class="container">
+        @if(is_null($bookinfo) || empty($bookinfo))    
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <h1 class="text-danger"> <strong>You do not have any booking currently!</strong> </h1>
+            </div>
+        </div>
+        @else
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -42,5 +50,6 @@
             </div>
         </div>
 
+        @endif
 
-</x-frontend.layouts.master>
+    </x-frontend.layouts.master>
