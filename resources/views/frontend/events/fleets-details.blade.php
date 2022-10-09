@@ -153,7 +153,7 @@
                 @csrf
                 <div class="modal-content">          
                     <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
+                        <h5 class="modal-title">Book a Seat</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -196,6 +196,21 @@
                                 <label for="no_of_seat">Number of Seat</label>
                                 <input type="number" class="form-control" id="no_of_seat" name="no_of_seat">
                             </div>
+                            @foreach ($trips as $trip)
+                        
+                            @php
+                                 $seat = 0;
+                                 $seat = $trip->available_seats;
+                                 $seat = $seat - $trip->booked_seats;   
+                                //   dd($seat);
+                             @endphp
+                             @endforeach
+
+                              <div class="col-md-6" id="available_seats">
+
+                                
+                             </div>
+                              
                         </div>
                         <input type="hidden" name="trip_id" id="trip_id">
                         <input type="hidden" name="passenger_id" id="passenger_id">
@@ -205,7 +220,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Book</button>
                     </div>
                 </div>
             </form>
@@ -249,7 +264,7 @@
             if (user_id.length > 0) {
                 const base_url = $("#base_url").val();
                 const fethc_url = `${base_url}/get-passenger/${user_id}/${trip_id}`;
-                alert(fethc_url);
+                // alert(fethc_url);
                 var myModal = new bootstrap.Modal(document.getElementById('booking_modal'), {
                     keyboard: false
                 })
@@ -290,4 +305,31 @@
 
         }
     </script>
+
+    <script>
+        
+       let seat = <?php echo $seat; ?>;
+          let seat_old = document.getElementById('no_of_seat');
+          let newSeat = document.getElementById('available_seats').innerHTML = " ";
+          newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat}</div>`;
+          seat_old.addEventListener('change', function(){
+            if(seat_old.value > 0 && seat_old.value <= seat){
+              let seat_new = seat - seat_old.value;
+              if(seat_new <6){
+                newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
+              }else{
+                newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
+              }
+            }
+            else
+            {
+              alert('Please enter valid number of seats');
+            //   document.getElementById('available_seats').removeChild(p);
+            document.getElementById('available_seats').innerHTML = " ";
+            }
+            
+          });
+
+    </script>
+
 </x-frontend.layouts.master>

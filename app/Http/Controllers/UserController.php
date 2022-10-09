@@ -86,17 +86,20 @@ class UserController extends Controller
     public function passengerLoginPost(Request $request)
     {
         // dd($request->all());
-
-        
-
+        if($request->parameter){
+            $newRoute = route($request->routeName, ['id' => $request->parameter]);
+        }else{
+            $newRoute = route($request->routeName);
+        }
 
         try{
             $user = User::where('email', request('email'))->first();
             if($user){
                 if(Hash::check(request('password'), $user->password)){  
                     // dd("check");
+                    // dd($newRoute);
                     session()->put('user', $user);
-                    return redirect()->route('Phantom-Tranzit');
+                    return redirect()->to($newRoute);
                 }else{
                     return redirect()->back()->withInput()->withErrors('Invalid Password');
                 }

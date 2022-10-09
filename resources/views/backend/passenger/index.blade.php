@@ -63,10 +63,10 @@
                         <td>
                             @can('create-passenger')
                             <a class="btn btn-info btn-sm" href="{{ route('passengers.show', ['passenger' => $passenger->id]) }}">Show</a>
-                           
+                           @can('Admin')
                             <a class="btn btn-warning btn-sm" href="{{ route('passengers.edit', ['passenger' => $passenger->id]) }}">Edit</a>
                             @endcan
-                            @can('Admin')
+                            
                             <form style="display:inline" action="{{ route('passengers.destroy', ['passenger' => $passenger->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
