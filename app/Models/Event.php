@@ -17,4 +17,31 @@ class Event extends Model
         return $this->hasMany(Trip::class);
     }
 
+    public function buses()
+    {
+        return $this->belongsToMany(Bus::class);
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function drivers()
+    {
+        return $this->belongsToMany(Driver::class);
+    }
+
+    public function passengers()
+    {
+        return $this->belongsToMany(Passenger::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    
+
 }

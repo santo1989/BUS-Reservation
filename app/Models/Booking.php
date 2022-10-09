@@ -21,4 +21,42 @@ class Booking extends Model
     {
         return $this->belongsTo(Trip::class);
     }
+
+    public function bus()
+    {
+        return $this->belongsTo(Bus::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function driver()
+    {
+        return $this->belongsTo(Driver::class);
+    }
+
+    public function passengers()
+    {
+        return $this->belongsToMany(Passenger::class);
+    }
+
+    public function trips()
+    {
+        return $this->belongsToMany(Trip::class);
+    }
+
+    public function buses()
+    {
+        return $this->belongsToMany(Bus::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+    
+
+
 }

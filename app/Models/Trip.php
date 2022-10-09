@@ -34,5 +34,22 @@ class Trip extends Model
     {
         return $this->hasMany(Passenger::class);
     }
+
+    public function buses()
+    {
+        return $this->belongsToMany(Bus::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
+    public function drivers()
+    {
+        return $this->belongsToMany(Driver::class);
+    }
+
+    
 }
 
