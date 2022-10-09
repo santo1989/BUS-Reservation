@@ -77,7 +77,7 @@
             <div class="form-group mt-3" id="stoppage">            
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="stoppages">Stopagges</label>                    
+                        <label for="stoppages">Shuttle Start Location</label>                    
                         <input name="stoppages[]" class="form-control" id="stoppages" type="text">
                     </div>
                     <div class="col-md-5">

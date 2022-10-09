@@ -39,7 +39,7 @@
                     <th>Trip Code</th>
                     <th>Start Date</th>
                     <th>End Date</th>
-                    <th>Stoppages</th>
+                    <th>Shuttle Times</th>
                     <th>Start Location</th>
                     <th>End Location</th>
                     <th>Action</th>

@@ -214,7 +214,7 @@ class BookingController extends Controller
         $bookinfo = array();
 
         
-          dd($booking);
+        //  dd($booking);
              foreach ($booking as $bookings) {
                 array_push( $bookinfo,$bookings);
                 $event_details = Event::where('id', $bookings->event_id)->first();
