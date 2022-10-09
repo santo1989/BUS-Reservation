@@ -230,4 +230,56 @@ class BookingController extends Controller
         return view('frontend.mybooking', compact('bookings'));
        
     }
+
+    public function cancelBooking($booking_id)
+    {
+        $booking = Booking::where('id', $booking_id)->first();
+
+        $trip = Trip::where('id', $booking->trip_id)->first();
+        $trip->update([
+            'available_seats' => $trip->available_seats + $booking->no_of_seat
+        ]);
+
+        $booking->delete();
+
+        return redirect()->route('mybooking')->withMessage('Booking deleted');
+    }
+
+    public function editBooking($booking_id)
+    {
+        $booking = Booking::where('id', $booking_id)->first();
+        $events = Event::all();
+        $trips = Trip::all();
+        $passengers = Passenger::all();
+        return view('frontend.editbooking', compact('booking', 'events', 'trips', 'passengers'));
+    }
+
+    public function updateBooking(Request $request, $booking_id)
+    {
+        $booking = Booking::where('id', $booking_id)->first();
+        $trip = Trip::where('id', $booking->trip_id)->first();
+        $trip->update([
+            'available_seats' => $trip->available_seats + $booking->no_of_seat
+        ]);
+
+        $trip = Trip::where('id', $request->trip_id)->first();
+        $newAvailable = $trip->available_seats - $request->no_of_seat;
+        if ($newAvailable < 0) {
+            return redirect()->back()->withError('No of seats not available');
+        }
+        $trip->update([
+            'available_seats' => $newAvailable
+        ]);
+
+        $booking->update([
+            'passenger_id' => $request->passenger_id,
+            'trip_id' => $request->trip_id,
+            'event_id' => $request->event_id,
+            'no_of_seat' => $request->no_of_seat,
+            'seat' => $newAvailable,
+            'stoppage' => $request->stoppage,
+        ]);
+
+        return redirect()->route('mybooking')->withMessage('Booking updated');
+    }
 }

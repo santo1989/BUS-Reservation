@@ -189,3 +189,9 @@ Route::post('/passenger_login_post', [UserController::class, 'passengerLoginPost
 Route::post('/passenger-logout', [UserController::class, 'passengerLogout'])->name('passenger_logout');
 
 Route::post('/passenger-register', [UserController::class, 'passengerRegisterPost'])->name('passenger_register');
+
+Route::get('/mybooking/{booking_id}', [BookingController::class, 'editBooking'])->name('mybooking');
+
+Route::put('/mybooking/{booking_id}', [BookingController::class, 'updateBooking'])->name('mybooking');
+
+Route::delete('/mybooking/{booking_id}', [BookingController::class, 'cancelBooking'])->name('mybooking');

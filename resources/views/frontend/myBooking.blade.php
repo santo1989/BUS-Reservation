@@ -29,7 +29,7 @@
                                 </thead>
                                 <tbody>
                                 @php $sl=0 @endphp
-                                    @foreach ($bookings as $booking)
+                                    @forelse ($bookings as $booking)
                                     {{-- @dd($booking->trip()) --}}
                                     <tr>
                                     <td>{{ ++$sl }}</td>
@@ -40,11 +40,17 @@
                                     <td> {{$booking->trip->stoppages }}</td>
 
                                     <td> {{ $booking->no_of_seat}}</td>
-                                    
+                                    <td>
+                                        <a href="{{ route('front_booking', ['booking_id', $booking->id]) }}" class="btn btn-sucess">Edit</a>
+
+                                        <a href="{{ route('front_booking',['booking_id', $booking->id]) }}" class="btn btn-danger">Cancel</a>
+                                    </td>
                                     </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">You do not have any booking currently!</td>
 
-
-                                    @endforeach
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
