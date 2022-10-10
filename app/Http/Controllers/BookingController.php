@@ -226,7 +226,7 @@ class BookingController extends Controller
         // dd($booking, $event_details, $trip_details, $passenger_details);
         // return view('frontend.mybooking', compact('booking', 'event_details', 'trip_details', 'passenger_details'));
 
-        return view('frontend.mybooking', compact('bookings'));
+        return view('frontend.myBooking', compact('bookings'));
     }
 
     public function cancelBooking($id)

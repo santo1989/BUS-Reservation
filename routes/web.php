@@ -207,3 +207,21 @@ Route::get('/cleareverything', function () {
     $clearconfig = Artisan::call('config:cache');
     echo "Config cleared<br>";
 });
+
+Route::get('/key', function () {
+    Artisan::call('key:generate');
+});
+
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+});
+
+Route::get('/migrate-fresh', function () {
+    Artisan::call('migrate:fresh --seed');
+});
+
+Route::get('/optimize', function () {
+    Artisan::call('optimize');
+});
+
+
