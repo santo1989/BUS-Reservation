@@ -144,7 +144,7 @@ class DriverController extends Controller
         try {
             $user = User::find($driver->user_id);
             $user->delete();
-            unlink(public_path('storage/drivers/' . $driver->picture));
+            unlink(public_path('images/drivers/' . $driver->picture));
             $driver->delete();
             return redirect()->route('drivers.index')->withMessage('Successfully Deleted!');
         } catch (QueryException $e) {
@@ -154,7 +154,7 @@ class DriverController extends Controller
     public function uploadpdf($file)
     {
         $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $destinationPath = storage_path('/app/public/drivers/');
+        $destinationPath = public_path('images/drivers/');
         $file->move($destinationPath, $fileName);
         return $fileName;
     }
