@@ -53,16 +53,17 @@ class UserController extends Controller
         try {
 
             $requestData = [
-                // 'name' => $request->name,
-                'role_id' => $request->role_id
+                'name' => $request->name,
+                'role_id' => $request->role_id,
+                'password' => $request->password ? Hash::make($request->password) : $user->password,
             ];
 
-            $notification = Notification::create([
-                'name' => 'User Role Updated ' . $user->email,
-                'link' => "route('home')",
-                'status' => 'unread',
-                'color' => 'green',
-            ]);
+            // $notification = Notification::create([
+            //     'name' => 'User Role Updated ' . $user->email,
+            //     'link' => "route('home')",
+            //     'status' => 'unread',
+            //     'color' => 'green',
+            // ]);
 
             $user->update($requestData);
 

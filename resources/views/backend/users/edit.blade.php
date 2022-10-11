@@ -40,7 +40,14 @@
                 @endforeach
             </select>
           </div>
+
           </div>
+
+          <x-backend.form.input name="name" type="text" label="Name" :value="$user->name "/>
+
+          <x-backend.form.input name="password" type="password" label="Password" :value="$user->password"/>
+
+          <x-backend.form.input name="confirm_password" type="password" label="Confirm Password" :value="$user->confirm_password"/>
           
       </div>
       <button type="submit" class="btn btn-primary" style="margin-left: 33px">Save</button>

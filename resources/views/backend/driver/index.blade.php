@@ -55,13 +55,17 @@
 
                             <a class="btn btn-warning btn-sm" href="{{ route('drivers.edit', ['driver' => $driver->id]) }}">Edit</a>
 
+                            @can('Admin')
+                                
+                            
+
                             <form style="display:inline" action="{{ route('drivers.destroy', ['driver' => $driver->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
 
                                 <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-sm btn-danger" type="submit">Delete</button>
                             </form>
-
+                            @endcan
                             {{-- <!-- <a href="{{ route('driver.destroy', ['driver' => $driver->id]) }}" >Delete</a> --> --}}
 
 
