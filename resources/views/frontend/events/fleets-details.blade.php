@@ -216,7 +216,7 @@
             </form>
         </div>
     </div>
-     @foreach ($trips as $trip)
+     @forelse ($trips as $trip)
                         
                             @php
                                  $seat = 0;
@@ -224,7 +224,11 @@
                                  $seat = $seat - $trip->booked_seats;   
                                 //   dd($seat);
                              @endphp
-                             @endforeach
+                             @empty 
+                             @php 
+                             $seat = 0;
+                             @endphp
+    @endforelse
     {{-- //end modal --}}
     <script>
         let images = document.querySelectorAll('.card-img-top');
