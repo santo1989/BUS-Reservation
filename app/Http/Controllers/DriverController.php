@@ -71,10 +71,19 @@ class DriverController extends Controller
                     'email'   => $request->email,
                     'user_id' => $user->id,
                     'license_no' => $request->license_no,
-                    'picture' => $this->uploadpdf(request()->file('picture')),
+                    // 'picture' => $this->uploadpdf(request()->file('picture')),
 
 
                 ];
+
+
+                if ($request->file('picture')) {
+                    $file = $request->file('picture');
+                    $filename = time() . $file->getClientOriginalName();
+                    $file->move(public_path('images/drivers/'), $filename);
+                    $driverData['picture'] = $filename;
+                }
+
 
 
                 Driver::create($driverData);
@@ -113,6 +122,13 @@ class DriverController extends Controller
         $driver = Driver::find($id);
         $user = User::find($driver->user_id);
 
+        if ($request->file('picture')) {
+            $file = $request->file('picture');
+            $filename = time() . $file->getClientOriginalName();
+            $file->move(public_path('images/drivers/'), $filename);
+            $driver['picture'] = $filename;
+        }
+
         $driver->update([
 
             'name'    => $request->name,
@@ -120,10 +136,11 @@ class DriverController extends Controller
             'email'   => $request->email,
             'user_id' => $user->id,
             'license_no' => $request->license_no,
-            'picture' => $request->picture
+
 
         ]);
 
+        
         $user->update([
 
             'name'     => $request->name,
@@ -150,12 +167,5 @@ class DriverController extends Controller
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
-    }
-    public function uploadpdf($file)
-    {
-        $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $destinationPath = public_path('images/drivers/');
-        $file->move($destinationPath, $fileName);
-        return $fileName;
     }
 }
