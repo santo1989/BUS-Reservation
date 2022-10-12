@@ -6,9 +6,11 @@ use App\Models\Booking;
 use App\Models\Driver;
 use App\Models\Passenger;
 use App\Models\Trip;
+use App\Models\User;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PassengerController extends Controller
 {
@@ -134,4 +136,33 @@ class PassengerController extends Controller
         ]);
         
     }
+
+    public function passengerPasswordChange(Request $request)
+    {
+        if($request->email && $request->phone){
+            $username = User::where('email', $request->email)->first();
+            $userPhone = Passenger::where('phone', $request->phone)->first();
+            if($username && $userPhone==true){
+                return view('frontend.passengerPasswdReset', [
+                    'user_id' => $username->id
+                ]);
+            }else{
+                return redirect()->back()->with('error', 'Email or Phone number is not correct');
+            }
+        }else{
+            return redirect()->back()->witherror('Email or Phone number is not correct');
+        }
+
+            
+    }
+
+    public function passengerPasswordResetUpdate(Request $request)
+    {
+        // @dd($request);
+        $user = User::findOrFail($request->user_id);
+        $user->password = Hash::make($request->password);
+        $user->update();
+        return redirect()->route('Phantom-Tranzit')->with('success', 'Password reset successfully');
+    }
+
 }

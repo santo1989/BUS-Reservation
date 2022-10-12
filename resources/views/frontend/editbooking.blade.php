@@ -28,11 +28,17 @@
                                     <label for="stoppages">Shuttle Time</label>
                                     <select name="stoppages" id="stoppages" class="form-control">
                                         @php
-                                            $stoppages = explode(',', $booking->trip->stoppages);
+                                            // $stoppages = explode(',', $booking->trip->stoppages);
+                                            $stoppages = json_decode($booking->trip->stoppages);
+
+                                            // dd($stoppages);
 
                                         @endphp
-                                        @foreach ($stoppages as $stoppage)
+                                        {{-- @foreach ($stoppages as $stoppage)
                                             <option value="{{ $stoppage }}" {{ $stoppage == $booking->stoppages ? 'selected' : '' }}>{{ $stoppage }}</option>
+                                        @endforeach --}}
+                                        @foreach ($stoppages as $key => $stoppage)
+                                            <option value ="{{ $key }}-{{ $stoppage }}" {{ $key == $booking->stoppages ? 'selected' : '' }}> {{ $key }}-{{ $stoppage }}</option>
                                         @endforeach
                                     </select>
                                 </div>

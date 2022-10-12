@@ -27,14 +27,21 @@ class HomePageController extends Controller
     public function fleets()
     {
 
-        $eventCollection = Event::all();
+        // $eventCollection = Event::all();
 
-        if (request('search')) {
-            $eventCollection = $eventCollection
-                ->where('name', 'like', '%' . request('search') . '%');
+        // if (request('search')) {
+        //     $eventCollection = $eventCollection
+        //         ->where('name', 'like', '%' . request('search') . '%');
+        // }
+
+        // $events = $eventCollection;
+
+        $events = Event::all();
+
+        if(request('search')){
+            $events = $events->where('name', 'like', '%' . request('search') . '%')
+            ->where('date', 'like', '%' . request('search') . '%');
         }
-
-        $events = $eventCollection;
 
         return view('frontend.events.fleet', [
             'events' => $events
@@ -126,5 +133,19 @@ class HomePageController extends Controller
     {
         return view('frontend.passenger_register');
     }
+
+    public function passengerPasswdChangeRequest()
+    {
+        return view('frontend.passengerPasswdChangeRequest');
+    }
+
+
+
+    public function passengerPasswdReset()
+    {
+        return view('frontend.passengerPasswdReset');
+    }
+
+
 
 }

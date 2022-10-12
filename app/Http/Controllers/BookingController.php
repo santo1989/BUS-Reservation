@@ -209,7 +209,7 @@ class BookingController extends Controller
     public function mybooking()
     {
         // dd(session('user'));
-        $bookings = Booking::where('passenger_id', session('user')->id)->get();
+        $bookings = Booking::where('passenger_id', session('user')->id)->latest()->get();
         // $bookinfo = array();
 
 

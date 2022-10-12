@@ -4,7 +4,7 @@
     <div >
         {{-- @dd($events) --}}
         <div class="mb-5">
-        <form action="{{ route('fleets') }}" method="GET">
+        <form action="#">
                 
             <div class="input-group mb-3" style="padding-right:150px; padding-left:150px;">
                 <input type="text" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" name='search'>
@@ -14,10 +14,10 @@
         </form>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" >
         @foreach ($events as $event)
             {{-- <x-frontend.event-card :event="$event" /> --}}
-            <div class="col-md-3 col-sm-12 col-xl-3 mb-5">
+            <div class="col-md-3 col-sm-12 col-xl-3 mb-5" id="card_event">
              <div class="card h-100">
         <!-- event image-->
         @php
@@ -54,4 +54,20 @@
         @endforeach
     </div>
     </div>
+    <script>
+      let search = document.querySelector('input[name="search"]');
+      let card_event = document.querySelectorAll('#card_event');
+        search.addEventListener('keyup', function(){
+            let value = search.value.toLowerCase();
+            card_event.forEach(function(card){
+            let card_name = card.querySelector('h5').textContent.toLowerCase();
+            if(card_name.indexOf(value) != -1){
+                card.style.display = 'block';
+            }else{
+                card.style.display = 'none';
+            }
+            });
+        });
+    </script>
+    
 </x-frontend.layouts.master>
