@@ -16,6 +16,8 @@
 
 <body>
  <div class="wrapper">
+    <x-backend.layouts.elements.message :fmessage="session('message')" />
+     <x-backend.layouts.elements.errors :errors="$errors"/>
         <div class="logo">
             <img src="{{ asset('ui/frontend/images/Phantom_Tranzit.jpg')}}" alt="" ; class="logo-image">
         </div>
@@ -27,11 +29,11 @@
             <input type="hidden" name="user_id" value="{{ $user_id }}">
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="password" id="pwd" placeholder="New Password">
+                <input type="password" name="password" id="pwd" placeholder="New Password" required>
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="password_confirmation" id="pwd" placeholder="Confirm Password">
+                <input type="password" name="password_confirmation" id="pwd" placeholder="Confirm Password" required>
             </div>
 
             <button type="submit" class="btn mt-3">Save</button>

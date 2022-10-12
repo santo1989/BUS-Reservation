@@ -16,6 +16,7 @@
 
 <body>
     <x-backend.layouts.elements.message :fmessage="session('message')" />
+     <x-backend.layouts.elements.errors :errors="$errors"/>
  <div class="wrapper">
 
 
@@ -30,11 +31,11 @@
             @csrf
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="number" name="phone" id="userName" placeholder="Phone">
+                <input type="number" name="phone" id="userName" placeholder="Phone" required>
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="email" name="email" id="userName" placeholder="Email">
+                <input type="email" name="email" id="userName" placeholder="Email" required>
             </div>
 
             <button type="submit" class="btn mt-3">Search User</button>

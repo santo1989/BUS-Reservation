@@ -26,6 +26,7 @@
         <div class="card-body">
 
             <x-backend.layouts.elements.message :fmessage="session('message')" />
+             <x-backend.layouts.elements.errors :errors="$errors"/>
 
             <!-- <table id="datatablesSimple"> -->
             <form method="GET" action="{{ route('drivers.index') }}">

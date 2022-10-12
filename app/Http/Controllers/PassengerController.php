@@ -19,12 +19,6 @@ class PassengerController extends Controller
 
         $passengerCollection = Passenger::latest();
 
-        // if (request('search')) {
-        //     $passengerCollection = $passengerCollection
-        //         ->where('passenger_id', 'like', '%' . request('search') . '%')
-        //         ->orWhere('year', 'like', '%' . request('search') . '%');
-        // }
-
         $passenger = $passengerCollection->paginate(10);
 
         return view('backend.passenger.index', [
@@ -56,12 +50,12 @@ class PassengerController extends Controller
                 'address' => $request->address
             ]);
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passengers.index')->with('success', 'Passenger created successfully');
+        return redirect()->route('passengers.index')->withMessage( 'Passenger created successfully');
     }
 
     public function edit($id)
@@ -84,12 +78,12 @@ class PassengerController extends Controller
                 'address' => $request->address
             ]);
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passengers.index')->with('success', 'Passenger updated successfully');
+        return redirect()->route('passengers.index')->withMessage( 'Passenger updated successfully');
     }
 
     public function destroy($id)
@@ -98,12 +92,12 @@ class PassengerController extends Controller
         try {
             $passenger->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passengers.index')->with('success', 'Passenger deleted successfully');
+        return redirect()->route('passengers.index')->withMessage( 'Passenger deleted successfully');
     }
 
     public function show($id)
@@ -147,10 +141,10 @@ class PassengerController extends Controller
                     'user_id' => $username->id
                 ]);
             }else{
-                return redirect()->back()->with('error', 'Email or Phone number is not correct');
+                return redirect()->back()->withErrors('Email or Phone number is not correct');
             }
         }else{
-            return redirect()->back()->witherror('Email or Phone number is not correct');
+            return redirect()->back()->withErrors('Email or Phone number is not correct');
         }
 
             
@@ -162,7 +156,7 @@ class PassengerController extends Controller
         $user = User::findOrFail($request->user_id);
         $user->password = Hash::make($request->password);
         $user->update();
-        return redirect()->route('Phantom-Tranzit')->with('success', 'Password reset successfully');
+        return redirect()->route('Phantom-Tranzit')->withMessage( 'Password reset successfully');
     }
 
 }

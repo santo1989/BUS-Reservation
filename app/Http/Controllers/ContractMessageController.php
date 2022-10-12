@@ -66,7 +66,7 @@ class ContractMessageController extends Controller
         $contractMessage->update($request->only('name', 'email', 'message'));
 
         return redirect()->route('contract_message.index')
-            ->with('success', 'Message updated successfully');
+            ->withMessage('Message updated successfully');
     }
 
     public function destroy($id)
@@ -74,7 +74,7 @@ class ContractMessageController extends Controller
         $contractMessage = ContractMessage::findOrFail($id);
         $contractMessage->delete();
         return redirect()->route('contract_message.index')
-            ->with('success', 'Message deleted successfully');
+            ->withMessage('Message deleted successfully');
     }
 
 

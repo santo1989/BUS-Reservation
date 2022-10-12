@@ -16,6 +16,8 @@
 
 <body>
  <div class="wrapper">
+    <x-backend.layouts.elements.message :fmessage="session('message')" />
+     <x-backend.layouts.elements.errors :errors="$errors"/>
         <div class="logo">
             <img src="{{ asset('ui/frontend/images/Phantom_Tranzit.jpg')}}" alt="" ; class="logo-image">
         </div>
@@ -26,11 +28,11 @@
             @csrf
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="email" name="email" id="userName" placeholder="Email">
+                <input type="email" name="email" id="userName" placeholder="Email" required>
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="password" id="pwd" placeholder="Password">
+                <input type="password" name="password" id="pwd" placeholder="Password" required>
             </div>
            <input type="hidden" name="routeName" value="{{ $route['routeName'] }}">
             <input type="hidden" name="parameter" value="{{ $route['parameter'] }}">

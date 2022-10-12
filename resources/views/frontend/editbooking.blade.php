@@ -1,6 +1,6 @@
 <x-frontend.layouts.master>
 
- 
+ <x-backend.layouts.elements.message :fmessage="session('message')" />
     <div class="container">
             <div class="row">
                 <div class="col-md-12">
