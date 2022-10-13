@@ -24,13 +24,14 @@
                     <a class="text-white text-decoration-none"
                         href="{{ route('transport') }}"><strong>Fleet</strong></a>
                     <br>
+                    <br>
 
                     <a class="text-white text-decoration-none" href="{{ route('fleets') }}"><strong>Events</strong></a>
-                    <br>
+                    <br><br>
 
                     <a class="text-white text-decoration-none" href="{{ route('contactUS') }}"><strong>Contact
                             Us</strong></a>
-                    <br>
+                    <br><br>
 
                     <a class="text-white text-decoration-none" href="#"><br>
                     </a><br>
@@ -39,9 +40,9 @@
 
 
             </div>
-            {{-- <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-center text-white">
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-center text-white">
                 
-            </div> --}}
+            </div>
 
         </div>
 
@@ -65,7 +66,7 @@
                             Phantom Tranzit LLC- All Rights Reserved
 
                             <a class="text-white text-decoration-none d-flex justify-content-between"
-                                href="https://breakitsolution.com/" traget="blank">Developed By: Break-IT</a>
+                                href="https://breakitsolution.com/" target="_blank">Developed By: Break-IT</a>
                         </p>
                     </div>
                 </div>

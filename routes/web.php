@@ -35,6 +35,38 @@ Route::get('/transport-details/{bus_id}', [HomePageController::class, 'transport
 Route::get('/transport-details2', [HomePageController::class, 'transport_details2'])->name('transport_details2');
 Route::post('/trip/newBooking/', [BookingController::class, 'newBooking'])->name('newBooking');
 
+//passengers login
+
+Route::get('/passenger-login', [HomePageController::class, 'passengerLogin'])->name('passenger_login');
+
+Route::get('/passenger_register', [HomePageController::class, 'passengerRegister'])->name('passenger_registerHome');
+
+Route::post('/passenger_login_post', [UserController::class, 'passengerLoginPost'])->name('passenger_login_post');
+
+Route::post('/passenger-logout', [UserController::class, 'passengerLogout'])->name('passenger_logout');
+
+Route::post('/passenger-register', [UserController::class, 'passengerRegisterPost'])->name('passenger_register');
+
+Route::get('/passengerPasswdChangeRequest', [HomePageController::class, 'passengerPasswdChangeRequest'])->name('passengerPasswdChangeRequest');
+
+Route::post('/passengerPasswordChange', [PassengerController::class, 'passengerPasswordChange'])->name('passengerPasswordChange');
+
+Route::post('/passengerPasswdReset', [HomePageController::class, 'passengerPasswdReset'])->name('passengerPasswdReset');
+
+Route::post('/passengerPasswordResetUpdate', [PassengerController::class, 'passengerPasswordResetUpdate'])->name('passengerPasswordResetUpdate');
+
+//passengers Bookings
+Route::get('/mybooking', [BookingController::class, 'mybooking'])->name('mybooking');
+
+//passengers Bookings from home page
+
+Route::get('/mybooking/edit/{id}', [BookingController::class, 'editBooking'])->name('editBooking');
+
+Route::put('/mybooking/update/{id}', [BookingController::class, 'updateBooking'])->name('updateBooking');
+
+Route::delete('/mybooking/cancel/{id}', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
+
+
 
 
 
@@ -135,8 +167,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-//passengers Bookings
-Route::get('/mybooking', [BookingController::class, 'mybooking'])->name('mybooking');
+
 
 Route::get('/contract-message', [ContractMessageController::class, 'index'])->name('contract_message.index');
 
@@ -179,35 +210,7 @@ Route::get('/driver_passenger_index', function () {
 
 require __DIR__ . '/auth.php';
 
-//passengers login
 
-Route::get('/passenger-login', [HomePageController::class, 'passengerLogin'])->name('passenger_login');
-
-Route::get('/passenger_register', [HomePageController::class, 'passengerRegister'])->name('passenger_registerHome');
-
-Route::post('/passenger_login_post', [UserController::class, 'passengerLoginPost'])->name('passenger_login_post');
-
-Route::post('/passenger-logout', [UserController::class, 'passengerLogout'])->name('passenger_logout');
-
-Route::post('/passenger-register', [UserController::class, 'passengerRegisterPost'])->name('passenger_register');
-
-Route::get('/passengerPasswdChangeRequest', [HomePageController::class, 'passengerPasswdChangeRequest'])->name('passengerPasswdChangeRequest');
-
-Route::post('/passengerPasswordChange', [PassengerController::class, 'passengerPasswordChange'])->name('passengerPasswordChange');
-
-Route::post('/passengerPasswdReset', [HomePageController::class, 'passengerPasswdReset'])->name('passengerPasswdReset');
-
-Route::post('/passengerPasswordResetUpdate', [PassengerController::class, 'passengerPasswordResetUpdate'])->name('passengerPasswordResetUpdate');
-
-
-
-//passengers Bookings from home page
-
-Route::get('/mybooking/edit/{id}', [BookingController::class, 'editBooking'])->name('editBooking');
-
-Route::put('/mybooking/update/{id}', [BookingController::class, 'updateBooking'])->name('updateBooking');
-
-Route::delete('/mybooking/cancel/{id}', [BookingController::class, 'cancelBooking'])->name('cancelBooking');
 
 //php artisan command
 
