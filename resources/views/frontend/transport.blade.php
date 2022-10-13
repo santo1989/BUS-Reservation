@@ -28,6 +28,7 @@
       @endforelse
     </div>
 <div>
+  
 
 
 </x-frontend.layouts.master>
