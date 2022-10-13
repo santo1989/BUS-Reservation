@@ -7,7 +7,7 @@
         <form action="#">
                 
             <div class="input-group mb-3" style="padding-right:150px; padding-left:150px;">
-                <input type="text" class="form-control"  aria-describedby="button-addon2" name='search' placeholder="Search" />
+                <input type="text" class="form-control "  aria-describedby="button-addon2" name='search' placeholder="Search" />
                 {{-- <button class="btn btn-outline-warning " type="submit" id="button-addon2">Search</button> --}}
             
             </div>
