@@ -28,7 +28,7 @@
             <div class="row mb-3">        
                 <div class=col-md-4>
                     <label for="passenger_id" class="mt-2">Passengers</label>
-                    <select name="passenger_id" id="passenger_id" class="form-select">
+                    <select name="passenger_id" id="passenger_id" class="form-select" required>
                         <option value="">Select One...</option>
                         @foreach ($passengers as $passenger)
                             <option value="{{ $passenger->id }}">{{ $passenger->name }}</option>
@@ -38,7 +38,7 @@
 
                 <div class=col-md-4>
                     <label for="event_id" class="mt-2">Event</label>
-                    <select name="event_id" id="event_id" class="form-select">
+                    <select name="event_id" id="event_id" class="form-select" required>
                         <option value="">Select One...</option>
                         @foreach ($events as $event)
                             <option value="{{ $event->id }}">{{ $event->name }}</option>
@@ -48,7 +48,7 @@
 
                 <div class=col-md-4>
                     <label for="trip_id" class="mt-2">Trip</label>
-                    <select name="trip_id" id="trip_id" class="form-select">
+                    <select name="trip_id" id="trip_id" class="form-select" required>
                         <option value="">Select One...</option>                        
                     </select>
                 </div>
@@ -58,12 +58,12 @@
                 
                 <div class="col-md-4">
                     <label for="no_of_seat" class="mt-2"> Number Of Seat</label>
-                    <input type="number" name="no_of_seat" id="no_of_seat" class="form-control">
+                    <input type="number" name="no_of_seat" id="no_of_seat" class="form-control" required>
                 </div>
 
                 <div class=col-md-4>
                     <label for="stoppage" class="mt-2">Stoppage</label>
-                    <select name="stoppage" id="stoppage" class="form-select">
+                    <select name="stoppage" id="stoppage" class="form-select" required>
                         <option value="">Select One...</option>                        
                     </select>
                 </div>

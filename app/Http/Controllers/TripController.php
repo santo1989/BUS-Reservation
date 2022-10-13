@@ -40,7 +40,14 @@ class TripController extends Controller
                 $stoppages[$request->stoppages[$i]] = $request->times[$i];
             }
 
-            $tripCode = $this->generateTripCode($request->event_id, $request->start_date);
+            if(Trip::all()->count() > 0){
+                $trip = Trip::latest()->first();
+                $add_id = $trip->id + 1;
+            }else{
+                $add_id = 1;
+            }
+
+            $tripCode = $this->generateTripCode($request->event_id, $request->start_date, $add_id);
             $availableSeats = Bus::where('id', $request->bus_id)->first()->no_of_seat;
 
             $trip = Trip::create([
@@ -66,11 +73,11 @@ class TripController extends Controller
         }
     }
 
-    public function generateTripCode($event_id, $trip_date)
+    public function generateTripCode($event_id, $trip_date, $add_id)
     {
         $event = Event::find($event_id);
         $trip_date = $trip_date;
-        return str_replace(' ', '_', $event->name) . '_' . $trip_date;
+        return str_replace(' ', '_', $event->name) . '_' . $trip_date . '-' . $add_id;
     }
 
     public function edit($trip_id)
@@ -100,6 +107,7 @@ class TripController extends Controller
             $stoppages[$request->stoppages[$i]] = $request->times[$i];
         }
         $availableSeats = Bus::where('id', $request->bus_id)->first()->no_of_seat;
+        $trip->trip_code = $this->generateTripCode($request->event_id, $request->start_date, $trip->id);
         $trip->update([
             'event_id' => $request->event_id,
             'trip_details' => $request->trip_details,
@@ -111,6 +119,8 @@ class TripController extends Controller
             'bus_id' => $request->bus_id,
             'driver_id' => $request->drivers_id,
             'available_seats' => $availableSeats,
+            'trip_code' => $trip->trip_code,
+
         ]);
 
 

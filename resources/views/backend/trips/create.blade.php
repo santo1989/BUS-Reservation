@@ -27,25 +27,25 @@
             @csrf
             <div class="row">
                 <div class="col-md-6">
-                    <x-backend.form.input name="start_date" type="date" label="Start Date"/>                
+                    <x-backend.form.input name="start_date" type="date" label="Start Date" required/>                
                 </div>
                 <div class="col-md-6">
-                    <x-backend.form.input name="end_date" type="date" label="End Date"/>                
+                    <x-backend.form.input name="end_date" type="date" label="End Date" required/>                
                 </div>
                 <div class="col-md-6">
-                    <x-backend.form.input name="start_location" type="text" label="Start Location"/>
+                    <x-backend.form.input name="start_location" type="text" label="Start Location" required/>
                 </div>
                 <div class="col-md-6">
-                    <x-backend.form.input name="end_location" type="text" label="End Location"/>
+                    <x-backend.form.input name="end_location" type="text" label="End Location" required/>
                 </div>
             </div>        
             
-            <x-backend.form.textarea name="trip_details" label="Trip Details"/>
+            <x-backend.form.textarea name="trip_details" label="Trip Details" required/>
 
             <div class="row">        
                 <div class=col-md-4>
                     <label for="event_id" class="mt-2">Event</label>
-                    <select name="event_id" id="event_id" class="form-select">
+                    <select name="event_id" id="event_id" class="form-select" required>
                         <option value="">Select One...</option>
                         @foreach ($events as $event)
                             <option value="{{ $event->id }}">{{ $event->name }}</option>
@@ -55,7 +55,7 @@
 
                 <div class=col-md-4>
                     <label for="bus_id" class="mt-2">Bus</label>
-                    <select name="bus_id" id="bus_id" class="form-select">
+                    <select name="bus_id" id="bus_id" class="form-select" required>
                         <option value="">Select One...</option>
                         @foreach ($buses as $bus)
                             <option value="{{ $bus->id }}">{{ $bus->name }}</option>
@@ -65,7 +65,7 @@
 
                 <div class=col-md-4>
                     <label for="driver_id" class="mt-2">Driver</label>
-                    <select name="driver_id" id="driver_id" class="form-select">
+                    <select name="driver_id" id="driver_id" class="form-select" required>
                         <option value="">Select One...</option>
                         @foreach ($drivers as $driver)
                             <option value="{{ $driver->id }}">{{ $driver->name }}</option>
@@ -78,11 +78,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="stoppages">Shuttle Start Location</label>                    
-                        <input name="stoppages[]" class="form-control" id="stoppages" type="text">
+                        <input name="stoppages[]" class="form-control" id="stoppages" type="text" required>
                     </div>
                     <div class="col-md-5">
                         <label for="times">Expected Time</label>
-                        <input name="times[]" class="form-control" id="times" type="time">
+                        <input name="times[]" class="form-control" id="times" type="time" required>
                     </div>
                     <div class="col-md-1">
                         <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded w-100" style="width: 40px; height: 38px; color: purple; margin-top: 29px;" onclick="createInput()"><i class="fa fa-plus"></i></a>

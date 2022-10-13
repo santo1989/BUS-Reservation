@@ -43,70 +43,13 @@
   </div>
   
   {{-- @php
-  $trip_table = App\Models\Trip::all();
-  echo '<pre>';
-  // var_dump($trip_table);
-  
     $driver = App\Models\Driver::where('user_id', auth()->user()->id)->first();
-    // var_dump($driver);
-    
-    $driverinfo = App\Models\Driver::where('id', $driver->id)->first();
-    // var_dump($driverinfo);
-   
-    $eventinfo = App\Models\Event::where('id', $trip_table->event_id)->get();
-    // var_dump($eventinfo);
-     echo '</pre>';
-  die();
-    $passanger = App\Models\Passanger::where('id', $trip_table->passanger_id)->get();
-    var_dump($passanger, $event, $driver, $trip);
+  $trip_table = App\Models\Trip::where('driver_id', $driver->id )->get();
+  // dd($trip_table);
+  $passenger_id = App\Models\Booking::where('trip_id', $trip_table->id)->get();
+    $passanger = App\Models\Passenger::where('id', $passenger_id->passenger_id)->get();
+    dd($passanger);
   @endphp --}}
-
-{{-- <x-slot name="pageTitle">
-  Driver Portal
-    </x-slot>
-
-    <x-slot name='breadCrumb'>
-        <x-backend.layouts.elements.breadcrumb>
-            <x-slot name="pageHeader"> Welcome, {{ auth()->user()->name }} </x-slot>
-            
-        </x-backend.layouts.elements.breadcrumb>
-    </x-slot>
-
-    <div class="row">
-      <div class="col-xl-3 col-md-6">
-          <div class="card bg-primary text-white mb-4">
-              <div class="card-body">Check Passenger List</div>
-              <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="{{ route('passengers.index') }}">Passenger List</a>
-                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-              </div>
-          </div>
-      </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 ">
-          <h3><i class="fas fa-chart-pie mr-1"></i>
-            Notifications</h3> 
-            @php
-              $notifications = App\Models\Notification::all();
-
-            @endphp
-         @forelse ($notifications as $notification)
-            <a href="{{ $notification->link }}" style="text-decoration: none; ">
-              <div class="border rounded-pill;" style="  background-color: {{ $notification->color }}; padding-left:5px; color:black;">
-                <p style="color:'black'; font-size:15px; font-weight:bold;">{{ $notification->name }}</p>
-                <p style="color:'black'">{{ $notification->created_at->diffForHumans() }}</p>  
-             </div>
-            @empty
-            <div class="border rounded-pill;" style="  background-color: #ffc107; padding-left:5px; color:black;">
-              <p style="color:'black'; font-size:15px; font-weight:bold;">No Notification</p>
-            </div>
-          </a>  
-          @endforelse
-        </div>
-        
-      </div> --}}
-  {{-- </div> --}}
 </x-backend.layouts.master>
 @break
 

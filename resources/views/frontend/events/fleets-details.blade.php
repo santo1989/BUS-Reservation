@@ -60,7 +60,7 @@
         <h3 class="ps-1 mt-3 mb-2 font-weight-bold text-center"><strong>Trips</strong></h3>
 <x-backend.layouts.elements.errors :errors="$errors"/>
         <div id="accordion">
-            @foreach ($event->trips as $index => $trip)
+            @forelse ($event->trips as $index => $trip)
                 @php
                     $trip->stoppages = json_decode($trip->stoppages, true);
                 @endphp
@@ -118,7 +118,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class=" text-center">
+                    <h3>No Trips Found</h3>
+                </div>
+            @endforelse
         </div>
 
     </div>
@@ -186,7 +190,7 @@
                              
                             <div class="col-md-4">
                                 <label for="stoppage">Shuttle Place and Time</label>
-                                <select name="stoppage" id="stoppage" class="form-control">
+                                <select name="stoppage" id="stoppage" class="form-control" required>
                                     <option value="">Select One...</option>
                                 </select>
                             </div>
@@ -286,7 +290,7 @@
                         $("#event_id").val(data[1]['event_id']);
                         const stoppages = document.getElementById("stoppage");
                         stoppages.innerHTML = "";
-                        let options = `<option>Choose One...</option>`;
+                        let options = `<option label="Choose One..." disabled selected></option>`;
                         // stoppages.appendChild(`<option>Choose One...</option>`);
                         const locations = Object.keys(data[1]['stoppages']);
                         const times = Object.values(data[1]['stoppages']);

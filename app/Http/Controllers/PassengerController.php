@@ -154,9 +154,14 @@ class PassengerController extends Controller
     {
         // @dd($request);
         $user = User::findOrFail($request->user_id);
-        $user->password = Hash::make($request->password);
-        $user->update();
-        return redirect()->route('Phantom-Tranzit')->withMessage( 'Password reset successfully');
+        if($request->password == $request->password_confirmation){
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+            return redirect()->route('Phantom-Tranzit')->withMessage('Password reset successfully');
+        }else{
+            return redirect()->back()->withErrors('Password and confirm password does not match');
+        }
     }
 
 }
