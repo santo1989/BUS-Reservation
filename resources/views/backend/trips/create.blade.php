@@ -147,7 +147,9 @@
     }
 
     let deleteDiv = (e) => {
-            e.parentNode.parentNode.removeChild(e.parentNode);
+        e.parentNode.parentNode.remove();
+        
+
             // console.log(e);
         }
     

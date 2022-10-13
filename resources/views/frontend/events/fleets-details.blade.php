@@ -102,7 +102,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <h4 class="border-bottom"><strong>Stoppages</strong></h4>
+                                    <h4 class="border-bottom"><strong>Shuttle Time</strong></h4>
                                     <ul class="list-group">
                                         @foreach ($trip->stoppages as $location => $time)
                                             <li class="list-group-item d-flex justify-content-between">
