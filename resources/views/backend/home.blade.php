@@ -25,28 +25,7 @@
             </div>
         </div>
        </div>
-        <div class="row">
-          <div class="col-md-12 ">
-            <h3><i class="fas fa-chart-pie mr-1"></i>
-              Notifications</h3> 
-              @php
-                $notifications = App\Models\Notification::all();
-              @endphp
-           @forelse ($notifications as $notification)
-              <a href="{{ $notification->link }}" style="text-decoration: none; ">
-                <div class="border rounded-pill;" style="  background-color: {{ $notification->color }}; padding-left:5px; color:black;">
-                  <p style="color:'black'; font-size:15px; font-weight:bold;">{{ $notification->name }}</p>
-                  <p style="color:'black'">{{ $notification->created_at->diffForHumans() }}</p>  
-               </div>
-              @empty
-              <div class="border rounded-pill;" style="  background-color: #ffc107; padding-left:5px; color:black;">
-                <p style="color:'black'; font-size:15px; font-weight:bold;">No Notification</p>
-              </div>
-            </a>  
-            @endforelse
-          </div>
-          
-        </div>
+     
 
 
 </x-backend.layouts.master>

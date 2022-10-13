@@ -28,7 +28,10 @@
 
                 <x-backend.form.input name="name" type="text" label="Title"/>
                 
-                <x-backend.form.textarea name="details" label="Details" />
+                {{-- <x-backend.form.textarea  /> --}}
+
+                <x-backend.form.textarea name="details" label="Details" >
+                </x-backend.form.textarea>
 
                 
                 <div class="form-group" id="images">

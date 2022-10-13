@@ -229,20 +229,31 @@ Route::get('/cleareverything', function () {
     echo "Config cleared<br>";
 });
 
-Route::get('/key', function () {
-    Artisan::call('key:generate');
+Route::get('/ key =', function () {
+    $key =  Artisan::call('key:generate');
+    echo "key:generate<br>";
 });
 
 Route::get('/migrate', function () {
-    Artisan::call('migrate');
+    $migrate = Artisan::call('migrate');
+    echo "migration create<br>";
 });
 
 Route::get('/migrate-fresh', function () {
-    Artisan::call('migrate:fresh --seed');
+    $fresh = Artisan::call('migrate:fresh --seed');
+    echo "migrate:fresh --seed create<br>";
 });
 
 Route::get('/optimize', function () {
-    Artisan::call('optimize');
+    $optimize = Artisan::call('optimize:clear');
+    echo "optimize cleared<br>";
+});
+Route::get('/route-clear', function () {
+    $route_clear = Artisan::call('route:clear');
+    echo "route cleared<br>";
 });
 
-
+Route::get('/route-cache', function () {
+    $route_cache = Artisan::call('route:cache');
+    echo "route cache<br>";
+});

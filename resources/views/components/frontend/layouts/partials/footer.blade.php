@@ -1,4 +1,4 @@
-<footer class="footer py-5" style="background-color: #400859">
+<footer class="footer col-sm-12 col-md-12 col-xl-12 pt-5" style="background-color: #400859">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
@@ -50,7 +50,7 @@
 
 
 
-        <div class="footer-lower">
+        <div class="footer-lower ">
             <div class="media-container-row">
                 <div class="col-sm-12">
                     <hr>

@@ -46,7 +46,7 @@
 
                         <td>{{ $event->name }}</td>
 
-                        <td>{{ $event->details }}</td>
+                        <td> {{ Str::limit($event->details, 50) }} </td>
                         
                         <td>
                             <a class="btn btn-info btn-sm" href="{{ route('events.show', ['event_show' => $event->id]) }}">Show</a>

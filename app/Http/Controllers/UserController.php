@@ -100,6 +100,7 @@ class UserController extends Controller
                     || request('password') == $user->password){  
                     // dd("check");
                     // dd($newRoute);
+                    $user->passenger = $user->passenger;
                     session()->put('user', $user);
                     return redirect()->to($newRoute);
                 }else{

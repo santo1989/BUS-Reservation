@@ -58,7 +58,7 @@
         </div>
 
         <h3 class="ps-1 mt-3 mb-2 font-weight-bold text-center"><strong>Trips</strong></h3>
-
+<x-backend.layouts.elements.errors :errors="$errors"/>
         <div id="accordion">
             @foreach ($event->trips as $index => $trip)
                 @php
@@ -124,7 +124,7 @@
     </div>
 
     @php
-        $user_id = (session('user')->id ?? '');
+        $user_id = session('user')->id ?? '';
     @endphp
 
     <input type="hidden" value="{{ $user_id }}" id="user_id">
@@ -149,9 +149,9 @@
     {{-- end booking modal --}}
     <div class="modal" tabindex="-1" id="booking_modal">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <form action="{{ route('newBooking') }}" method="post"> 
+            <form action="{{ route('newBooking') }}" method="post">
                 @csrf
-                <div class="modal-content">          
+                <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Book a Seat</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -162,29 +162,30 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="name">Name</label>
-                                <input class="form-control" type="text" name="name" id="name">
+                                <input class="form-control" type="text" name="name" id="name" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="phone">Phone</label>
-                                <input class="form-control" type="text" name="phone" id="phone">
+                                <input class="form-control" type="text" name="phone" id="phone" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="address">Address</label>
-                                <input class="form-control" type="text" name="address" id="address">
+                                <input class="form-control" type="text" name="address" id="address" required>
                             </div>
                         </div>
 
                         <div class="row mt-2">
                             <div class="col-md-4">
                                 <label for="event">Event Name</label>
-                                <input class="form-control" type="text" id="event">
+                                <input class="form-control" type="text" id="event" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="trip">Trip Code</label>
-                                <input class="form-control" type="text" id="trip">
+                                <input class="form-control" type="text" id="trip" required>
                             </div>
+                             
                             <div class="col-md-4">
-                                <label for="stoppage">Stopagges</label>
+                                <label for="stoppage">Shuttle Place and Time</label>
                                 <select name="stoppage" id="stoppage" class="form-control">
                                     <option value="">Select One...</option>
                                 </select>
@@ -194,13 +195,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="no_of_seat">Number of Seat</label>
-                                <input type="number" class="form-control" id="no_of_seat" name="no_of_seat">
+                                <input type="number" class="form-control" id="no_of_seat" name="no_of_seat"
+                                    required>
                             </div>
-                              <div class="col-md-6" id="available_seats">
+                            <div class="col-md-6" id="available_seats">
 
-                                
-                             </div>
-                              
+
+                            </div>
+
                         </div>
                         <input type="hidden" name="trip_id" id="trip_id">
                         <input type="hidden" name="passenger_id" id="passenger_id">
@@ -216,18 +218,17 @@
             </form>
         </div>
     </div>
-     @forelse ($trips as $trip)
-                        
-                            @php
-                                 $seat = 0;
-                                 $seat = $trip->available_seats;
-                                 $seat = $seat - $trip->booked_seats;   
-                                //   dd($seat);
-                             @endphp
-                             @empty 
-                             @php 
-                             $seat = 0;
-                             @endphp
+    @forelse ($trips as $trip)
+        @php
+            $seat = 0;
+            $seat = $trip->available_seats;
+            $seat = $seat - $trip->booked_seats;
+            //   dd($seat);
+        @endphp
+    @empty
+        @php
+            $seat = 0;
+        @endphp
     @endforelse
     {{-- //end modal --}}
     <script>
@@ -301,7 +302,7 @@
                 myModal.show();
             } else {
                 const ans = confirm("You have to log in first. Login now?");
-                if(ans == true) {
+                if (ans == true) {
                     window.location.href = "{{ URL::to('/passenger-login') }}";
                 }
             }
@@ -310,29 +311,28 @@
     </script>
 
     <script>
-        
-       let seat = <?php echo $seat; ?>;
-          let seat_old = document.getElementById('no_of_seat');
-          let newSeat = document.getElementById('available_seats').innerHTML = " ";
-          newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat}</div>`;
-          seat_old.addEventListener('change', function(){
-            if(seat_old.value > 0 && seat_old.value <= seat){
-              let seat_new = seat - seat_old.value;
-              if(seat_new <6){
-                newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
-              }else{
-                newSeat = document.getElementById('available_seats').innerHTML = ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
-              }
+        let seat = <?php echo $seat; ?>;
+        let seat_old = document.getElementById('no_of_seat');
+        let newSeat = document.getElementById('available_seats').innerHTML = " ";
+        newSeat = document.getElementById('available_seats').innerHTML =
+            ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat}</div>`;
+        seat_old.addEventListener('change', function() {
+            if (seat_old.value > 0 && seat_old.value <= seat) {
+                let seat_new = seat - seat_old.value;
+                if (seat_new < 6) {
+                    newSeat = document.getElementById('available_seats').innerHTML =
+                        ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
+                } else {
+                    newSeat = document.getElementById('available_seats').innerHTML =
+                        ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
+                }
+            } else {
+                alert('Please enter valid number of seats');
+                //   document.getElementById('available_seats').removeChild(p);
+                document.getElementById('available_seats').innerHTML = " ";
             }
-            else
-            {
-              alert('Please enter valid number of seats');
-            //   document.getElementById('available_seats').removeChild(p);
-            document.getElementById('available_seats').innerHTML = " ";
-            }
-            
-          });
 
+        });
     </script>
 
 </x-frontend.layouts.master>

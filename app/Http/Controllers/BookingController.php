@@ -151,12 +151,7 @@ class BookingController extends Controller
     {
         $trip = Trip::where('id', $trip_id)->first();
         $stoppagesJson = json_decode($trip->stoppages, true);
-        // $stoppages = array();
 
-        // foreach ($stoppagesJson as $location => $time)
-        // {
-        //     $stoppages[$location] = $time;
-        // }
         return response()->json($stoppagesJson);
     }
 
@@ -175,24 +170,20 @@ class BookingController extends Controller
     public function newBooking(Request $request)
     {
         // dd($request->all());
-        // $newAvailable= Trip::where('id', $request->trip_id)->first()->update([
-        //     'available_seats' => Trip::where('id', $request->trip_id)->first()->available_seats - $request->no_of_seat
-        // ]);
+
+        if($request->stoppage == 'Choose One...')
+        {
+            return redirect()->back()->withErrors('Please select a stoppage');
+        }else{
+
         $trip = Trip::where('id', $request->trip_id)->first();
         $newAvailable = $trip->available_seats - $request->no_of_seat;
         if ($newAvailable < 0) {
-            return redirect()->back()->withError('No of seats not available');
+            return redirect()->back()->withErrors('No of seats not available');
         }
         $trip->update([
             'available_seats' => $newAvailable
         ]);
-
-        // $passengerdata = [
-        //     'name' => $request->name,
-        //     'phone' => $request->phone,
-        //     'address' => $request->address
-        // ];
-        // $passenger = Passenger::create($passengerdata);
         $bookingdata = [
             'passenger_id' => $request->passenger_id,
             'trip_id' => $request->trip_id,
@@ -202,30 +193,16 @@ class BookingController extends Controller
             'stoppage' => $request->stoppage,
         ];
         $booking = Booking::create($bookingdata);
-
+        }
         return redirect()->route('mybooking')->withMessage("Successfully created a booking");
+   
     }
 
     public function mybooking()
     {
         // dd(session('user'));
-        $bookings = Booking::where('passenger_id', session('user')->id)->latest()->get();
+        $bookings = Booking::where('passenger_id', session('user')->passenger->id)->latest()->get();
         // $bookinfo = array();
-
-
-        // //   dd($booking);
-        //      foreach ($booking as $bookings) {
-        //         // array_push( $bookinfo,$bookings);
-        //         $event_details = Event::where('id', $bookings->event_id)->first();
-        //         // array_push($bookinfo, $event_details);
-        //         $trip_details = Trip::where('id', $bookings->trip_id)->first();
-        //         // array_push($bookinfo, $trip_details);
-        //         $passenger_details = Passenger::where('id', $bookings->passenger_id)->first();
-        //         // array_push($bookinfo, $passenger_details);
-        //     }
-        // dd($booking, $event_details, $trip_details, $passenger_details);
-        // return view('frontend.mybooking', compact('booking', 'event_details', 'trip_details', 'passenger_details'));
-
         return view('frontend.myBooking', compact('bookings'));
     }
 
@@ -249,8 +226,6 @@ class BookingController extends Controller
         $events = Event::all();
         $trips = Trip::all();
         $passengers = Passenger::all();
-        // $trip = Trip::where('id', $booking->trip_id)->first();
-        // $stoppagesJson = json_decode($trip->stoppages, true);
         return view('frontend.editbooking', compact('booking', 'events', 'trips', 'passengers'));
     }
 
@@ -266,7 +241,7 @@ class BookingController extends Controller
         $trip = Trip::where('id', $request->trip_id)->first();
         $newAvailable = $trip->available_seats - $request->no_of_seat;
         if ($newAvailable < 0) {
-            return redirect()->back()->withError('No of seats not available');
+            return redirect()->back()->withErrors('No of seats not available');
         }
         $trip->update([
             'available_seats' => $newAvailable
