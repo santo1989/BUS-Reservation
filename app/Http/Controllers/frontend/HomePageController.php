@@ -39,7 +39,7 @@ class HomePageController extends Controller
         $event = Event::find($id);
         $event->images = json_decode($event->images, true);
         $date = date('Y-m-d');
-        $event->trips = $event->trips->where('start_date', '>=', $date);
+        $event->trips = $event->trips->where('start_date', '>=', $date)->sortBy('start_date');
         $trips = Trip::where('event_id', $event->id)->get();
         // dd($event, $trips);
         return view('frontend.events.fleets-details', compact('trips', 'event'));
