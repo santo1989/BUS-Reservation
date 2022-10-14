@@ -177,7 +177,7 @@ class BookingController extends Controller
         }else{
 
         $trip = Trip::where('id', $request->trip_id)->first();
-        $newAvailable = $trip->available_seats - $request->no_of_seat;
+        $newAvailable = $trip->available_seats - (int)$request->no_of_seat;
         if ($newAvailable < 0) {
             return redirect()->back()->withErrors('No of seats not available');
         }

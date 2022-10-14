@@ -58,7 +58,7 @@
         </div>
 
         <h3 class="ps-1 mt-3 mb-2 font-weight-bold text-center"><strong>Trips</strong></h3>
-<x-backend.layouts.elements.errors :errors="$errors"/>
+        <x-backend.layouts.elements.errors :errors="$errors" />
         <div id="accordion">
             @forelse ($event->trips as $index => $trip)
                 @php
@@ -166,15 +166,18 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="name">Name</label>
-                                <input class="form-control" type="text" name="name" id="name" required readonly>
+                                <input class="form-control" type="text" name="name" id="name" required
+                                    readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="phone">Phone</label>
-                                <input class="form-control" type="text" name="phone" id="phone" required readonly>
+                                <input class="form-control" type="text" name="phone" id="phone" required
+                                    readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="address">Address</label>
-                                <input class="form-control" type="text" name="address" id="address" required readonly>
+                                <input class="form-control" type="text" name="address" id="address" required
+                                    readonly>
                             </div>
                         </div>
 
@@ -187,7 +190,7 @@
                                 <label for="trip">Trip Code</label>
                                 <input class="form-control" type="text" id="trip" required readonly>
                             </div>
-                             
+
                             <div class="col-md-4">
                                 <label for="stoppage">Shuttle Place and Time</label>
                                 <select name="stoppage" id="stoppage" class="form-control" required>
@@ -198,7 +201,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="no_of_seat">Number of Seat</label>
+                                <label for="no_of_seat">Number of Seats</label>
                                 <input type="number" class="form-control" id="no_of_seat" name="no_of_seat"
                                     required>
                             </div>
@@ -222,10 +225,15 @@
             </form>
         </div>
     </div>
+
     @forelse ($trips as $trip)
         @php
             $seat = 0;
+            //   dd($seat);
+            
             $seat = $trip->available_seats;
+            //   dd($seat);
+            
             $seat = $seat - $trip->booked_seats;
             //   dd($seat);
         @endphp
