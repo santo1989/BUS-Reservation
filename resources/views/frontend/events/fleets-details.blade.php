@@ -65,7 +65,7 @@
                     $trip->stoppages = json_decode($trip->stoppages, true);
                 @endphp
                 <div class="card mt-2">
-                    <div class="card-header d-flex justify-content-between" style="background-color: #1f1252"
+                    <div class="card-header d-md-flex justify-content-between" style="background-color: #1f1252"
                         id="heading{{ $trip->id }}" data-toggle="collapse"
                         data-target="#collapse{{ $trip->id }}" aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
                         aria-controls="collapse{{ $trip->id }}">
