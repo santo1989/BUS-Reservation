@@ -166,26 +166,26 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="name">Name</label>
-                                <input class="form-control" type="text" name="name" id="name" required>
+                                <input class="form-control" type="text" name="name" id="name" required readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="phone">Phone</label>
-                                <input class="form-control" type="text" name="phone" id="phone" required>
+                                <input class="form-control" type="text" name="phone" id="phone" required readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="address">Address</label>
-                                <input class="form-control" type="text" name="address" id="address" required>
+                                <input class="form-control" type="text" name="address" id="address" required readonly>
                             </div>
                         </div>
 
                         <div class="row mt-2">
                             <div class="col-md-4">
                                 <label for="event">Event Name</label>
-                                <input class="form-control" type="text" id="event" required>
+                                <input class="form-control" type="text" id="event" required readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="trip">Trip Code</label>
-                                <input class="form-control" type="text" id="trip" required>
+                                <input class="form-control" type="text" id="trip" required readonly>
                             </div>
                              
                             <div class="col-md-4">
