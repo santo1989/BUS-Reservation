@@ -65,7 +65,7 @@
                     $trip->stoppages = json_decode($trip->stoppages, true);
                 @endphp
                 <div class="card mt-2">
-                    <div class="card-header d-flex justify-content-between" style="background-color: #1f1252"
+                    <div class="card-header d-md-flex justify-content-between" style="background-color: #1f1252"
                         id="heading{{ $trip->id }}" data-toggle="collapse"
                         data-target="#collapse{{ $trip->id }}" aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
                         aria-controls="collapse{{ $trip->id }}">
@@ -206,8 +206,10 @@
                                     required>
                             </div>
                             <div class="col-md-6" id="available_seats">
+                                <div class="rounded bg-success text-white p-2 mt-4">
+                                    Available Seats: ${seat}
 
-
+                                </div>
                             </div>
 
                         </div>
@@ -296,6 +298,8 @@
                         $("#trip_id").val(data[1]['id']);
                         $("#passenger_id").val(data[0]['id']);
                         $("#event_id").val(data[1]['event_id']);
+                        var seats = data[1]['available_seats'];
+                       
                         const stoppages = document.getElementById("stoppage");
                         stoppages.innerHTML = "";
                         let options = `<option label="Choose One..." disabled selected></option>`;
@@ -309,7 +313,16 @@
                             );
                         }
                         stoppages.innerHTML = options;
-
+                        if(seats<6)
+                        {
+                            document.getElementById('available_seats').innerHTML =
+                        ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: `+seats+`</div>`;
+                        }
+                        else{
+                            document.getElementById('available_seats').innerHTML =
+                        ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: `+seats+`</div>`;
+                        }
+                     
                     })
                 myModal.show();
             } else {
