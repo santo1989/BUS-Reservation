@@ -76,13 +76,13 @@
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <div id="accordion">
-                                        @forelse ($today_trip->bookings as $booking)
+                                        
                                             {{-- @dd($booking); --}}
                                             <div class="card card-primary">
                                                 <div class="card-header">
                                                     <h4 class="card-title w-100">
                                                         <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
-                                                            {{ $booking->trip->trip_code }}
+                                                            {{ $today_trip->trip_code }}
                                                         </a>
                                                     </h4>
                                                 </div>
@@ -101,6 +101,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                              @forelse ($today_trip->bookings as $booking)
                                                                 @php
                                                                     $passengers = App\Models\Passenger::where('id', $booking->passenger_id)->first();
                                                                     // @dd($passenger);
@@ -113,18 +114,19 @@
                                                                     <td>{{ $booking->no_of_seat }}</td>
                                                                     <td>{{ $booking->stoppage }}</td>
                                                                 </tr>
+                                                                @empty
+                                                                <div class="alert alert-danger">
+                                                                  <span class="close" data-dismiss="alert">&times;</span>
+                                                                  <strong>No Trip Found.</strong>
+                                                                 </div>
+                                                             @endforelse
                                                             </tbody>
 
                                                         </table>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @empty
-                                            <div class="alert alert-danger">
-                                                <span class="close" data-dismiss="alert">&times;</span>
-                                                <strong>No Trip Found.</strong>
-                                            </div>
-                                        @endforelse
+                                        
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -173,7 +175,6 @@
 
 
         </x-backend.layouts.master>
-
 @endswitch
 
 <script>
