@@ -37,7 +37,7 @@
                     <tr>
                         <th>Sl#</th>
                         <th>Driver Name</th>
-                        <th>Driver Code</th>
+                        <th>Driver Phone</th>
                         <th>Action</th>
                     </tr>
                 </thead>
