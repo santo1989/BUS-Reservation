@@ -55,7 +55,6 @@
                 </div>
             </div>
         </div>
-            @foreach ($trips as $trip)
 
             @php
                 $seat = 0;
@@ -63,7 +62,6 @@
                 $seat = $seat - $trip->booked_seats;   
                 //   dd($seat);
             @endphp
-            @endforeach      
   <script>
         
        let seat = <?php echo $seat; ?>;
