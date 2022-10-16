@@ -66,16 +66,49 @@
               </div>
             </div>
 <script>
-    let submitfrom = document.getElementById('submitfrom');
-    submitfrom.addEventListener('click', function(){
-        swal.fire({
-            title: 'Message Sent!',
-            text: 'Thank you for contacting us. We will get back to you soon.',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-            time : 5000;
-        })
-    })
+  // fetch('{{ route('contract_message.store') }}', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  //   },
+  //   body: JSON.stringify({
+  //     name: document.querySelector('#name').value,
+  //     email: document.querySelector('#email').value,
+  //     message: document.querySelector('#message').value,
+  //   })
+  // })
+  // .then(response => response.json())
+  // .then(data => {
+  //   swal.fire({
+  //     title: 'Success!',
+  //     text: data.message,
+  //     icon: 'success',
+  //     confirmButtonText: 'OK'
+  //   })
+  // })
+  // .catch(error => {
+  //   swal.fire({
+  //     title: 'Error!',
+  //     text: error.message,
+  //     icon: 'error',
+  //     confirmButtonText: 'OK'
+  //   })
+  // });
+
+
+
+
+    // let submitfrom = document.getElementById('submitfrom');
+    // submitfrom.addEventListener('click', function(){
+    //     swal.fire({
+    //         title: 'Message Sent!',
+    //         text: 'Thank you for contacting us. We will get back to you soon.',
+    //         icon: 'success',
+    //         confirmButtonText: 'Ok'
+    //         time : 5000;
+    //     })
+    // })
   </script>
           </div>
 

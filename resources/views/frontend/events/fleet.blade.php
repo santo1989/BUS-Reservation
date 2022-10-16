@@ -1,6 +1,13 @@
 <x-frontend.layouts.master>
 
     <div class="container">
+        @if (is_null($events) || empty($events))
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                </div>
+            </div>
+        @else
     <div >
         {{-- @dd($events) --}}
         <div class="mb-5">
@@ -70,5 +77,6 @@
             });
         });
     </script>
+    @endif
     
 </x-frontend.layouts.master>

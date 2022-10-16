@@ -4,6 +4,7 @@
             {{ session()->get('message') }}
         </div>
     @endif
+    
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
@@ -70,6 +71,10 @@
                         data-target="#collapse{{ $trip->id }}" aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
                         aria-controls="collapse{{ $trip->id }}">
                         <h5 class="mt-1">
+                            <p class="btn badge bg-danger">
+                                {{ $trip->trip_code }}</p> 
+                        </h5>
+                        <h5 class="mt-1">
                             <button class="btn badge bg-info" data-toggle="collapse"
                                 data-target="#collapse{{ $trip->id }}"
                                 aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
@@ -95,26 +100,37 @@
                     <div id="collapse{{ $trip->id }}" class="{{ $index == 0 ? 'collapse show' : 'collapse' }}"
                         aria-labelledby="heading{{ $trip->id }}" data-parent="#accordion">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <h4 class="border-bottom"><strong>Trip Details</strong></h4>
-                                    {{ $trip->trip_details }}
-                                </div>
+                            <div class="row border-bottom">
+                                {{-- <h4 class="border-bottom"> </h4> --}}
+                                {{ $trip->trip_details }}
+                            </div>
 
-                                <div class="col-md-4">
-                                    <h4 class="border-bottom"><strong>Shuttle Time</strong></h4>
+                            <div class="row">
+                                
+                                
+                                 <div class="col-md-8 col-sm-8">
+                                    {{-- <h4 class="border-bottom"><strong></strong></h4> --}}
                                     <ul class="list-group">
                                         @foreach ($trip->stoppages as $location => $time)
-                                            <li class="list-group-item d-flex justify-content-between">
-                                                <span>{{ $location }}</span><span>{{ $time }}</span>
-                                            </li>
+                                            <li class="list-group-item">    
+                                                @php
+                                                    $time = \Carbon\Carbon::parse($time)->format('h:i A');
+                                                @endphp       
+                                             <span>{{ $time }}</span> Shuttle to <span>{{ $location }}</span>
                                         @endforeach
                                 </div>
-                            </div>
-                            <div class="d-flex justify-content-end w-100">
+
+                             <div class="col-md-4 col-sm-4">
+                                    <div class="d-flex justify-content-end w-100">
                                 <button class="btn btn-primary mt-2" onclick="modalOpen(<?php echo $trip->id; ?>)">Book a
                                     Seat</button>
                             </div>
+                                </div> 
+                            </div>
+                            {{--   <div class="d-flex justify-content-end w-100">
+                                <button class="btn btn-primary mt-2" onclick="modalOpen()">Book a
+                                    Seat</button>
+                            </div>--}}
                         </div>
                     </div>
                 </div>

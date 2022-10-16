@@ -1,0 +1,65 @@
+{{-- <div id="accordion">
+            @forelse ($event->trips as $index => $trip)
+                @php
+                    $trip->stoppages = json_decode($trip->stoppages, true);
+                @endphp
+                <div class="card mt-2">
+                    <div class="card-header d-md-flex justify-content-between" style="background-color: #1f1252"
+                        id="heading{{ $trip->id }}" data-toggle="collapse"
+                        data-target="#collapse{{ $trip->id }}" aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                        aria-controls="collapse{{ $trip->id }}">
+                        <h5 class="mt-1">
+                            <button class="btn badge bg-info" data-toggle="collapse"
+                                data-target="#collapse{{ $trip->id }}"
+                                aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                                aria-controls="collapse{{ $trip->id }}">
+                                <i class="fas fa-plane-departure"></i>
+                                {{ \Carbon\Carbon::parse($trip->start_date)->format('d M, Y') }}
+                            </button>
+                        </h5>
+                        <h5 class="mt-1">
+                            <p class="btn badge bg-danger"><i class="fas fa-bus"></i> {{ $trip->bus->name }}</p>
+                        </h5>
+                        <h5 class="mt-1">
+                            <button class="btn badge bg-info" data-toggle="collapse"
+                                data-target="#collapse{{ $trip->id }}"
+                                aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                                aria-controls="collapse{{ $trip->id }}">
+                                <i class="fas fa-plane-arrival"></i>
+                                {{ \Carbon\Carbon::parse($trip->end_date)->format('d M, Y') }}
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapse{{ $trip->id }}" class="{{ $index == 0 ? 'collapse show' : 'collapse' }}"
+                        aria-labelledby="heading{{ $trip->id }}" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 class="border-bottom"><strong>Trip Details</strong></h4>
+                                    {{ $trip->trip_details }}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h4 class="border-bottom"><strong>Shuttle Time</strong></h4>
+                                    <ul class="list-group">
+                                        @foreach ($trip->stoppages as $location => $time)
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span>{{ $location }}</span><span>{{ $time }}</span>
+                                            </li>
+                                        @endforeach
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end w-100">
+                                <button class="btn btn-primary mt-2" onclick="modalOpen(<?php echo $trip->id; ?>)">Book a
+                                    Seat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class=" text-center">
+                    <h3>No Trips Found</h3>
+                </div>
+            @endforelse
+        </div> --}}
