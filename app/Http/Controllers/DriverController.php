@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\Trip;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\QueryException;
@@ -158,6 +159,7 @@ class DriverController extends Controller
 
     public function destroy(Driver $driver)
     {
+        dd("Please do the trip delete part then delete the dd");
         try {
             $user = User::find($driver->user_id);
             $user->delete();
@@ -166,6 +168,33 @@ class DriverController extends Controller
             return redirect()->route('drivers.index')->withMessage('Successfully Deleted!');
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+
+    public function getTripsByDriver($driver_id)
+    {
+        $date = date('Y-m-d');
+        $trips = Trip::where('start_date', '>=', $date)->where('driver_id', $driver_id)->get();
+
+        foreach ($trips as $trip) 
+        {
+            $trip->event = $trip->event;
+        }
+
+        $drivers = Driver::where('id', '!=' , $driver_id)->get();
+        return response()->json([$trips, $driver_id, $drivers]);
+    }
+
+    public function updateTripDriver($trip_id, $driver_id)
+    {
+        try {
+            $trip = Trip::where('id', $trip_id)->first();
+            $trip->driver_id = $driver_id;
+            $trip->update();
+    
+            return response()->json(true);
+        } catch(\Exception $e) {
+            return response()->json(false);
         }
     }
 }

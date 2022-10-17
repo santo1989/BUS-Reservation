@@ -100,6 +100,7 @@ Route::middleware('auth')->group(function () {
 
 
     //driver
+    Route::get('/driver/delete/{driver}', [DriverController::class, 'destroy'])->name('driversManual.delete');
     Route::resource('/drivers', DriverController::class);
 
     //passenger
@@ -186,6 +187,8 @@ Route::delete('/contract-message/{message}', [ContractMessageController::class, 
 
 Route::get('/notification/{message}/{notification}', [NotificationController::class, 'showForUpdating'])->name("/message.show");
 
+//apis
+
 Route::get('/get-bookings/{trip_id}', [BookingController::class, 'getBookings']);
 
 Route::get('/get-trips/{event_id}', [BookingController::class, 'getTrips']);
@@ -195,6 +198,12 @@ Route::get('/get-stoppages/{trip_id}', [BookingController::class, 'getStoppages'
 Route::get('/get-available-seat/{trip_id}', [BookingController::class, 'getAvailableSeat']);
 
 Route::get('/get-passenger/{user_id}/{trip_id}', [HomePageController::class, 'getPassenger']);
+
+Route::get('/get-trips/by-driver/{driver_id}', [DriverController::class, 'getTripsByDriver']);
+
+Route::get('/update-driver/{trip_id}/{driver_id}', [DriverController::class, 'updateTripDriver']);
+
+//end apis
 
 // Route::get('/setplane', function () {
 //     return view('backend.setplane');
