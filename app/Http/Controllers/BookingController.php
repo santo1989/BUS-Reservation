@@ -200,9 +200,11 @@ class BookingController extends Controller
 
     public function mybooking()
     {
-        // dd(session('user'));
-        $bookings = Booking::where('passenger_id', session('user')->passenger->id)->latest()->get();
-        // $bookinfo = array();
+        $bookings = [];
+        if(isset(session('user')->passenger->id)){
+            $bookings = Booking::where('passenger_id', session('user')->passenger->id)->latest()->get();
+        }
+      
         return view('frontend.myBooking', compact('bookings'));
     }
 

@@ -3,8 +3,8 @@
 
     <div class="container">
         @if (is_null($bookings) || empty($bookings))
-            <div class="row">
-                <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="row text-center">
+                <div class="col-md-12 col-lg-12 col-sm-12" style="height:100vh">
                     <h1 class="text-danger"> <strong>You do not have any booking currently!</strong> </h1>
                 </div>
             </div>
