@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bus;
+use App\Models\Trip;
+use Carbon\Carbon;
 use Doctrine\DBAL\Query\QueryException;
 use Exception;
 use Illuminate\Http\Request;
@@ -48,7 +50,7 @@ class BusController extends Controller
                 ]);
             }
 
-            return redirect()->route('buses.index')->withMessage("Successfully created driver with user");
+            return redirect()->route('buses.index')->withMessage("Successfully created bus with user");
             
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -90,7 +92,12 @@ class BusController extends Controller
     public function destroy($id)
     {
         try {
+            $date = Carbon::now()->format('Y-m-d');
             $bus = Bus::find($id);
+            $trips = Trip::where('bus_id', $id)->where('date', '>=', $date)->get();
+            if (count($trips) > 0) {
+                $trips->each->delete();
+            }
             $bus->delete();
             foreach (json_decode($bus->images) as $image) {
                 $location = public_path('images/Buses/' . $image);
@@ -112,5 +119,31 @@ class BusController extends Controller
     {
         $show_buse = Bus::find($id);
         return view('backend.buses.show', compact('show_buse'));
+    }
+
+    public function getTripsByBus($bus_id)
+    {
+        $date = date('Y-m-d');
+        $trips = Trip::where('start_date', '>=', $date)->where('bus_id', $bus_id)->get();
+
+        foreach ($trips as $trip) {
+            $trip->event = $trip->event;
+        }
+
+        $buss = Bus::where('id', '!=', $bus_id)->get();
+        return response()->json([$trips, $bus_id, $buss]);
+    }
+
+    public function updateTripBus($trip_id, $bus_id)
+    {
+        try {
+            $trip = Trip::where('id', $trip_id)->first();
+            $trip->bus_id = $bus_id;
+            $trip->update();
+
+            return response()->json(true);
+        } catch (\Exception $e) {
+            return response()->json(false);
+        }
     }
 }

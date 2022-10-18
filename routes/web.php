@@ -122,10 +122,18 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
     //events
+
+    // Route::get('/events/delete/{events}', [EventController::class, 'destroy'])->name('eventsManual.delete');
+    Route::get('/event/delete/{event}', [EventController::class, 'destroy'])->name('eventsManual.delete');
+
+   
+
     Route::controller(EventController::class)->prefix('events')->group(function () {
         Route::get('/events/trashed-events', 'trash')->name('events.trashed');
         Route::get('/events/trashed-events/{events}/restore', 'restore')->name('events.restore');
         Route::delete('/events/trashed-events/delete/{events}', 'delete')->name('events.delete');
+
+        // Route::get('/event/delete/{event_id}', '')->name('.');
 
         Route::get('/', 'index')->name('events.index');
         Route::get('/create', 'create')->name('events.create');
@@ -133,21 +141,27 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{single_event}', 'edit')->name('events.edit');
         Route::put('/update/{update_event}', 'update')->name('events.update');
         Route::get('/show/{event_show}', 'show')->name('events.show');
-        Route::delete('/destroy/{event_id}', 'destroy')->name('events.destroy');
+       
+        // Route::delete('/destroy/{event_id}', 'destroy')->name('events.destroy');
     });
-
+    
     //buses
+    
+    Route::get('/bus/delete/{driver}', [BusController::class, 'destroy'])->name('busesManual.delete');
+
     Route::controller(BusController::class)->prefix('buses')->group(function () {
         Route::get('/', 'index')->name('buses.index');
         Route::get('/create', 'create')->name('buses.create');
         Route::post('/store', 'store')->name('buses.store');
         Route::get('/edit/{single_buse}', 'edit')->name('buses.edit');
         Route::post('/update/{single_buse}', 'update')->name('buses.update');
-        Route::delete('/delete/{buse}', 'destroy')->name('buses.destroy');
+        // Route::delete('/delete/{buse}', 'destroy')->name('buses.destroy');
         Route::get('/show/{show_buse}', 'show')->name('buses.show');
+
     });
 
     //trips
+
     Route::controller(TripController::class)->prefix('trips')->group(function () {
         Route::get('/', 'index')->name('trips.index');
         Route::get('/create', 'create')->name('trips.create');
@@ -202,6 +216,16 @@ Route::get('/get-passenger/{user_id}/{trip_id}', [HomePageController::class, 'ge
 Route::get('/get-trips/by-driver/{driver_id}', [DriverController::class, 'getTripsByDriver']);
 
 Route::get('/update-driver/{trip_id}/{driver_id}', [DriverController::class, 'updateTripDriver']);
+
+Route::get('/get-trips/by-bus/{bus_id}', [BusController::class, 'getTripsByBus']);
+
+Route::get('/update-bus/{trip_id}/{bus_id}', [BusController::class, 'updateTripBus']);
+
+Route::get('/get-trips/by-event/{event_id}', [EventController::class, 'getTripsByEvent']);
+
+Route::get('/update-event/{trip_id}/{event_id}', [EventController::class, 'updateTripEvent']);
+
+
 
 //end apis
 
