@@ -56,33 +56,40 @@
                 //   dd($passanger);
             @endphp
 
+
             <section class="content">
                 <div class="container-fluid">
-
-                    @if (session('message'))
-                        <div class="alert alert-success">
-                            <span class="close" data-dismiss="alert">&times;</span>
-                            <strong>{{ session('message') }}.</strong>
+                    @if (is_null($today_trip) || empty($today_trip))
+                        <div class="row text-center">
+                            <div class="col-md-12 col-lg-12 col-sm-12" style="height:100vh">
+                                <h1 class="text-danger"> <strong>You do not have any trip currently!</strong> </h1>
+                            </div>
                         </div>
-                    @endif
+                    @else
+                        @if (session('message'))
+                            <div class="alert alert-success">
+                                <span class="close" data-dismiss="alert">&times;</span>
+                                <strong>{{ session('message') }}.</strong>
+                            </div>
+                        @endif
 
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title text-center">Today Trip Table</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <div id="accordion">
-                                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title text-center">Today Trip Table</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div id="accordion">
+
                                             {{-- @dd($booking); --}}
                                             <div class="card card-primary">
                                                 <div class="card-header">
                                                     <h4 class="card-title w-100">
                                                         <a class="d-block w-100" data-toggle="collapse" href="#collapseOne">
-                                                            {{ $today_trip->trip_code }}
+                                                            {{ $today_trip->trip_code ?? '' }}
                                                         </a>
                                                     </h4>
                                                 </div>
@@ -101,49 +108,48 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                              @forelse ($today_trip->bookings as $booking)
-                                                                @php
-                                                                    $passengers = App\Models\Passenger::where('id', $booking->passenger_id)->first();
-                                                                    // @dd($passenger);
-                                                                @endphp
-                                                                <tr>
-                                                                    <td>{{ $passengers->name }}</td>
-                                                                    <td>{{ $passengers->phone }}</td>
-                                                                    <td>{{ $passengers->user->email }}</td>
-                                                                    <td>{{ $passengers->address }}</td>
-                                                                    <td>{{ $booking->no_of_seat }}</td>
-                                                                    <td>{{ $booking->stoppage }}</td>
-                                                                </tr>
+                                                                @forelse ($today_trip->bookings as $booking)
+                                                                    @php
+                                                                        $passengers = App\Models\Passenger::where('id', $booking->passenger_id)->first();
+                                                                        // @dd($passenger);
+                                                                    @endphp
+                                                                    <tr>
+                                                                        <td>{{ $passengers->name }}</td>
+                                                                        <td>{{ $passengers->phone }}</td>
+                                                                        <td>{{ $passengers->user->email }}</td>
+                                                                        <td>{{ $passengers->address }}</td>
+                                                                        <td>{{ $booking->no_of_seat }}</td>
+                                                                        <td>{{ $booking->stoppage }}</td>
+                                                                    </tr>
                                                                 @empty
-                                                                <div class="alert alert-danger">
-                                                                  <span class="close" data-dismiss="alert">&times;</span>
-                                                                  <strong>No Trip Found.</strong>
-                                                                 </div>
-                                                             @endforelse
+                                                                    <div class="alert alert-danger">
+                                                                        <span class="close" data-dismiss="alert">&times;</span>
+                                                                        <strong>No Trip Found.</strong>
+                                                                    </div>
+                                                                @endforelse
                                                             </tbody>
 
                                                         </table>
                                                     </div>
                                                 </div>
                                             </div>
-                                        
+
+                                        </div>
                                     </div>
+                                    <!-- /.card-body -->
                                 </div>
-                                <!-- /.card-body -->
+                                <!-- /.card -->
+
+
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
-
-
-                            <!-- /.card -->
+                            <!-- /.col -->
                         </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
+                        <!-- /.row -->
                 </div>
                 <!-- /.container-fluid -->
             </section>
-
-
+            @endif
 
 
 
