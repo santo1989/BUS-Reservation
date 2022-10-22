@@ -14,7 +14,13 @@
 
 <section class="content">
   <div class="container-fluid">
-
+ @if (is_null($buses) || empty($buses))
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                </div>
+            </div>
+        @else
 @if (session('message'))
 <div class="alert alert-success">
     <span class="close" data-dismiss="alert">&times;</span>
@@ -57,7 +63,7 @@
 
 
                         @can('Admin')
-                        <button class="btn btn-sm btn-danger" onclick="deleteBus(<?php echo $bus->id; ?>)">Delete</button>
+                        <button class="btn btn-danger" onclick="deleteBus(<?php echo $bus->id; ?>)">Delete</button>
                             {{-- <form style="display:inline" action="{{ route('buses.destroy', ['buse' => $bus->id]) }}" method="post">
                                 @csrf
                                 @method('delete')
@@ -116,7 +122,7 @@
                 <form method="post" id="deleteForm">
                     @csrf
                     @method('delete')
-                    <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-sm btn-danger" type="submit">Delete With Trips</button>
+                    <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-danger" type="submit">Delete With Trips</button>
                 </form>
             </div>
             </div>
@@ -175,7 +181,7 @@
                 const tr = document.createElement('tr');
 
                 const sl = document.createElement('td');
-                sl.textContent = sl_index;
+                sl.textContent = sl_index++;
 
                 const event = document.createElement('td');
                 event.textContent = trip['event']['name'];
@@ -203,7 +209,7 @@
                 const action = document.createElement('td');
                 const updateButton = document.createElement('button');
                 updateButton.setAttribute('onclick', `updateBus(${trip['id']}, ${bus_id})`)
-                updateButton.setAttribute('class', 'btn btn-sm btn-warning')
+                updateButton.setAttribute('class', 'btn btn-warning')
                 updateButton.textContent = "Update";
                 action.appendChild(updateButton);
 
@@ -239,4 +245,5 @@
             myModal.hide();
         }
     </script>
+@endif
 </x-backend.layouts.master>

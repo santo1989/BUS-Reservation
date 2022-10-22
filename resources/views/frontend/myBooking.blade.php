@@ -44,6 +44,9 @@
 
                                             <td>
                                                 @foreach ($stoppage as $key => $value)
+                                                   @php
+                                        $value = \Carbon\Carbon::parse($value)->format('h:i A');
+                                        @endphp
                                                     {{ $key }}-{{ $value }} <br>
                                                 @endforeach
 

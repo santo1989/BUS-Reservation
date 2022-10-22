@@ -12,7 +12,13 @@
 
         </x-backend.layouts.elements.breadcrumb>
     </x-slot>
-
+@if (is_null($events) || empty($events))
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                </div>
+            </div>
+        @else
     <div class="card" style="width:100%" >
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
@@ -242,6 +248,6 @@
    
 
 
-
+@endif
 
 </x-backend.layouts.master>

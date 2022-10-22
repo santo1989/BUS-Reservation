@@ -1,4 +1,5 @@
 <x-frontend.layouts.master>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
@@ -6,6 +7,13 @@
     @endif
     
     <div class="container">
+        @if (is_null($trips) || empty($trips))
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                </div>
+            </div>
+        @else
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
 
@@ -243,7 +251,7 @@
             </form>
         </div>
     </div>
-
+@endif
     @forelse ($trips as $trip)
         @php
             $seat = 0;

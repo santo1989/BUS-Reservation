@@ -37,7 +37,11 @@
                                         {{-- @foreach ($stoppages as $stoppage)
                                             <option value="{{ $stoppage }}" {{ $stoppage == $booking->stoppages ? 'selected' : '' }}>{{ $stoppage }}</option>
                                         @endforeach --}}
+                                        
                                         @foreach ($stoppages as $key => $stoppage)
+                                        @php
+                                        $key = \Carbon\Carbon::parse($key)->format('h:i A');
+                                        @endphp
                                             <option value ="{{ $key }}-{{ $stoppage }}" {{ $key == $booking->stoppages ? 'selected' : '' }}> {{ $key }}-{{ $stoppage }}</option>
                                         @endforeach
                                     </select>

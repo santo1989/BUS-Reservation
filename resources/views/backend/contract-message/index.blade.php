@@ -32,6 +32,13 @@
                 <x-backend.form.input style="width: 200px;" name='search' />
 
             </form> --}}
+             @if (is_null($contract_messages) || empty($contract_messages))
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                </div>
+            </div>
+        @else
             <table class="table" id="datatablesSimple">
                 <thead>
                     <tr>
@@ -74,5 +81,5 @@
             {{-- {{ $contract_messages->links() }} --}}
         </div>
     </div>
-
+@endif
 </x-backend.layouts.master>
