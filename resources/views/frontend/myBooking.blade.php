@@ -1,7 +1,7 @@
 <x-frontend.layouts.master>
     <x-backend.layouts.elements.message :fmessage="session('message')" />
 
-    <div class="container">
+  
         @if (is_null($bookings) || empty($bookings))
             <div class="row text-center">
                 <div class="col-md-12 col-lg-12 col-sm-12" style="height:100vh">
@@ -9,14 +9,13 @@
                 </div>
             </div>
         @else
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
+                <div class="container-fluid">
+                    <div class="card" style="width:100%">
                         <div class="card-header">
-                            <h3 class="card-title">My Booking</h3>
+                            <h3>My Booking</h3>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered" id="datatablesSimple">
+                            <table class="table table-bordered table-hover" id="datatablesSimple" >
                                 <thead>
                                     <tr>
                                         <th>Sl#</th>
@@ -91,17 +90,12 @@
 
                                             </td>
                                         </tr>
-                                        {{-- @empty
-                                    <tr>
-                                        <td colspan="7" class="text-center">You do not have any booking currently!</td> --}}
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
-    </div>
 
     @endif
 
