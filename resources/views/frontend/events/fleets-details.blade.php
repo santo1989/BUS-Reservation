@@ -80,8 +80,8 @@
                         aria-controls="collapse{{ $trip->id }}">
                         <h5 class="mt-1">
                             <p class="btn badge bg-danger">
-                                {{-- {{ $trip->trip_code }}</p>  --}}
-                                @php 
+                                {{ $trip->trip_code }}</p> 
+                                {{-- @php 
                                 $trip_code = explode('-', $trip->trip_code);
                                 $trip_code1 = explode('_', $trip_code[0]); 
                                 $trip_code_2 = explode('_', $trip->trip_code);
@@ -90,7 +90,7 @@
                                 // dd($trip_code3);
                                 @endphp
                                 {{ $trip_code1[2] }}_{{ $trip_code1[0] }}_{{ $trip_code1[1] }}_{{$trip_code3[1]}}_{{$trip_code3[2]}}
-                            </p>
+                            </p> --}}
                         </h5>
                         <h5 class="mt-1">
                             <button class="btn badge bg-info" data-toggle="collapse"
