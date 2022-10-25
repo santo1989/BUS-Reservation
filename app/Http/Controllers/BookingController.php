@@ -191,7 +191,9 @@ class BookingController extends Controller
             'no_of_seat' => $request->no_of_seat,
             'seat' => $newAvailable,
             'stoppage' => $request->stoppage,
+           
         ];
+        //  dd($bookingdata);
         $booking = Booking::create($bookingdata);
         }
         return redirect()->route('mybooking')->withMessage("Successfully created a booking");
@@ -249,6 +251,9 @@ class BookingController extends Controller
         $trip->update([
             'available_seats' => $newAvailable
         ]);
+
+        
+   
 
         $booking->update([
             'no_of_seat' => $request->no_of_seat,

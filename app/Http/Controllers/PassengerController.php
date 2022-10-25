@@ -141,10 +141,10 @@ class PassengerController extends Controller
                     'user_id' => $username->id
                 ]);
             }else{
-                return redirect()->back()->withErrors('Email or Phone number is not correct');
+                return redirect()->back()->withErrors(' Phone number is not correct');
             }
         }else{
-            return redirect()->back()->withErrors('Email or Phone number is not correct');
+            return redirect()->back()->withErrors('Email  is not correct');
         }
 
             

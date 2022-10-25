@@ -120,6 +120,7 @@
                                                         <table class="table table-bordered">
                                                             <thead>
                                                                 <tr>
+                                                                    <th>Check Box</th>
                                                                     <th>Passenger Name</th>
                                                                     <th>Passenger Phone</th>
                                                                     <th>Passenger Email</th>
@@ -136,6 +137,9 @@
                                                                         // @dd($passenger);
                                                                     @endphp
                                                                     <tr>
+                                                                        <td>
+                                                                            <input type="checkbox">
+                                                                        </td>
                                                                         <td>{{ $passengers->name }}</td>
                                                                         <td>{{ $passengers->phone }}</td>
                                                                         <td>{{ $passengers->user->email }}</td>

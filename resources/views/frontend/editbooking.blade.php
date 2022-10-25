@@ -26,7 +26,7 @@
                                 <br>
                                 <div class="form-group">
                                     <label for="stoppages">Shuttle Time</label>
-                                    <select name="stoppages" id="stoppages" class="form-control">
+                                    <select name="stoppage" id="stoppages" class="form-control">
                                         @php
                                             // $stoppages = explode(',', $booking->trip->stoppages);
                                             $stoppages = json_decode($booking->trip->stoppages);
@@ -39,9 +39,6 @@
                                         @endforeach --}}
                                         
                                         @foreach ($stoppages as $key => $stoppage)
-                                        @php
-                                        $key = \Carbon\Carbon::parse($key)->format('h:i A');
-                                        @endphp
                                             <option value ="{{ $key }}-{{ $stoppage }}" {{ $key == $booking->stoppages ? 'selected' : '' }}> {{ $key }}-{{ $stoppage }}</option>
                                         @endforeach
                                     </select>

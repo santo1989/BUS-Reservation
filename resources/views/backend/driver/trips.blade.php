@@ -1,14 +1,14 @@
 <x-backend.layouts.master>
     <x-slot name="pageTitle">
-        Trips
+        Passenger List
     </x-slot>
 
     <x-slot name='breadCrumb'>
         <x-backend.layouts.elements.breadcrumb>
-            <x-slot name="pageHeader"> Trips </x-slot>
+            <x-slot name="pageHeader"> Passenger List </x-slot>
 
             <li class="breadcrumb-item"><a href="{{ route('home')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Trips</li>
+            <li class="breadcrumb-item active">Passenger List</li>
 
         </x-backend.layouts.elements.breadcrumb>
     </x-slot>

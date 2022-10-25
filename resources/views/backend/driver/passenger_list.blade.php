@@ -21,20 +21,27 @@
             <table class="table" id="datatablesSimple">
                 <thead>
                     <tr>
+                        <th>Check Box</th>
                         <th>Sl#</th>
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Shuttle Place and Time</th>
+                        <th>Booked Seat</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php $sl=0 @endphp
                     @foreach ($bookings as $booking)
+                    {{-- @dd($booking) --}}
                     <tr>
+                        <td>
+                            <input type="checkbox">
+                        </td>
                         <td>{{ ++$sl }}</td>
                         <td>{{ $booking->passenger->name }}</td>
                         <td>{{ $booking->passenger->phone }}</td>                      
-                        <td>{{ $booking->stoppage }}</td>                      
+                        <td>{{ $booking->stoppage }}</td>
+                        <td>{{ $booking->no_of_seat }}</td>                      
                     </tr>
                     @endforeach
 
@@ -42,5 +49,8 @@
             </table>
         </div>
     </div>
+  
+       
+        
 
 </x-backend.layouts.master>

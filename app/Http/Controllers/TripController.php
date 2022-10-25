@@ -37,7 +37,9 @@ class TripController extends Controller
             $stoppages = [];
             $limit = count($request->stoppages);
             for ($i = 0; $i < $limit; $i++) {
-                $stoppages[$request->stoppages[$i]] = $request->times[$i];
+                // time convert to 12 hour format
+                
+                $stoppages[$request->stoppages[$i]] = date("h:i A", strtotime($request->stoppages[$i]['times']));
             }
 
             if(Trip::all()->count() > 0){
@@ -104,7 +106,10 @@ class TripController extends Controller
         $stoppages = [];
         $limit = count($request->stoppages);
         for ($i = 0; $i < $limit; $i++) {
-            $stoppages[$request->stoppages[$i]] = $request->times[$i];
+            $stoppages[$request->stoppages[$i]] = date("h:i A", strtotime($request->times[$i]));
+            // $times = date("h:i A", strtotime($request->stoppages[$i]['times']));
+            // $stoppages[$request->stoppages[$i]] = $times;
+            // $stoppages[$request->stoppages[$i]] = $request->times[$i];
         }
         $availableSeats = Bus::where('id', $request->bus_id)->first()->no_of_seat;
         $trip->trip_code = $this->generateTripCode($request->event_id, $request->start_date, $trip->id);
