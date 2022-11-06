@@ -238,13 +238,13 @@ class BookingController extends Controller
     {
         // dd($request->all());
         $booking = Booking::where('id', $id)->first();
-        $trip = Trip::where('id', $booking->trip_id)->first();
-        $trip->update([
-            'available_seats' => $trip->available_seats + $booking->no_of_seat
-        ]);
+        // $trip = Trip::where('id', $booking->trip_id)->first();
+        // $trip->update([
+        //     'available_seats' => $trip->available_seats + $booking->no_of_seat
+        // ]);
 
         $trip = Trip::where('id', $request->trip_id)->first();
-        $newAvailable = $trip->available_seats - $request->no_of_seat;
+        $newAvailable = $trip->available_seats + $booking->no_of_seat - $request->no_of_seat;
         if ($newAvailable < 0) {
             return redirect()->back()->withErrors('No of seats not available');
         }
