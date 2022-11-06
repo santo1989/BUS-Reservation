@@ -239,7 +239,7 @@
 
         const closeModal = () => {
             myModal.hide();
-        }
+        }        
     </script>
 @endif
 </x-backend.layouts.master>
