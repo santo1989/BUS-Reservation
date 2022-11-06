@@ -28,7 +28,7 @@
             @if (is_null($today_trip) || empty($today_trip))
                 <div class="row text-center">
                     <div class="col-md-12 col-lg-12 col-sm-12" style="height:100vh">
-                        <h1 class="text-danger"> <strong>You do not have any trip currently!</strong> </h1>
+                        <h1 class="text-danger"> <strong>You do not have any trip Today!</strong> </h1>
                     </div>
                 </div>
             @else

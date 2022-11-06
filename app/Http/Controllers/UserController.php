@@ -110,7 +110,7 @@ class UserController extends Controller
                 return redirect()->back()->withInput()->withErrors('Invalid Email');
             }
         }catch(Exception $e){
-            return redirect()->back()->withInput()->withErrors($e->getMessage());
+            return redirect()->back()->withInput()->withErrors($e->getMessage('Email already exists'));
         }
 
         
@@ -143,7 +143,7 @@ class UserController extends Controller
             session()->put('user', $user);
             return redirect()->route('Phantom-Tranzit');
         }catch(Exception $e){
-            return redirect()->back()->withInput()->withErrors($e->getMessage());
+            return redirect()->back()->withInput()->withErrors('Email already exists');
         }
     }
 }

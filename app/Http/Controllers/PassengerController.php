@@ -30,7 +30,7 @@ class PassengerController extends Controller
     {
         // $this->authorize('create-markinput');
         $cours = Driver::all();
-    
+
         $passengers = Passenger::all();
         return view('backend.passenger.create', [
             'passengers' => $passengers,
@@ -50,12 +50,12 @@ class PassengerController extends Controller
                 'address' => $request->address
             ]);
         } catch (QueryException $e) {
-            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Error: ' . $e->getMessage());
         } catch (Exception $e) {
-            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passengers.index')->withMessage( 'Passenger created successfully');
+        return redirect()->route('passengers.index')->withMessage('Passenger created successfully');
     }
 
     public function edit($id)
@@ -78,12 +78,12 @@ class PassengerController extends Controller
                 'address' => $request->address
             ]);
         } catch (QueryException $e) {
-            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Error: ' . $e->getMessage());
         } catch (Exception $e) {
-            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passengers.index')->withMessage( 'Passenger updated successfully');
+        return redirect()->route('passengers.index')->withMessage('Passenger updated successfully');
     }
 
     public function destroy($id)
@@ -92,12 +92,12 @@ class PassengerController extends Controller
         try {
             $passenger->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Error: ' . $e->getMessage());
         } catch (Exception $e) {
-            return redirect()->back()->withErrors( 'Error: ' . $e->getMessage());
+            return redirect()->back()->withErrors('Error: ' . $e->getMessage());
         }
 
-        return redirect()->route('passengers.index')->withMessage( 'Passenger deleted successfully');
+        return redirect()->route('passengers.index')->withMessage('Passenger deleted successfully');
     }
 
     public function show($id)
@@ -112,9 +112,9 @@ class PassengerController extends Controller
 
         $driverId = auth()->user()->driver->id;
         $currentDate = date('Y-m-d');
-        $trips = Trip::where('driver_id',$driverId)
-                ->where('start_date', '>=', $currentDate)->orderBy('start_date')->get();
-      
+        $trips = Trip::where('driver_id', $driverId)
+            ->where('start_date', '>=', $currentDate)->orderBy('start_date')->get();
+
         return view('backend.driver.trips', [
             'trips' => $trips
         ]);
@@ -128,40 +128,36 @@ class PassengerController extends Controller
         return view('backend.driver.passenger_list', [
             'bookings' => $bookings
         ]);
-        
     }
 
     public function passengerPasswordChange(Request $request)
     {
-        if($request->email && $request->phone){
+        if ($request->email && $request->phone) {
             $username = User::where('email', $request->email)->first();
             $userPhone = Passenger::where('phone', $request->phone)->first();
-            if($username && $userPhone==true){
+            if ($username && $userPhone == true) {
                 return view('frontend.passengerPasswdReset', [
                     'user_id' => $username->id
                 ]);
-            }else{
-                return redirect()->back()->withErrors(' Phone number is not correct');
+            } else {
+                return redirect()->back()->withErrors('Email or Phone number is not correct');
             }
-        }else{
-            return redirect()->back()->withErrors('Email  is not correct');
+        } else {
+            return redirect()->back()->withErrors('Email or Phone  is not correct');
         }
-
-            
     }
 
     public function passengerPasswordResetUpdate(Request $request)
     {
         // @dd($request);
         $user = User::findOrFail($request->user_id);
-        if($request->password == $request->password_confirmation){
+        if ($request->password == $request->password_confirmation) {
             $user->update([
                 'password' => Hash::make($request->password)
             ]);
             return redirect()->route('Phantom-Tranzit')->withMessage('Password reset successfully');
-        }else{
+        } else {
             return redirect()->back()->withErrors('Password and confirm password does not match');
         }
     }
-
 }
