@@ -232,7 +232,7 @@
 
         const closeModal = () => {
             myModal.hide();
-        }
+        }        
     </script>
 
 </x-backend.layouts.master>
