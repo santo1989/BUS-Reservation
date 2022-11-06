@@ -2,9 +2,9 @@
 
     <div class="container">
         @if (is_null($events) || empty($events))
-            <div class="row">
+            <div class="row" id="empty">
                 <div class="col-md-12 col-lg-12 col-sm-12">
-                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                    <h1 class="text-danger text-center"> <strong>Currently No Information Available!</strong> </h1>
                 </div>
             </div>
         @else
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="row justify-content-center" >
-        @foreach ($events as $event)
+        @forelse ($events as $event)
             {{-- <x-frontend.event-card :event="$event" /> --}}
             <div class="col-md-3 col-sm-12 col-xl-3 mb-5" id="card_event">
              <div class="card h-100">
@@ -59,7 +59,11 @@
 
     </div>
 </div>
-        @endforeach
+        @empty
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <h1 class="text-danger text-center"> <strong>Currently No Information Available!</strong> </h1>
+            </div>
+        @endforelse
     </div>
     </div>
     <script>

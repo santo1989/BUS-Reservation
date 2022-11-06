@@ -1,4 +1,4 @@
-<footer class="footer col-sm-12 col-md-12 col-xl-12 pt-5" style="background-color: #400859">
+<footer class="footer col-sm-12 col-md-12 col-xl-12 pt-5" style="background-color: #400859 ;">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4 mb-md-0 text-center text-white">
@@ -31,18 +31,18 @@
 
                     <a class="text-white text-decoration-none" href="{{ route('contactUS') }}"><strong>Contact
                             Us</strong></a>
-                    <br><br>
+                    {{-- <br><br>
 
                     <a class="text-white text-decoration-none" href="#"><br>
                     </a><br>
-                    <br>
+                    <br> --}}
                 </h5>
 
 
             </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-center text-white">
+            {{-- <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-center text-white">
                 
-            </div>
+            </div> --}}
 
         </div>
 
@@ -59,7 +59,7 @@
             <div class="media-container-row mbr-white">
                 <div class="row">
 
-                    <div class="col-sm-12">
+                    <div class="col-md-12 col-sm-6">
 
                         <p class="text-white text-decoration-none d-flex justify-content-between"
                             style="font-family: 'Inconsolata', monospace; "> © Copyright 2018-{{ now()->year }}
@@ -72,4 +72,6 @@
                 </div>
             </div>
         </div>
+    </div>
+
 </footer>

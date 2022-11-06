@@ -1,4 +1,5 @@
 <x-frontend.layouts.master>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
@@ -6,6 +7,13 @@
     @endif
     
     <div class="container">
+        @if (is_null($trips) || empty($trips))
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                </div>
+            </div>
+        @else
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
 
@@ -73,6 +81,16 @@
                         <h5 class="mt-1">
                             <p class="btn badge bg-danger">
                                 {{ $trip->trip_code }}</p> 
+                                {{-- @php 
+                                $trip_code = explode('-', $trip->trip_code);
+                                $trip_code1 = explode('_', $trip_code[0]); 
+                                $trip_code_2 = explode('_', $trip->trip_code);
+                                $trip_code_3 = explode('_', $trip_code_2[2]);
+                                $trip_code3 = explode('-', $trip_code_3[0]);
+                                // dd($trip_code3);
+                                @endphp
+                                {{ $trip_code1[2] }}_{{ $trip_code1[0] }}_{{ $trip_code1[1] }}_{{$trip_code3[1]}}_{{$trip_code3[2]}}
+                            </p> --}}
                         </h5>
                         <h5 class="mt-1">
                             <button class="btn badge bg-info" data-toggle="collapse"
@@ -100,7 +118,7 @@
                     <div id="collapse{{ $trip->id }}" class="{{ $index == 0 ? 'collapse show' : 'collapse' }}"
                         aria-labelledby="heading{{ $trip->id }}" data-parent="#accordion">
                         <div class="card-body">
-                            <div class="row border-bottom">
+                            <div class="row border-bottom mt-1 mb-1">
                                 {{-- <h4 class="border-bottom"> </h4> --}}
                                 {{ $trip->trip_details }}
                             </div>
@@ -243,7 +261,7 @@
             </form>
         </div>
     </div>
-
+@endif
     @forelse ($trips as $trip)
         @php
             $seat = 0;
@@ -322,6 +340,7 @@
                         // stoppages.appendChild(`<option>Choose One...</option>`);
                         const locations = Object.keys(data[1]['stoppages']);
                         const times = Object.values(data[1]['stoppages']);
+                        // console.log(locations, times);
                         const limit = locations.length;
                         for (let i = 0; i < limit; i++) {
                             options += (

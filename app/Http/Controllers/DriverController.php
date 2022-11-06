@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Trip;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -159,9 +160,16 @@ class DriverController extends Controller
 
     public function destroy(Driver $driver)
     {
-        dd("Please do the trip delete part then delete the dd");
+        // dd("Please do the trip delete part then delete the dd");
         try {
+            $date = Carbon::now()->format('Y-m-d');
+
             $user = User::find($driver->user_id);
+            $trips = Trip::where('driver_id', $driver->id)->where('start_date', '>=', $date)->get();
+            if (count($trips) > 0) {
+                $trips->each->delete();
+            }
+
             $user->delete();
             unlink(public_path('images/drivers/' . $driver->picture));
             $driver->delete();

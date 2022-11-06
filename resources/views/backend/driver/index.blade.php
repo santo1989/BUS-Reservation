@@ -32,6 +32,13 @@
             <form method="GET" action="{{ route('drivers.index') }}">
 
             </form>
+             @if (is_null($drivers) || empty($drivers))
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                </div>
+            </div>
+        @else
             <table class="table" id="datatablesSimple">
                 <thead>
                     <tr>
@@ -111,7 +118,7 @@
                 <form method="post" id="deleteForm">
                     @csrf
                     @method('delete')
-                    <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-sm btn-danger" type="submit">Delete With Trips</button>
+                    <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-danger" type="submit">Delete With Trips</button>
                 </form>
             </div>
             </div>
@@ -234,5 +241,5 @@
             myModal.hide();
         }        
     </script>
-
+@endif
 </x-backend.layouts.master>

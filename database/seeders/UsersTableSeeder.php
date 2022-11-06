@@ -35,9 +35,18 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
+            'role_id' => 1,
+            'name' => 'Admin',
+            'email' => 'nathan@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('nathanusa'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
             'role_id' => 2,
             'name' => 'Driver',
-            'email' => 'md@gmail.com',
+            'email' => 'dr1@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('12345678'),
             'remember_token' => Str::random(10),
@@ -53,9 +62,9 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'role_id' => 4,
-            'name' => 'Guest',
-            'email' => 'g@gmail.com',
+            'role_id' => 3,
+            'name' => 'Passenger',
+            'email' => 'md@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('12345678'),
             'remember_token' => Str::random(10),

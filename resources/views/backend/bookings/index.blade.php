@@ -12,6 +12,13 @@
 
   <section class="content">
     <div class="container-fluid">
+      @if (is_null($evs) || empty($evs))
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h1 class="text-danger"> <strong>Currently No Information Available!</strong> </h1>
+                </div>
+            </div>
+        @else
 
     @if (session('message'))
     <div class="alert alert-success">
@@ -211,5 +218,5 @@
       });
     }
   </script>
-
+@endif
 </x-backend.layouts.master>

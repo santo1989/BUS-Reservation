@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Event;
+use App\Models\Trip;
 use Exception;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
@@ -51,7 +51,7 @@ class EventController extends Controller
                 'details' => $request->details
             ]);
 
-           
+
 
             if ($request->images && count($request->images) > 0) {
                 $images = [];
@@ -123,10 +123,24 @@ class EventController extends Controller
         }
     }
 
-    public function destroy(Event $event_id)
+    public function destroy(Event $event)
     {
+        // dd($event);
         try {
-            $event_id->delete();
+            $date = Carbon::now()->format('Y-m-d');
+            $trips = Trip::where('event_id', $event->id)->where('start_date', '>=', $date)->get();
+            if (count($trips) > 0) {
+                $trips->each->delete();
+            }
+
+            foreach (json_decode($event->images) as $image) {
+                $location = public_path('images/Events/' . $image);
+                if (file_exists($location)) {
+                    unlink($location);
+                }
+            }
+
+            $event->forceDelete();
             return redirect()->route('events.index')->withMessage('Successfully Deleted!');
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
@@ -153,11 +167,34 @@ class EventController extends Controller
     public function delete($id)
     {
         $event = Event::onlyTrashed()->findOrFail($id);
-        // for($i = 0; $i < count(json_decode($event->images)); $i++){
-        //     $image = json_decode($event->images)[$i];
-        //     unlink(storage_path('/images/events/' . $image));
-        // }
         $event->forceDelete();
         return redirect()->route('events.trashed')->withMessage('Successfully Deleted Permanently!');
+    }
+
+    public function getTripsByEvent($event_id)
+    {
+        $date = date('Y-m-d');
+        $trips = Trip::where('start_date', '>=', $date)->where('event_id', $event_id)->get();
+        // dd($trips);
+
+        foreach ($trips as $trip) {
+            $trip->event = $trip->event;
+        }
+
+        $events = Event::where('id', '!=', $event_id)->get();
+        return response()->json([$trips, $event_id, $events]);
+    }
+
+    public function updateTripEvent($trip_id, $event_id)
+    {
+        try {
+            $trip = Trip::where('id', $trip_id)->first();
+            $trip->event_id = $event_id;
+            $trip->update();
+
+            return response()->json(true);
+        } catch (\Exception $e) {
+            return response()->json(false);
+        }
     }
 }

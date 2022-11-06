@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class TripController extends Controller
 {
-    //
+    
     public function index()
     {
         $trips = Trip::latest()->get();
@@ -34,20 +34,17 @@ class TripController extends Controller
     public function store(Request $request)
     {
         try {
+            // dd($request->all());
             $stoppages = [];
             $limit = count($request->stoppages);
+            // $times = $request->times = array_values($request->stoppages);  
             for ($i = 0; $i < $limit; $i++) {
-                $stoppages[$request->stoppages[$i]] = $request->times[$i];
-            }
+                // time convert to 12 hour format
 
-            if(Trip::all()->count() > 0){
-                $trip = Trip::latest()->first();
-                $add_id = $trip->id + 1;
-            }else{
-                $add_id = 1;
+                $stoppages[$request->stoppages[$i]] = date("h:i A", strtotime($request->times[$i]));
+                // dd(json_encode($stoppages));
             }
-
-            $tripCode = $this->generateTripCode($request->event_id, $request->start_date, $add_id);
+                $tripCode = $this->generateTripCode($request->event_id, $request->start_date);
             $availableSeats = Bus::where('id', $request->bus_id)->first()->no_of_seat;
 
             $trip = Trip::create([
@@ -73,11 +70,11 @@ class TripController extends Controller
         }
     }
 
-    public function generateTripCode($event_id, $trip_date, $add_id)
+    public function generateTripCode($event_id, $trip_date)
     {
         $event = Event::find($event_id);
         $trip_date = $trip_date;
-        return str_replace(' ', '_', $event->name) . '_' . $trip_date . '-' . $add_id;
+        return str_replace(' ', '_', $event->name) . '_' .str_replace('-', '/', $trip_date);
     }
 
     public function edit($trip_id)
@@ -104,7 +101,10 @@ class TripController extends Controller
         $stoppages = [];
         $limit = count($request->stoppages);
         for ($i = 0; $i < $limit; $i++) {
-            $stoppages[$request->stoppages[$i]] = $request->times[$i];
+            $stoppages[$request->stoppages[$i]] = date("h:i A", strtotime($request->times[$i]));
+            // $times = date("h:i A", strtotime($request->stoppages[$i]['times']));
+            // $stoppages[$request->stoppages[$i]] = $times;
+            // $stoppages[$request->stoppages[$i]] = $request->times[$i];
         }
         $availableSeats = Bus::where('id', $request->bus_id)->first()->no_of_seat;
         $trip->trip_code = $this->generateTripCode($request->event_id, $request->start_date, $trip->id);

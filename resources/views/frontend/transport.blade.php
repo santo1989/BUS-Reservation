@@ -23,9 +23,9 @@
                 </div>
             @empty
                 <div class="col-md-12 col-sm-12 col-xl-12">
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">No Bus Found</h5>
+                            <h5 class="card-title text-center">No Bus Found</h5>
                         </div>
                     </div>
                 </div>

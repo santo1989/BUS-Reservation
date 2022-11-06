@@ -191,7 +191,9 @@ class BookingController extends Controller
             'no_of_seat' => $request->no_of_seat,
             'seat' => $newAvailable,
             'stoppage' => $request->stoppage,
+           
         ];
+        //  dd($bookingdata);
         $booking = Booking::create($bookingdata);
         }
         return redirect()->route('mybooking')->withMessage("Successfully created a booking");
@@ -200,9 +202,11 @@ class BookingController extends Controller
 
     public function mybooking()
     {
-        // dd(session('user'));
-        $bookings = Booking::where('passenger_id', session('user')->passenger->id)->latest()->get();
-        // $bookinfo = array();
+        $bookings = [];
+        if(isset(session('user')->passenger->id)){
+            $bookings = Booking::where('passenger_id', session('user')->passenger->id)->latest()->get();
+        }
+      
         return view('frontend.myBooking', compact('bookings'));
     }
 
@@ -247,6 +251,9 @@ class BookingController extends Controller
         $trip->update([
             'available_seats' => $newAvailable
         ]);
+
+        
+   
 
         $booking->update([
             'no_of_seat' => $request->no_of_seat,
