@@ -155,18 +155,12 @@
 
       $("#no_of_seat").on('change', function() {
         const selectedSeat = this.value;
-        // alert(tripAvailableSeat);
-
-        // if(selectedSeat > tripAvailableSeat){
-        //     alert("You can't select more than available seat");
-        //     this.value = "";
-        // }
-
-        // alert(typeof(tripAvailableSeat));
-
+        
+        const previousBooking = "<?php echo $booking->no_of_seat; ?>";
+        
         if(typeof(tripAvailableSeat) =='number')
         {
-            let newAvailable = parseInt(tripAvailableSeat) - parseInt(selectedSeat);
+            let newAvailable = parseInt(tripAvailableSeat) + parseInt(previousBooking) - parseInt(selectedSeat);
             if(newAvailable < 0){
                 $("#new_available").attr('class', 'bg-danger p-2');
                 $("#new_available").html(newAvailable);
@@ -174,8 +168,8 @@
                 $("#new_available").attr('class', 'bg-warning p-2');
                 $("#new_available").html(newAvailable);
             }
-        }else{
-            let newAvailable = parseInt(<?php echo $booking->trip->available_seats; ?>) - parseInt(selectedSeat);
+        }else{            
+            let newAvailable = parseInt(<?php echo $booking->trip->available_seats; ?>) + parseInt(previousBooking) - parseInt(selectedSeat);
 
             if(newAvailable < 0){
                 $("#new_available").attr('class', 'bg-danger p-2');
