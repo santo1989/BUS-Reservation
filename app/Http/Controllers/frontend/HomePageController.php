@@ -37,7 +37,7 @@ class HomePageController extends Controller
     public function fleet_details($id)
     {
         $event = Event::find($id);
-        $event->images = json_decode($event->images, true);
+        //$event->images = json_decode($event->images, true);
         $date = date('Y-m-d');
         $event->trips = $event->trips->where('start_date', '>=', $date)->sortBy('start_date');
         $trips = Trip::where('event_id', $event->id)->get();

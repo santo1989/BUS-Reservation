@@ -174,12 +174,12 @@
 
         {{-- Image modal --}}
         <div class="modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdrop" aria-hidden="false">
+            aria-labelledby="staticBackdrop" aria-hidden="false" style=" height: 100vh;>
             <div class="modal-dialog" style="width: 100% !important; height: 100% !important;">
-                <div class="modal-content">
+                <div class="modal-content" >
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Image</h5>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" ></button>
                     </div>
                     <div class="modal-body">
 
@@ -199,9 +199,9 @@
             let firstImg = document.querySelector('#myImg');
             let imageShow = document.querySelector('#imageShow');
             let modalImg = document.createElement('img');
-            modalImg.setAttribute('class', 'img-fluid');
-            // modalImg.setAttribute('height', '100vh');
-            // modalImg.setAttribute('width', '100vh');
+            //modalImg.setAttribute('class', 'img-fluid');
+             modalImg.setAttribute('height', '95%');                   
+             modalImg.setAttribute('width', '95%');
             // modalImg.setAttribute('alt', '...');
             modalImg.setAttribute('id', 'modalImg');
             modalBody.appendChild(modalImg);
