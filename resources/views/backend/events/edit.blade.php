@@ -39,6 +39,8 @@
 
                 <x-backend.form.textarea name="details" label="Details" :value="$single_event->details" />
 
+                <x-backend.form.input name="images" type="file" label="images" :value="$single_event->images"/>
+
 
 
                 

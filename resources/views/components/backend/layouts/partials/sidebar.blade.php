@@ -75,7 +75,7 @@
             @can('Driver')
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading">List</div>
-                    <a class="nav-link" href="{{ route('home') }}">
+                    {{-- <a class="nav-link" href="{{ route('home') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Home
                     </a>
@@ -83,12 +83,12 @@
                     <a class="nav-link" href="{{ route('trips.index') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                         Trip Details
-                    </a>
+                    </a> --}}
 
 
                     <a class="nav-link" href="{{ route('driver.trip.passenger') }}">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Check Passenger List
+                        Home
                     </a>
 
                 </div>

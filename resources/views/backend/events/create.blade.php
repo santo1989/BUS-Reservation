@@ -33,14 +33,16 @@
                 <x-backend.form.textarea name="details" label="Details" >
                 </x-backend.form.textarea>
 
+                <x-backend.form.input name="images" type="file" label="images"/>
+
                 
-                <div class="form-group" id="images">
+                {{-- <div class="form-group" id="images">
                     <label for="iamges">Image</label>
                     <div class="d-flex">
                         <input name="images[]" class="form-control" id="images" type="file">
                         <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1" style="width: 40px; color: purple" onclick="createInput()"><i class="fa fa-plus"></i></a>
                     </div>
-                </div>
+                </div> --}}
                 
 
                 <x-backend.form.button>Save</x-backend.form.button>

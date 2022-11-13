@@ -29,10 +29,10 @@
                     <div class="col-md-3 col-sm-12 col-xl-3 mb-5" id="card_event">
                         <div class="card h-100">
                             <!-- event image-->
-                            @php
+                            {{-- @php
                                 $event->images = json_decode($event->images, true);
-                            @endphp
-                            <img class="card-img-top" src="{{ asset('images/events/' . $event->images[0]) }}"
+                            @endphp --}}
+                            <img class="card-img-top" src="{{ asset('images/events/' . $event->images) }}"
                                 height="180" alt="..." />
                             <!-- event details-->
                             <div class="card-body p-4">

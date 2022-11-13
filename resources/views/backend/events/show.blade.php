@@ -19,11 +19,11 @@
            Events Details <a class="btn btn-sm btn-info" href="{{ route('events.index') }}">List</a>
         </div>
         <div class="card-body">
-           
+            
+           {{-- @dd($event_show); --}}
                 <p>Image : <h3>
-                   @foreach ($event_show->images as $image)
-                     <img src="{{ asset('images/events/'.$image) }}" alt="" width="100px" height="100px">
-                   @endforeach
+                    <img src="{{ asset('/images/events/'.$event_show->images) }}" alt=""
+                                class="img" style="height: 250px; width:250px;">
                 </h3></p>
                 <p>Name : <h3>{{ $event_show->name }}</h3></p>
                 <p>Details :  <h3>{{ $event_show->details }}</h3></p>   

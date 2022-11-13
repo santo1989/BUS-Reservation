@@ -51,22 +51,31 @@ class EventController extends Controller
                 'details' => $request->details
             ]);
 
-
-
-            if ($request->images && count($request->images) > 0) {
-                $images = [];
-                for ($i = 0; $i < count($request->images); $i++) {
-                    $image = $request->images[$i];
-                    $filename = time() . '.' . $image->getClientOriginalExtension();
-                    $location = public_path('images/events/');
-                    $image->move($location, $filename);
-                    $images[$i] = $filename;
-                    sleep(1);
-                }
-                $event->update([
-                    'images' => json_encode($images),
-                ]);
+            if ($request->file('images')) {
+                $file = $request->file('images');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('/images/events/'), $filename);
+                $driverData['images'] = $filename;
             }
+
+            $event->update($driverData);
+
+
+
+            // if ($request->images && count($request->images) > 0) {
+            //     $images = [];
+            //     for ($i = 0; $i < count($request->images); $i++) {
+            //         $image = $request->images[$i];
+            //         $filename = time() . '.' . $image->getClientOriginalExtension();
+            //         $location = public_path('images/events/');
+            //         $image->move($location, $filename);
+            //         $images[$i] = $filename;
+            //         sleep(1);
+            //     }
+            //     $event->update([
+            //         'images' => json_encode($images),
+            //     ]);
+            // }
 
             return redirect()->route('events.index')->withMessage('Successfully Created!');
         } catch (QueryException $e) {
@@ -76,7 +85,7 @@ class EventController extends Controller
 
     public function show(Event $event_show)
     {
-        $event_show->images = json_decode($event_show->images);
+        // $event_show->images = json_decode($event_show->images);
         // dd($event_show);
         return view('backend.events.show', [
             'event_show' => $event_show,
@@ -102,6 +111,13 @@ class EventController extends Controller
                 'name' => $request->name,
                 'details' => $request->details
             ];
+
+            if ($request->file('images')) {
+                $file = $request->file('images');
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('/images/events/'), $filename);
+                $requestData['images'] = $filename;
+            }
             // if (request()->hasfile('images[]')) {
             //     for ($i = 0; $i < count($request->file('images[]')); $i++) {
             //         $image = $request->file('images[]')[$i];
@@ -133,12 +149,16 @@ class EventController extends Controller
                 $trips->each->delete();
             }
 
-            foreach (json_decode($event->images) as $image) {
-                $location = public_path('images/Events/' . $image);
-                if (file_exists($location)) {
-                    unlink($location);
-                }
-            }
+            unlink(public_path('/images/events/' . $event->images));
+
+            // unlink(public_path('images/events/' . $event->images));
+
+            // foreach (json_decode($event->images) as $image) {
+            //     $location = public_path('images/Events/' . $image);
+            //     if (file_exists($location)) {
+            //         unlink($location);
+            //     }
+            // }
 
             $event->forceDelete();
             return redirect()->route('events.index')->withMessage('Successfully Deleted!');

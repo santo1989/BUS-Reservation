@@ -46,7 +46,7 @@
 
                 <x-backend.form.input name="confirm_password" type="password" label="Confirm Password" :value="$single_driver->confirm_password"/>
 
-                <x-backend.form.input name="picture" type="file" label="Picture" :value="$single_driver->picture"/>
+                {{-- <x-backend.form.input name="picture" type="file" label="Picture" :value="$single_driver->picture"/> --}}
 
                 
                 

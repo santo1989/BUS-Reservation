@@ -19,18 +19,17 @@
         </div>
         <div class="container-fluid !direction !spacing">
             <div class="row">
-                <div class="col-md-5">
+                {{-- <div class="col-md-5">
                     <div class="card mb-4 mt-3">
-                        {{-- @dd($show_driver) --}}
                         <div class="card-body text-center">
                             <img src="{{ asset('images/drivers/' . $show_driver->picture) }}" alt=""
                                 class="img" style="height: 250px; width:250px;">
                         </div>
                     </div>
 
-                </div>
+                </div> --}}
 
-                <div class="col-md-7">
+                <div class="col-md-12">
                     <div class="card mb-4 mt-3">
                         <div class="card-body ">
 
