@@ -49,8 +49,8 @@
                                         <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Shuttle Times</th>
-                                        <th>Start Location</th>
-                                        <th>End Location</th>
+                                        {{-- <th>Start Location</th> --}}
+                                        {{-- <th>End Location</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -68,8 +68,8 @@
                                                     <li>{{ $stoppage }} - {{ $time }}</li>
                                                 @endforeach
                                             </td>
-                                            <td>{{ $trip->start_location }}</td>
-                                            <td>{{ $trip->end_location }}</td>
+                                            {{-- <td>{{ $trip->start_location }}</td> --}}
+                                            {{-- <td>{{ $trip->end_location }}</td> --}}
                                             <td>
                                               @can('Admin')
                                                 <a class="btn btn-primary"

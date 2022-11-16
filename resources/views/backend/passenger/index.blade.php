@@ -69,7 +69,7 @@
                         <td>
                             @can('create-passenger')
                             <a class="btn btn-info btn-sm" href="{{ route('passengers.show', ['passenger' => $passenger->id]) }}">Show</a>
-                           @can('Admin')
+                           {{-- @can('Admin') --}}
                             <a class="btn btn-warning btn-sm" href="{{ route('passengers.edit', ['passenger' => $passenger->id]) }}">Edit</a>
                             @endcan
                             
@@ -79,7 +79,7 @@
 
                                 <button onclick="return confirm('Are you sure want to delete ?')" class="btn btn-sm btn-danger" type="submit">Delete</button>
                             </form>
-                            @endcan
+                            {{-- @endcan --}}
                             {{-- <!-- <a href="{{ route('passenger.destroy', ['passenger' => $passenger->id]) }}" >Delete</a> --> --}}
 
 

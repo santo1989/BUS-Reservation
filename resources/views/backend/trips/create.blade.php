@@ -32,12 +32,12 @@
                 <div class="col-md-6">
                     <x-backend.form.input name="end_date" type="date" label="End Date" required/>                
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <x-backend.form.input name="start_location" type="text" label="Start Location" required/>
                 </div>
                 <div class="col-md-6">
                     <x-backend.form.input name="end_location" type="text" label="End Location" required/>
-                </div>
+                </div> --}}
             </div>        
             
             <x-backend.form.textarea name="trip_details" label="Trip Details" required/>
