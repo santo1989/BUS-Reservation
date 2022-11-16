@@ -10,7 +10,7 @@ use App\Models\Trip;
 use Exception;
 use Illuminate\Http\Request;
 use Mockery\Generator\Parameter;
-
+use Redirect; 
 class HomePageController extends Controller
 {
     public function index()
@@ -111,7 +111,7 @@ class HomePageController extends Controller
         $route['parameter'] = $prevRoute->parameters['id'] ?? '';
         // dd($route);
 
-        
+        Redirect::setIntendedUrl(url()->previous());
         return view('frontend.passenger_login', compact('prevRoute', 'route'));
     }
 

@@ -141,7 +141,8 @@ class UserController extends Controller
             ]);
 
             session()->put('user', $user);
-            return redirect()->route('Phantom-Tranzit');
+            //return redirect()->route('Phantom-Tranzit');
+            return redirect()->intended();
         }catch(Exception $e){
             return redirect()->back()->withInput()->withErrors('Email already exists');
         }
