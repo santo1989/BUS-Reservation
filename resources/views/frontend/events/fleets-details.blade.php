@@ -66,6 +66,13 @@
             </div>
 
             <h3 class="ps-1 mt-3 mb-2 font-weight-bold text-center"><strong>Trips</strong></h3>
+            {{-- <div class="ps-1 mt-3 mb-2 font-weight-bold text-center">Select Your Time Format 
+                <select name="time_format" id="time_format">
+                    <option value="12">12 Hours</option>
+                    <option value="24">24 Hours</option>
+                </select>
+            </div> --}}
+
             <x-backend.layouts.elements.errors :errors="$errors" />
             <div id="accordion">
                 @forelse ($event->trips as $index => $trip)
@@ -132,9 +139,19 @@
                                         <ul class="list-group">
                                             @foreach ($trip->stoppages as $location => $time)
                                                 <li class="list-group-item">
-                                                    @php
-                                                        $time = \Carbon\Carbon::parse($time)->format('h:i A');
-                                                    @endphp
+
+                                                    {{-- @php
+                                                        
+                                                        // $time = \Carbon\Carbon::parse($time)->format('h:i A');
+                                                        
+                                                        $time = \Carbon\Carbon::parse($time)->format('H:i');
+                                                        
+                                                    @endphp --}}
+
+
+                                                    {{-- <span><?php
+                                                    // echo '<script>document.writeln(time);</script>';
+                                                    ?></span> Shuttle by --}}
                                                     <span>{{ $time }}</span> Shuttle by
                                                     <span>{{ $location }}</span>
                                             @endforeach
@@ -270,20 +287,27 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="stoppage">Shuttle Place and Time</label>
-                                <select name="stoppage" id="stoppage" class="form-control" required>
-                                    <option value="">Select One...</option>
+                                <label for="time_format">Select Time Formate</label>
+                                <select name="time_format" id="time_format" class="form-control" required>
+                                    <option value="24">24 Hours</option>
+                                    <option value="12">12 Hours</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label for="stoppage" id="selectnew">Shuttle Place and Time</label>
+                                <select name="stoppage" id="stoppage" class="form-control" required>
+                                    <option value="">Select One...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
                                 <label for="no_of_seat">Number of Seats</label>
                                 <input type="number" class="form-control" id="no_of_seat" name="no_of_seat"
                                     required>
                             </div>
-                            <div class="col-md-6" id="available_seats">
+                            <div class="col-md-4" id="available_seats">
                                 <div class="rounded bg-success text-white p-2 mt-4">
                                     Available Seats: ${seat}
 
@@ -398,6 +422,29 @@ span.onclick = function() {
                         $("#passenger_id").val(data[0]['id']);
                         $("#event_id").val(data[1]['event_id']);
                         var seats = data[1]['available_seats'];
+                        let time_format = document.getElementById("time_format");
+                        time_format.addEventListener('change', function() {
+                            // console.clear();
+                            if (this.value == '12') {
+                                $("#time_formate_value").val(data[1]['time']);
+                            } else {
+                                $("#time_formate_value").val(data[1]['time_24']);
+                            }
+
+                            console.log(this.value);
+                            time_format.value = this.value;
+                            
+                            // break;
+                        });
+                        // time_format.onclick = function() {
+                        //     if (this.value == '12') {
+                        //         $("#time_formate_value").val(data[1]['time']);
+                        //     } else {
+                        //         $("#time_formate_value").val(data[1]['time_24']);
+                        //     }
+                        //     time_formate_value = this.value;
+                        // }
+                        // console.log(time_format.values);
 
                         const stoppages = document.getElementById("stoppage");
                         stoppages.innerHTML = "";
@@ -408,9 +455,41 @@ span.onclick = function() {
                         // console.log(locations, times);
                         const limit = locations.length;
                         for (let i = 0; i < limit; i++) {
-                            options += (
+                           
+
+                            if (time_format.value == '24') {
+                                  
+                                const convertTime = timeStr => {
+                                    const [time, modifier] = timeStr.split(' ');
+                                    let [hours, minutes] = time.split(':');
+                                    if (hours === '12') {
+                                        hours = '00';
+                                    }
+                                    if (modifier === 'PM') {
+                                        hours = parseInt(hours, 10) + 12;
+                                    }
+                                    return `${hours}:${minutes}`;
+                                };
+                                newtime = convertTime(times[i]);
+                            }
+                            // else{
+                            //     newtime = times[i];
+                            // }
+                            if (time_format.value == '24'){
+                                options += (
+                                `<option value="${locations[i]}-${newtime}">${locations[i]}-${newtime}</option>`
+                            );
+                            }else{
+                                options += (
                                 `<option value="${locations[i]}-${times[i]}">${locations[i]}-${times[i]}</option>`
                             );
+                            }
+                            
+
+                            // options += (
+                            //     `<option value="${locations[i]}-${times[i]}">${locations[i]}-${times[i]}</option>`
+                            // );
+
                         }
                         stoppages.innerHTML = options;
                         if (seats < 6) {
