@@ -1,5 +1,4 @@
 <x-frontend.layouts.master>
-    {{-- <s src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> --}}
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
@@ -45,33 +44,10 @@
                     </div>
                 </div>
 
-                {{-- <div class="col-md-6">
-                <div class="row ">
-                    @foreach ($event->images as $image)
-                        <div class="col-md-4">
-
-                            <div class="card m-1 p-1">
-                                <div class="card-body  m-1 p-1  " data-toggle='modal' data-target='#staticBackdrop'
-                                    id="modalBtn">
-                                    <img class="card-img-top" src="{{ asset('images/events/' . $image) }}"
-                                        height="100" alt="..." />
-                                </div>
-                            </div>
-
-                        </div>
-                    @endforeach
-
-                </div>
-            </div> --}}
             </div>
 
             <h3 class="ps-1 mt-3 mb-2 font-weight-bold text-center"><strong>Trips</strong></h3>
-            {{-- <div class="ps-1 mt-3 mb-2 font-weight-bold text-center">Select Your Time Format 
-                <select name="time_format" id="time_format">
-                    <option value="12">12 Hours</option>
-                    <option value="24">24 Hours</option>
-                </select>
-            </div> --}}
+
 
             <x-backend.layouts.elements.errors :errors="$errors" />
             <div id="accordion">
@@ -88,16 +64,6 @@
                             <h5 class="mt-1">
                                 <p class="btn badge bg-danger">
                                     {{ $trip->trip_code }}</p>
-                                {{-- @php 
-                                $trip_code = explode('-', $trip->trip_code);
-                                $trip_code1 = explode('_', $trip_code[0]); 
-                                $trip_code_2 = explode('_', $trip->trip_code);
-                                $trip_code_3 = explode('_', $trip_code_2[2]);
-                                $trip_code3 = explode('-', $trip_code_3[0]);
-                                // dd($trip_code3);
-                                @endphp
-                                {{ $trip_code1[2] }}_{{ $trip_code1[0] }}_{{ $trip_code1[1] }}_{{$trip_code3[1]}}_{{$trip_code3[2]}}
-                            </p> --}}
                             </h5>
                             <h5 class="mt-1">
                                 <button class="btn badge bg-info" data-toggle="collapse"
@@ -127,7 +93,6 @@
                             aria-labelledby="heading{{ $trip->id }}" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="row border-bottom mt-1 mb-1">
-                                    {{-- <h4 class="border-bottom"> </h4> --}}
                                     {{ $trip->trip_details }}
                                 </div>
 
@@ -135,23 +100,9 @@
 
 
                                     <div class="col-md-8 col-sm-8">
-                                        {{-- <h4 class="border-bottom"><strong></strong></h4> --}}
                                         <ul class="list-group">
                                             @foreach ($trip->stoppages as $location => $time)
                                                 <li class="list-group-item">
-
-                                                    {{-- @php
-                                                        
-                                                        // $time = \Carbon\Carbon::parse($time)->format('h:i A');
-                                                        
-                                                        $time = \Carbon\Carbon::parse($time)->format('H:i');
-                                                        
-                                                    @endphp --}}
-
-
-                                                    {{-- <span><?php
-                                                    // echo '<script>document.writeln(time);</script>';
-                                                    ?></span> Shuttle by --}}
                                                     <span>{{ $time }}</span> Shuttle by
                                                     <span>{{ $location }}</span>
                                             @endforeach
@@ -165,10 +116,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{--   <div class="d-flex justify-content-end w-100">
-                                <button class="btn btn-primary mt-2" onclick="modalOpen()">Book a
-                                    Seat</button>
-                            </div> --}}
                             </div>
                         </div>
                     </div>
@@ -215,10 +162,8 @@
         let firstImg = document.querySelector('#myImg');
         let imageShow = document.querySelector('#imageShow');
         let modalImg = document.createElement('img');
-        // modalImg.setAttribute('class', 'img-fluid');
         modalImg.setAttribute('height', '95%');
         modalImg.setAttribute('width', '95%');
-        // modalImg.setAttribute('alt', '...');
         modalImg.setAttribute('id', 'modalImg');
         modalBody.appendChild(modalImg);
         images.forEach((image) => {
@@ -234,18 +179,6 @@
             }
         });
     </script>
-    {{-- <div id="myModal" class="img-modal">
-
-  <!-- The Close Button -->
-  <span class="close">&times;</span>
-
-  <!-- Modal Content (The Image) -->
-  <img class="modal-content">
-
-  <!-- Modal Caption (Image Text) -->
-  <div id="caption"></div>
-</div> --}}
-    {{-- Seat modal --}}
     {{-- end booking modal --}}
     <div class="modal" tabindex="-1" id="booking_modal">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -289,6 +222,7 @@
                             <div class="col-md-4">
                                 <label for="time_format">Select Time Formate</label>
                                 <select name="time_format" id="time_format" class="form-control" required>
+                                    <option value="">Choose One...</option>
                                     <option value="24">24 Hours</option>
                                     <option value="12">12 Hours</option>
                                 </select>
@@ -347,58 +281,6 @@
         @endphp
     @endforelse
     {{-- //end modal --}}
-    {{-- <script>
-        let images = document.querySelectorAll('.card-img-top');
-        let modalBtn = document.querySelector('#modalBtn');
-        let modal = document.querySelector('#staticBackdrop');
-        let modalBody = document.querySelector('.modal-body');
-        let modalTitle = document.querySelector('.modal-title');
-        let firstImg = document.querySelector('#firstimg');
-        let imageShow = document.querySelector('#imageShow');
-        let modalImg = document.createElement('img');
-        modalImg.setAttribute('class', 'card-img-top');
-        modalImg.setAttribute('height', '300');
-        modalImg.setAttribute('width', '100%');
-        modalImg.setAttribute('alt', '...');
-        modalImg.setAttribute('id', 'modalImg');
-        modalBody.appendChild(modalImg);
-        modalImg.src = firstImg.src;
-        modalTitle.innerHTML = firstImg.alt;
-        modalBody.style.display = 'none';
-        modal.style.display = 'none';
-        modalBtn.addEventListener('click', function() {
-            modal.style.display = 'block';
-            modalBody.style.display = 'block';
-        });
-        images.forEach(function(image) {
-            image.addEventListener('click', function() {
-                modalImg.src = image.src;
-                modalTitle.innerHTML = image.alt;
-            });
-        });
-    </script> --}}
-    {{-- <script>
-    // Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.querySelectorAll('.card-img-top');
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.addEventListener('click', function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
-});
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-    </script> --}}
     <script>
         const modalOpen = (trip_id) => {
             const user_id = ($("#user_id").val());
@@ -424,74 +306,45 @@ span.onclick = function() {
                         var seats = data[1]['available_seats'];
                         let time_format = document.getElementById("time_format");
                         time_format.addEventListener('change', function() {
-                            // console.clear();
-                            if (this.value == '12') {
-                                $("#time_formate_value").val(data[1]['time']);
-                            } else {
-                                $("#time_formate_value").val(data[1]['time_24']);
-                            }
 
                             console.log(this.value);
-                            time_format.value = this.value;
-                            
-                            // break;
+                            makeStopageTimeformat(this.value);
                         });
-                        // time_format.onclick = function() {
-                        //     if (this.value == '12') {
-                        //         $("#time_formate_value").val(data[1]['time']);
-                        //     } else {
-                        //         $("#time_formate_value").val(data[1]['time_24']);
-                        //     }
-                        //     time_formate_value = this.value;
-                        // }
-                        // console.log(time_format.values);
 
-                        const stoppages = document.getElementById("stoppage");
-                        stoppages.innerHTML = "";
-                        let options = `<option label="Choose One..." disabled selected></option>`;
-                        // stoppages.appendChild(`<option>Choose One...</option>`);
-                        const locations = Object.keys(data[1]['stoppages']);
-                        const times = Object.values(data[1]['stoppages']);
-                        // console.log(locations, times);
-                        const limit = locations.length;
-                        for (let i = 0; i < limit; i++) {
-                           
 
-                            if (time_format.value == '24') {
-                                  
-                                const convertTime = timeStr => {
-                                    const [time, modifier] = timeStr.split(' ');
-                                    let [hours, minutes] = time.split(':');
-                                    if (hours === '12') {
-                                        hours = '00';
-                                    }
-                                    if (modifier === 'PM') {
-                                        hours = parseInt(hours, 10) + 12;
-                                    }
-                                    return `${hours}:${minutes}`;
-                                };
-                                newtime = convertTime(times[i]);
+                        function makeStopageTimeformat(time_format) {
+                            const stoppages = document.getElementById("stoppage");
+                            stoppages.innerHTML = "";
+                            let options = `<option label="Choose One..." disabled selected></option>`;
+                            const locations = Object.keys(data[1]['stoppages']);
+                            const times = Object.values(data[1]['stoppages']);
+                            const limit = locations.length;
+                            const convertTime = timeStr => {
+                                const [time, modifier] = timeStr.split(' ');
+                                let [hours, minutes] = time.split(':');
+                                if (hours === '12') {
+                                    hours = '00';
+                                }
+                                if (modifier === 'PM') {
+                                    hours = parseInt(hours, 10) + 12;
+                                }
+                                return `${hours}:${minutes}`;
+                            };
+                            for (let i = 0; i < limit; i++) {
+                                if (time_format == '12') {
+
+                                    options += `<option value="${locations[i]} - ${times[i]}">${locations[i]} (${times[i]})</option>`;
+                                } else {
+
+                                    newtime = convertTime(times[i]);
+                                    options += `<option value="${locations[i]} - ${newtime}">${locations[i]} (${newtime})</option>`;
+                                }
+
                             }
-                            // else{
-                            //     newtime = times[i];
-                            // }
-                            if (time_format.value == '24'){
-                                options += (
-                                `<option value="${locations[i]}-${newtime}">${locations[i]}-${newtime}</option>`
-                            );
-                            }else{
-                                options += (
-                                `<option value="${locations[i]}-${times[i]}">${locations[i]}-${times[i]}</option>`
-                            );
-                            }
-                            
-
-                            // options += (
-                            //     `<option value="${locations[i]}-${times[i]}">${locations[i]}-${times[i]}</option>`
-                            // );
-
+                            stoppages.innerHTML = options;
                         }
-                        stoppages.innerHTML = options;
+
+
                         if (seats < 6) {
                             document.getElementById('available_seats').innerHTML =
                                 ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: ` + seats +
@@ -532,7 +385,6 @@ span.onclick = function() {
                 }
             } else {
                 alert('Please enter valid number of seats');
-                //   document.getElementById('available_seats').removeChild(p);
                 document.getElementById('available_seats').innerHTML = " ";
             }
 
