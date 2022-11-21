@@ -220,7 +220,7 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="time_format">Select Time Formate</label>
+                                <label for="time_format">Select Time Format</label>
                                 <select name="time_format" id="time_format" class="form-control" required>
                                     <option value="">Choose One...</option>
                                     <option value="24">24 Hours</option>

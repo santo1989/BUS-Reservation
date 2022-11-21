@@ -29,7 +29,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="time_format">Select Time Formate</label>
+                                    <label for="time_format">Select Time Format</label>
                                     <select name="time_format" id="time_format" class="form-control" required>
                                         <option value="">Choose One...</option>
                                         <option value="24">24 Hours</option>
@@ -40,7 +40,7 @@
                                     <div class="form-group">
 
                                         <label for="stoppages">Shuttle Time</label>
-                                        <select name="stoppage" id="stoppages" class="form-control">
+                                        <select name="stoppage" id="stoppages" class="form-control" required>
                                             @php
                                                 // $stoppages = explode(',', $booking->trip->stoppages);
                                                 $stoppages = json_decode($booking->trip->stoppages);
@@ -151,7 +151,6 @@
                 }
             } else {
                 alert('Please enter valid number of seats');
-                //   document.getElementById('available_seats').removeChild(p);
                 document.getElementById('available_seats').innerHTML =
                     ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat}</div>`;
                 seat_old.value = book_seat;
