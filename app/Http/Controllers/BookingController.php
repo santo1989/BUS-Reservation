@@ -170,6 +170,18 @@ class BookingController extends Controller
     public function newBooking(Request $request)
     {
         // dd($request->all());
+        $trip_id = Booking::where('trip_id', $request->trip_id)->get();
+        // dd($trip_id);
+        try{
+            if($trip_id->count() > 0){
+                $booking = $trip_id->first();
+                // dd($booking);
+                $events = Event::all();
+                $trip = Trip::where('id', $booking->trip_id)->first();
+                $passengers = Passenger::all();
+                return view('frontend.editbooking', compact('booking', 'events', 'trip', 'passengers'));
+            }
+        
 
         if($request->stoppage == 'Choose One...')
         {
@@ -197,6 +209,11 @@ class BookingController extends Controller
         $booking = Booking::create($bookingdata);
         }
         return redirect()->route('mybooking')->withMessage("Successfully created a booking");
+    } catch (QueryException $e) {
+        return redirect()->back()->withErrors($e->getMessage());
+    } catch (Exception $e) {
+        return redirect()->back()->withErrors($e->getMessage());
+    }
    
     }
 

@@ -103,7 +103,7 @@
                                         <ul class="list-group">
                                             @foreach ($trip->stoppages as $location => $time)
                                                 <li class="list-group-item">
-                                                    <span>{{ $time }}</span> Shuttle by
+                                                    <span>{{ $time }}</span> -
                                                     <span>{{ $location }}</span>
                                             @endforeach
                                     </div>
