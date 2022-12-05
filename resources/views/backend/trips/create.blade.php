@@ -84,9 +84,9 @@
                         <label for="times">Expected Time</label>
                         <input name="times[]" class="form-control" id="times" type="time" required>
                     </div>
-                    <div class="col-md-1">
+                    {{-- <div class="col-md-1">
                         <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded w-100" style="width: 40px; height: 38px; color: purple; margin-top: 29px;" onclick="createInput()"><i class="fa fa-plus"></i></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <x-backend.form.button>Save</x-backend.form.button>    

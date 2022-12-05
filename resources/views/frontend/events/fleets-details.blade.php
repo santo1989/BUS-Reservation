@@ -232,9 +232,11 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="stoppage" id="selectnew">Shuttle Place and Time</label>
-                                <select name="stoppage" id="stoppage" class="form-control" required>
+                                {{-- <select name="stoppage" id="stoppage" class="form-control" required>
                                     <option value="">Select One...</option>
-                                </select>
+                                </select> --}}
+                                <input class="form-control" type="text" name="stoppage" id="stoppage" required
+                                readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="no_of_seat">Number of Seats</label>
@@ -294,7 +296,7 @@
                 fetch(fethc_url)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(Object.keys(data[1]['stoppages']));
+                        console.log(data[0]);
                         $("#name").val(data[0]['name']);
                         $("#phone").val(data[0]['phone']);
                         $("#address").val(data[0]['address']);
@@ -303,6 +305,7 @@
                         $("#trip_id").val(data[1]['id']);
                         $("#passenger_id").val(data[0]['id']);
                         $("#event_id").val(data[1]['event_id']);
+                      
                         var seats = data[1]['available_seats'];
                         let time_format = document.getElementById("time_format");
                         time_format.addEventListener('change', function() {

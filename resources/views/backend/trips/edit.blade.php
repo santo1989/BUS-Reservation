@@ -80,6 +80,9 @@
             </div>
             <div class="form-group mt-3" id="stoppage">
                 @foreach ($trip->stoppages as $key => $value)
+
+                
+                
                     <div class="d-flex justify-content-between align-items-center">
                         <div style="width: 48%;">
                             <label for="stoppages">Stopagges</label>
@@ -91,12 +94,12 @@
                             <input name="times[]" class="form-control" id="times" type="time"
                                 value="{{ $value }}">
                         </div>
-                        <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1"
+                        {{-- <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1"
                             style="width: 40px; height: 38px; color: purple; margin-top: 27px;"
                             onclick="createInput()"><i class="fa fa-plus"></i></a>
                         <a class="bg-danger d-flex align-items-center justify-content-center bordered rounded ml-1"
                             style="width: 40px; height: 38px; color: purple; margin-top: 27px;"
-                            onclick="deleteDiv(this)"><i class="fa fa-trash"></i></a>
+                            onclick="deleteDiv(this)"><i class="fa fa-trash"></i></a> --}}
                     </div>
                 @endforeach
             </div>

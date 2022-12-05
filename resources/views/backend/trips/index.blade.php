@@ -65,7 +65,9 @@
                                             <td>{{ $trip->end_date }}</td>
                                             <td>
                                                 @foreach ($trip->stoppages as $stoppage => $time)
-                                                    <li>{{ $stoppage }} - {{ $time }}</li>
+                                                    {{-- <li>{{ $stoppage }} - {{ $time }}</li> --}}
+                                                    <li>{{ $stoppage }} - {{ date("h:i A", strtotime($time))}}</li>
+                                                    
                                                 @endforeach
                                             </td>
                                             {{-- <td>{{ $trip->start_location }}</td> --}}
