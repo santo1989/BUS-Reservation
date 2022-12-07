@@ -1,6 +1,6 @@
 <x-frontend.layouts.master>
 
-
+<div id="screenSize">
 
     @if (is_null($bookings) || empty($bookings))
         <div class="row text-center">
@@ -108,4 +108,15 @@
 
     @endif
 
+   
+</div>
+ {{-- <script>
+        let height = window.innerHeight;
+        let screenSize = document.getElementById('screenSize');
+        screenSize.style.height = '100vh';
+        
+
+      
+        
+</script> --}}
 </x-frontend.layouts.master>

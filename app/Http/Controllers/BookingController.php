@@ -172,8 +172,8 @@ class BookingController extends Controller
         // dd($request->all());
         $trip_id = Booking::where('trip_id', $request->trip_id)->get();
         // dd($trip_id);
-        try{
-            if($trip_id->count() > 0){
+        try {
+            if ($trip_id->count() > 0) {
                 $booking = $trip_id->first();
                 // dd($booking);
                 $events = Event::all();
@@ -181,49 +181,47 @@ class BookingController extends Controller
                 $passengers = Passenger::all();
                 return view('frontend.editbooking', compact('booking', 'events', 'trip', 'passengers'));
             }
-        
 
-        if($request->stoppage == 'Choose One...')
-        {
-            return redirect()->back()->withErrors('Please select a stoppage');
-        }else{
 
-        $trip = Trip::where('id', $request->trip_id)->first();
-        $newAvailable = $trip->available_seats - (int)$request->no_of_seat;
-        if ($newAvailable < 0) {
-            return redirect()->back()->withErrors('Requested number of seats are not available');
+            if ($request->stoppage == 'Choose One...') {
+                return redirect()->back()->withErrors('Please select a stoppage');
+            } else {
+
+                $trip = Trip::where('id', $request->trip_id)->first();
+                $newAvailable = $trip->available_seats - (int)$request->no_of_seat;
+                if ($newAvailable < 0) {
+                    return redirect()->back()->withErrors('Requested number of seats are not available');
+                }
+                $trip->update([
+                    'available_seats' => $newAvailable
+                ]);
+                $bookingdata = [
+                    'passenger_id' => $request->passenger_id,
+                    'trip_id' => $request->trip_id,
+                    'event_id' => $request->event_id,
+                    'no_of_seat' => $request->no_of_seat,
+                    'seat' => $newAvailable,
+                    'stoppage' => $request->stoppage,
+
+                ];
+                //  dd($bookingdata);
+                $booking = Booking::create($bookingdata);
+            }
+            return redirect()->route('mybooking')->withMessage("Successfully created a booking");
+        } catch (QueryException $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
         }
-        $trip->update([
-            'available_seats' => $newAvailable
-        ]);
-        $bookingdata = [
-            'passenger_id' => $request->passenger_id,
-            'trip_id' => $request->trip_id,
-            'event_id' => $request->event_id,
-            'no_of_seat' => $request->no_of_seat,
-            'seat' => $newAvailable,
-            'stoppage' => $request->stoppage,
-           
-        ];
-        //  dd($bookingdata);
-        $booking = Booking::create($bookingdata);
-        }
-        return redirect()->route('mybooking')->withMessage("Successfully created a booking");
-    } catch (QueryException $e) {
-        return redirect()->back()->withErrors($e->getMessage());
-    } catch (Exception $e) {
-        return redirect()->back()->withErrors($e->getMessage());
-    }
-   
     }
 
     public function mybooking()
     {
         $bookings = [];
-        if(isset(session('user')->passenger->id)){
+        if (isset(session('user')->passenger->id)) {
             $bookings = Booking::where('passenger_id', session('user')->passenger->id)->latest()->get();
         }
-      
+
         return view('frontend.myBooking', compact('bookings'));
     }
 
@@ -269,13 +267,13 @@ class BookingController extends Controller
             'available_seats' => $newAvailable
         ]);
 
-        
-   
+
+
 
         $booking->update([
             'no_of_seat' => $request->no_of_seat,
             'seat' => $newAvailable,
-            'stoppage' => $request->stoppage,
+            // 'stoppage' => $request->stoppage,
         ]);
 
         return redirect()->route('mybooking')->withMessage('Booking updated');

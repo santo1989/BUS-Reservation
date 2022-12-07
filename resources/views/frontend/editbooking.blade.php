@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="row">
+                         {{--    <div class="row">
                                 <div class="col-md-6">
                                     <label for="time_format">Select Time Format</label>
                                     <select name="time_format" id="time_format" class="form-control" required>
@@ -53,8 +53,8 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                            </div>
+                                </div> 
+                            </div>--}}
 
 
                             <input type="hidden" name="trip_id" id="trip_id" value="{{ $booking->trip->id }}">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <script>
+    {{-- <script>
         let time_format = document.getElementById("time_format");
         time_format.addEventListener('change', function() {
             console.log(this.value);
@@ -82,7 +82,7 @@
             let stoppages = <?php echo json_encode($stoppages, true); ?>;
             console.log(stoppages);
             let option = document.createElement('option');
-            option = `<option value="">Choose One...</option>`;
+            option = '';
             for (stoppage in stoppages) {
                 console.log(stoppages[stoppage]);
 
@@ -97,7 +97,7 @@
                 // let second = stoppageTimeArray[2];
                 let ampm = stoppages[stoppage].split(' ')[1];
                 if (time_format == 24) {
-                    //    alert(parseInt(hour) + 12);
+                       alert(parseInt(hour) + 12);
 
                     hour = parseInt(hour) + 12;
                     if(hour == 24){
@@ -116,7 +116,7 @@
             stoppagesSelectForm.innerHTML = option;
 
         }
-    </script>
+    </script> --}}
     <script>
         let seat = <?php echo $trip->available_seats; ?>;
         let book_seat = <?php echo $booking->no_of_seat; ?>;
