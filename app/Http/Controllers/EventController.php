@@ -146,7 +146,7 @@ class EventController extends Controller
             $date = Carbon::now()->format('Y-m-d');
             $trips = Trip::where('event_id', $event->id)->where('start_date', '>=', $date)->get();
             if (count($trips) > 0) {
-                $trips->each->delete();
+                $trips->delete();
             }
 
             unlink(public_path('/images/events/' . $event->images));
