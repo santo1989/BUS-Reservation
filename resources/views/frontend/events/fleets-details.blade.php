@@ -126,6 +126,18 @@
                 @endforelse
             </div>
 
+            {{-- <div class="card" style="width:18rem;">
+              <div class="card-head">
+
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                b5
+              </div>
+            </div> --}}
+
     </div>
 
     @php
@@ -232,11 +244,11 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="stoppage" id="selectnew">Shuttle Place and Time</label>
-                                {{-- <select name="stoppage" id="stoppage" class="form-control" required>
-                                    <option value="">Select One...</option>
-                                </select> --}}
-                                <input class="form-control" type="text" name="stoppage" id="stoppage" required
-                                readonly>
+                                <select name="stoppage" id="stoppage" class="form-control" required>
+                                    {{-- <option value="">Select One...</option> --}}
+                                </select>
+                                {{-- <input class="form-control" type="text" name="stoppage" id="stoppage" required
+                                    readonly> --}}
                             </div>
                             <div class="col-md-4">
                                 <label for="no_of_seat">Number of Seats</label>
@@ -296,7 +308,7 @@
                 fetch(fethc_url)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data[0]);
+                        // console.log(data[0]);
                         $("#name").val(data[0]['name']);
                         $("#phone").val(data[0]['phone']);
                         $("#address").val(data[0]['address']);
@@ -305,7 +317,7 @@
                         $("#trip_id").val(data[1]['id']);
                         $("#passenger_id").val(data[0]['id']);
                         $("#event_id").val(data[1]['event_id']);
-                      
+
                         var seats = data[1]['available_seats'];
                         let time_format = document.getElementById("time_format");
                         time_format.addEventListener('change', function() {
@@ -314,33 +326,46 @@
                             makeStopageTimeformat(this.value);
                         });
 
+                        function changeFormat(time) {
+                            hour = time.split(":")[0];
+                            minute = time.split(":")[1];
+                            ampm = '';
+
+                            if (hour > 12) {
+                                hour = hour - 12;
+                                ampm = "pm"
+                            } else if (hour == '00') {
+                                hour = 12;
+                                ampm = "am"
+                            } else {
+                                hour = hour;
+                                ampm = "am";
+                            }
+                            return `${hour}:${minute} ${ampm}`;
+                        };
 
                         function makeStopageTimeformat(time_format) {
                             const stoppages = document.getElementById("stoppage");
                             stoppages.innerHTML = "";
-                            let options = `<option label="Choose One..." disabled selected></option>`;
+                            let options = '';
                             const locations = Object.keys(data[1]['stoppages']);
                             const times = Object.values(data[1]['stoppages']);
                             const limit = locations.length;
-                            const convertTime = timeStr => {
-                                const [time, modifier] = timeStr.split(' ');
-                                let [hours, minutes] = time.split(':');
-                                if (hours === '12') {
-                                    hours = '00';
-                                }
-                                if (modifier === 'PM') {
-                                    hours = parseInt(hours, 10) + 12;
-                                }
-                                return `${hours}:${minutes}`;
-                            };
+
+
                             for (let i = 0; i < limit; i++) {
-                                if (time_format == '12') {
+                                if (time_format == '24') {
 
-                                    options += `<option value="${locations[i]} - ${times[i]}">${locations[i]} (${times[i]})</option>`;
+                                    options +=
+                                        `<option value="${locations[i]} - ${times[i]}">${locations[i]} - ${times[i]}</option>`;
                                 } else {
+                                    console.log(times[i]);
 
-                                    newtime = convertTime(times[i]);
-                                    options += `<option value="${locations[i]} - ${newtime}">${locations[i]} (${newtime})</option>`;
+                                    newtime = changeFormat(times[i]);
+
+                                    options +=
+                                        `<option value="${locations[i]} - ${times[i]}">${locations[i]} - ${newtime}</option>`;
+
                                 }
 
                             }

@@ -56,7 +56,7 @@
 
                 <div class="col-md-6">
 
-                    <label for="bus_id" >Bus</label>
+                    <label for="bus_id">Bus</label>
                     <select name="bus_id" id="bus_id" class="form-select">
                         @foreach ($buses as $bus)
                             <option value="{{ $bus->id }}"
@@ -66,7 +66,7 @@
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="drivers_id" >Driver</label>
+                    <label for="drivers_id">Driver</label>
                     <select name="drivers_id" id="drivers_id" class="form-select">
                         @foreach ($drivers as $driver)
                             <option value="{{ $driver->id }}"
@@ -80,19 +80,39 @@
             </div>
             <div class="form-group mt-3" id="stoppage">
                 @foreach ($trip->stoppages as $key => $value)
+                {{-- @dd($value)
+                    @php
+                        $time = explode(' ', $value)[0];
+                        $hour = explode(':', $time)[0];
+                        $minute = explode(':', $time)[1];
+                        $ampm = explode(' ', $value)[1];
+                        $output = '';
+                        
+                        if ($ampm == 'PM') {
+                            $hour = 12 + $hour;
+                            if ($hour == 24) {
+                                $hour = '00';
+                            }
+                            $output = "$hour:$minute";
+                        } else {
+                            $output = "$hour:$minute";
+                        }
+                        
+                        // echo $output;
+                    @endphp --}}
 
-                
-                
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div style="width: 48%;">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
                             <label for="stoppages">Stopagges</label>
                             <input name="stoppages[]" class="form-control" id="stoppages" type="text"
                                 value={{ $key }}>
                         </div>
-                        <div style="width: 48%;">
+                        <div class="col-md-6 col-sm-12">
                             <label for="times">Expected Time</label>
                             <input name="times[]" class="form-control" id="times" type="time"
                                 value="{{ $value }}">
+
+                            {{-- @dd($value) --}}
                         </div>
                         {{-- <a class="bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1"
                             style="width: 40px; height: 38px; color: purple; margin-top: 27px;"
@@ -105,70 +125,9 @@
             </div>
 
             {{-- </div> --}}
-            <button type="submit" class="btn btn-primary" style="margin-left: 33px">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
 
-    <script>
-        const createInput = () => {
-            const parent = document.getElementById("stoppage");
-            const div = document.createElement("div");
-            div.setAttribute('class', 'd-flex justify-content-between align-items-center');
 
-            const div2 = document.createElement("div");
-            div2.setAttribute('style', 'width: 48%;');
-
-            const labelPlace = document.createElement("label");
-            labelPlace.setAttribute("for", 'times');
-            labelPlace.innerHTML = "pected Time";
-
-            const labelTtime = document.createElement("label");
-            labelTtime.setAttribute("for", 'stoppages');
-            labelTtime.innerHTML = "Stoppages";
-
-            const inputPlace = document.createElement("input");
-            inputPlace.setAttribute("type", "text");
-            inputPlace.setAttribute("class", "form-control");
-            inputPlace.setAttribute("name", "stoppages[]");
-
-            const inputTime = document.createElement("input");
-            inputTime.setAttribute("type", "time");
-            inputTime.setAttribute("class", "form-control");
-            inputTime.setAttribute("name", "times[]");
-
-            const aPlus = document.createElement("a");
-            aPlus.setAttribute("class",
-                "bg-warning d-flex align-items-center justify-content-center bordered rounded ml-1");
-            aPlus.setAttribute("style", "width: 40px; color: purple");
-            aPlus.setAttribute("onclick", "createInput()");
-
-            const iPlus = document.createElement("i");
-            iPlus.setAttribute("class", "fa fa-plus");
-
-            const aDelete = document.createElement("a");
-            aDelete.setAttribute("class",
-                "bg-danger d-flex align-items-center justify-content-center bordered rounded ml-1");
-            aDelete.setAttribute("style", "width: 40px; color: black");
-            aDelete.setAttribute("onclick", "deleteDiv(this)");
-
-            const iDelete = document.createElement("i");
-            iDelete.setAttribute("class", "fa fa-trash");
-
-            parent.appendChild(div);
-            parent.appendChild(div2);
-
-            aPlus.appendChild(iPlus);
-            aDelete.appendChild(iDelete);
-            div.appendChild(inputPlace);
-            div.appendChild(inputTime);
-            div.appendChild(aPlus);
-            div.appendChild(aDelete);
-
-        }
-
-        let deleteDiv = (e) => {
-            e.parentNode.remove();
-            // console.log(e);
-        }
-    </script>
 </x-backend.layouts.master>
