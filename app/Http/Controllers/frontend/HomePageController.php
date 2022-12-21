@@ -41,8 +41,9 @@ class HomePageController extends Controller
         $date = date('Y-m-d');
         $event->trips = $event->trips->where('start_date', '>=', $date)->sortBy('start_date');
         $trips = Trip::where('event_id', $event->id)->get();
-        // dd($event, $trips);
-        return view('frontend.events.fleets-details', compact('trips', 'event'));
+        $dates = Trip::where('event_id', $event->id)->get()->groupBy('start_date');
+        // dd($event, $dates);
+        return view('frontend.events.fleets-details', compact('trips', 'event', 'dates'));
     }
 
     public function trip($id)
@@ -94,7 +95,9 @@ class HomePageController extends Controller
 
     public function getPassenger($user_id, $trip_id)
     {
+        // dd($user_id,$trip_id);
         $passenger = Passenger::where('user_id', $user_id)->first();
+        // dd($passenger);
         $trip = Trip::where('id', $trip_id)->first();
         $trip->bus = $trip->bus;
         $trip->driver = $trip->driver;

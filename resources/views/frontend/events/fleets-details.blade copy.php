@@ -51,90 +51,78 @@
 
             <x-backend.layouts.elements.errors :errors="$errors" />
             <div id="accordion">
-                @forelse ($dates as $index=>$date)
-                <div class="card mt-2">
-                    <div class="card-header d-md-flex justify-content-center" style="background-color: #1f1252"
-                        id="heading{{ $date[0]->start_date }}" data-toggle="collapse"
-                        data-target="#collapse{{  $date[0]->start_date }}"
-                        aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
-                        aria-controls="collapse{{  $date[0]->start_date }}">
-                        {{-- <h5 class="mt-1">
-                            <p class="btn badge bg-danger">
-                                {{  $date[0]->start_date }}</p>
-                        </h5> --}}
-                        <h5 class="mt-1">
-                            <button class="btn badge bg-danger" data-toggle="collapse"
-                                data-target="#collapse{{ $date[0]->start_date }}"
-                                aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
-                                aria-controls="collapse{{  $date[0]->start_date }}">
-                                <i class="fas fa-plane-departure"></i>
-                                {{ \Carbon\Carbon::parse( $date[0]->start_date)->format('d M, Y') }}
-                            </button>
-                        </h5>
-                        {{-- <h5 class="mt-1">
-                            <p class="btn badge bg-danger"><i class="fas fa-bus"></i> {{  $date[0]->start_date }}
-                            </p>
-                        </h5> --}}
-                        {{-- <h5 class="mt-1">
-                            <button class="btn badge bg-info" data-toggle="collapse"
-                                data-target="#collapse{{  $date[0]->start_date }}"
-                                aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
-                                aria-controls="collapse{{ $date[0]->start_date }}">
-                                <i class="fas fa-plane-arrival"></i>
-                                {{ \Carbon\Carbon::parse( $date[0]->start_date)->format('d M, Y') }}
-                            </button>
-                        </h5> --}}
-                    </div>
-                    <div id="collapse{{ $index }}" class="{{ $index == 0 ? 'collapse show' : 'collapse' }}"
-                        aria-labelledby="heading{{ $date[0]->id}}" data-parent="#accordion">
-                        <div class="card-body">
-                         
+                @forelse ($event->trips as $index => $trip)
+                    @php
+                        $trip->stoppages = json_decode($trip->stoppages, true);
+                    @endphp
+                    <div class="card mt-2">
+                        <div class="card-header d-md-flex justify-content-between" style="background-color: #1f1252"
+                            id="heading{{ $trip->id }}" data-toggle="collapse"
+                            data-target="#collapse{{ $trip->id }}"
+                            aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                            aria-controls="collapse{{ $trip->id }}">
+                            <h5 class="mt-1">
+                                <p class="btn badge bg-danger">
+                                    {{ $trip->trip_code }}</p>
+                            </h5>
+                            <h5 class="mt-1">
+                                <button class="btn badge bg-info" data-toggle="collapse"
+                                    data-target="#collapse{{ $trip->id }}"
+                                    aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                                    aria-controls="collapse{{ $trip->id }}">
+                                    <i class="fas fa-plane-departure"></i>
+                                    {{ \Carbon\Carbon::parse($trip->start_date)->format('d M, Y') }}
+                                </button>
+                            </h5>
+                            <h5 class="mt-1">
+                                <p class="btn badge bg-danger"><i class="fas fa-bus"></i> {{ $trip->bus->name }}
+                                </p>
+                            </h5>
+                            <h5 class="mt-1">
+                                <button class="btn badge bg-info" data-toggle="collapse"
+                                    data-target="#collapse{{ $trip->id }}"
+                                    aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                                    aria-controls="collapse{{ $trip->id }}">
+                                    <i class="fas fa-plane-arrival"></i>
+                                    {{ \Carbon\Carbon::parse($trip->end_date)->format('d M, Y') }}
+                                </button>
+                            </h5>
+                        </div>
 
-                            <div class="row">
-                                    <ul class="list-group">
-                                        @foreach ($date as  $trip)
-                                        
-                                        @php
-                                        $trip->stoppages = json_decode($trip->stoppages, true);
-                                        
-                                        @endphp
-                                          @foreach ($trip->stoppages as $location => $time)
-                                        
-                                          <li class="list-group-item">
-                                            <div class="row border-bottom mt-1 mb-1">
-                                               <strong>{{ $trip->trip_details }}</strong> 
-                                            </div>
-                                        <div class="d-md-flex justify-content-between">
-                                        <div>
-                                            <span>{{ $time }}</span> -
-                                            <span>{{ $location }}</span>
-                                        </div>
-                                            
-                                            <button class="btn btn-primary mt-2"
-                                            onclick="modalOpen(<?php echo $trip->id; ?>)">Book a
-                                            Seat</button>
-                                        </div>
-                                            
-                                            @endforeach
-                                        @endforeach
+                        <div id="collapse{{ $trip->id }}" class="{{ $index == 0 ? 'collapse show' : 'collapse' }}"
+                            aria-labelledby="heading{{ $trip->id }}" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="row border-bottom mt-1 mb-1">
+                                    {{ $trip->trip_details }}
                                 </div>
-                                {{-- @foreach ($date as  $trip)
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="d-flex justify-content-end w-100">
-                                        <button class="btn btn-primary mt-2"
-                                            onclick="modalOpen(<?php echo $trip->id; ?>)">Book a
-                                            Seat</button>
+
+                                <div class="row">
+
+
+                                    <div class="col-md-8 col-sm-8">
+                                        <ul class="list-group">
+                                            @foreach ($trip->stoppages as $location => $time)
+                                                <li class="list-group-item">
+                                                    <span>{{ $time }}</span> -
+                                                    <span>{{ $location }}</span>
+                                            @endforeach
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="d-flex justify-content-end w-100">
+                                            <button class="btn btn-primary mt-2"
+                                                onclick="modalOpen(<?php echo $trip->id; ?>)">Book a
+                                                Seat</button>
+                                        </div>
                                     </div>
                                 </div>
-                                @endforeach --}}
                             </div>
                         </div>
                     </div>
-                </div>
                 @empty
-                <div class=" text-center">
-                    <h3>No Trips Found</h3>
-                </div>
+                    <div class=" text-center">
+                        <h3>No Trips Found</h3>
+                    </div>
                 @endforelse
             </div>
 
@@ -244,7 +232,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="stoppage" id="selectnew">Shuttle Place and Time</label>
-                                <select name="stoppage" id="stoppage" class="form-control" >
+                                <select name="stoppage" id="stoppage" class="form-control" required>
                                     {{-- <option value="">Select One...</option> --}}
                                 </select>
                                 {{-- <input class="form-control" type="text" name="stoppage" id="stoppage" required
@@ -278,7 +266,7 @@
         </div>
     </div>
     @endif
-    @forelse ($date as $trip)
+    @forelse ($trips as $trip)
         @php
             $seat = 0;
             //   dd($seat);
@@ -297,7 +285,6 @@
     {{-- //end modal --}}
     <script>
         const modalOpen = (trip_id) => {
-            
             const user_id = ($("#user_id").val());
             if (user_id.length > 0) {
                 const base_url = $("#base_url").val();
@@ -309,7 +296,7 @@
                 fetch(fethc_url)
                     .then(response => response.json())
                     .then(data => {
-                        //  console.log(data);
+                        // console.log(data[0]);
                         $("#name").val(data[0]['name']);
                         $("#phone").val(data[0]['phone']);
                         $("#address").val(data[0]['address']);
