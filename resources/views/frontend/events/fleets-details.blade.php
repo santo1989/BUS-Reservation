@@ -276,7 +276,7 @@
         </div>
     </div>
     @endif
-    @forelse ($date as $trip)
+    @forelse ($trips as $trip)
         @php
             $seat = 0;
             //   dd($seat);
