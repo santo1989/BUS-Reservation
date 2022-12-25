@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Bus;
 use App\Models\Event;
+use App\Models\User;
 use App\Models\Passenger;
 use App\Models\Trip;
 use Exception;
@@ -16,6 +17,7 @@ class HomePageController extends Controller
     public function index()
     {
         // dd(session('passenger'));
+        // dd(check());
         return view('frontend.index');
     }
 

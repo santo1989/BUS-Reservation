@@ -225,6 +225,8 @@ Route::get('/get-trips/by-event/{event_id}', [EventController::class, 'getTripsB
 
 Route::get('/update-event/{trip_id}/{event_id}', [EventController::class, 'updateTripEvent']);
 
+Route::get('/change-time-format/{make_format}', [UserController::class, 'changeTimeFormat']);
+
 
 
 //end apis
