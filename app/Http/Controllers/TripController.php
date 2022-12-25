@@ -41,7 +41,8 @@ class TripController extends Controller
             for ($i = 0; $i < $limit; $i++) {
                 // time convert to 12 hour format
 
-                $stoppages[$request->stoppages[$i]] = date("h:i A", strtotime($request->times[$i]));
+                //$stoppages[$request->stoppages[$i]] = date("h:i A", strtotime($request->times[$i]));
+                $stoppages[$request->stoppages[$i]] = $request->times[$i];
                 // dd(json_encode($stoppages));
             }
                 $tripCode = $this->generateTripCode($request->event_id, $request->start_date);
@@ -52,8 +53,8 @@ class TripController extends Controller
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'stoppages' => json_encode($stoppages),
-                'start_location' => $request->start_location,
-                'end_location' => $request->end_location,
+                // 'start_location' => $request->start_location,
+                // 'end_location' => $request->end_location,
                 'bus_id'    => $request->bus_id,
                 'driver_id' => $request->driver_id,
                 'trip_details' => $request->trip_details,
@@ -101,7 +102,8 @@ class TripController extends Controller
         $stoppages = [];
         $limit = count($request->stoppages);
         for ($i = 0; $i < $limit; $i++) {
-            $stoppages[$request->stoppages[$i]] = date("h:i A", strtotime($request->times[$i]));
+            // $stoppages[$request->stoppages[$i]] = date("h:i A", strtotime($request->times[$i]));
+            $stoppages[$request->stoppages[$i]] = $request->times[$i];
             // $times = date("h:i A", strtotime($request->stoppages[$i]['times']));
             // $stoppages[$request->stoppages[$i]] = $times;
             // $stoppages[$request->stoppages[$i]] = $request->times[$i];
@@ -114,8 +116,8 @@ class TripController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'stoppages' => json_encode($stoppages),
-            'start_location' => $request->start_location,
-            'end_location' => $request->end_location,
+            // 'start_location' => $request->start_location,
+            // 'end_location' => $request->end_location,
             'bus_id' => $request->bus_id,
             'driver_id' => $request->drivers_id,
             'available_seats' => $availableSeats,

@@ -79,12 +79,12 @@ class DriverController extends Controller
                 ];
 
 
-                if ($request->file('picture')) {
-                    $file = $request->file('picture');
-                    $filename = time() . $file->getClientOriginalName();
-                    $file->move(public_path('images/drivers/'), $filename);
-                    $driverData['picture'] = $filename;
-                }
+                // if ($request->file('picture')) {
+                //     $file = $request->file('picture');
+                //     $filename = time() . $file->getClientOriginalName();
+                //     $file->move(public_path('images/drivers/'), $filename);
+                //     $driverData['picture'] = $filename;
+                // }
 
 
 
@@ -124,12 +124,12 @@ class DriverController extends Controller
         $driver = Driver::find($id);
         $user = User::find($driver->user_id);
 
-        if ($request->file('picture')) {
-            $file = $request->file('picture');
-            $filename = time() . $file->getClientOriginalName();
-            $file->move(public_path('images/drivers/'), $filename);
-            $driver['picture'] = $filename;
-        }
+        // if ($request->file('picture')) {
+        //     $file = $request->file('picture');
+        //     $filename = time() . $file->getClientOriginalName();
+        //     $file->move(public_path('images/drivers/'), $filename);
+        //     $driver['picture'] = $filename;
+        // }
 
         $driver->update([
 
@@ -171,7 +171,7 @@ class DriverController extends Controller
             }
 
             $user->delete();
-            unlink(public_path('images/drivers/' . $driver->picture));
+            // unlink(public_path('images/drivers/' . $driver->picture));
             $driver->delete();
             return redirect()->route('drivers.index')->withMessage('Successfully Deleted!');
         } catch (QueryException $e) {

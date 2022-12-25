@@ -39,7 +39,7 @@
 
                 <x-backend.form.input name="confirm_password" type="password" label="Confirm Password"/>
 
-                <x-backend.form.input name="picture" type="file" label="Picture"/>
+                {{-- <x-backend.form.input name="picture" type="file" label="Picture"/> --}}
 
 
 

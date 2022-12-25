@@ -125,7 +125,7 @@
     }
 
     .bla-bar.active {
-        height: 300px;
+        height: auto;
     }
     
     .bla-bar ul{

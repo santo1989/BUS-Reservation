@@ -27,7 +27,7 @@ class BusController extends Controller
         try {
             $data = $request->all();
             // unset($data['_token']);
-          $busdata =  Bus::create([
+            $busdata =  Bus::create([
                 'name' => $data['name'],
                 'reg_number' => $data['reg_number'],
                 'no_of_seat' => $data['no_of_seat'],
@@ -51,13 +51,11 @@ class BusController extends Controller
             }
 
             return redirect()->route('buses.index')->withMessage("Successfully created bus with user");
-            
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }
-
     }
 
     public function edit($id)
@@ -81,7 +79,6 @@ class BusController extends Controller
             ]);
 
             return redirect()->route('buses.index')->withMessage("Successfully updated bus");
-            
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         } catch (Exception $e) {
@@ -91,13 +88,16 @@ class BusController extends Controller
 
     public function destroy($id)
     {
+        // dd($id);
         try {
+
             $date = Carbon::now()->format('Y-m-d');
             $bus = Bus::find($id);
-            $trips = Trip::where('bus_id', $id)->where('date', '>=', $date)->get();
+            $trips = Trip::where('bus_id', $id)->where('start_date', '>=', $date)->get();
             if (count($trips) > 0) {
-                $trips->each->delete();
+                $trips->delete();
             }
+            
             $bus->delete();
             foreach (json_decode($bus->images) as $image) {
                 $location = public_path('images/Buses/' . $image);
@@ -107,7 +107,6 @@ class BusController extends Controller
             }
 
             return redirect()->route('buses.index')->withMessage("Successfully deleted bus");
-            
         } catch (QueryException $e) {
             return redirect()->back()->withErrors($e->getMessage());
         } catch (Exception $e) {

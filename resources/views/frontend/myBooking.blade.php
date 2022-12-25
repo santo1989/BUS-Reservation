@@ -1,6 +1,6 @@
 <x-frontend.layouts.master>
 
-
+<div id="screenSize">
 
     @if (is_null($bookings) || empty($bookings))
         <div class="row text-center">
@@ -29,13 +29,16 @@
                 </thead>
                 <tbody>
                     @php $sl=0 @endphp
+                    {{-- @dd($bookings) --}}
                     @forelse ($bookings as $booking)
-                        {{-- @dd($booking) --}}
+                       
                         <tr>
                             <td>{{ ++$sl }}</td>
                             @php
-                                $tripDate = \Carbon\Carbon::parse($booking->trip->trip_date)->format('d-m-Y');
+                                $tripDate = \Carbon\Carbon::parse($booking->trip->start_date)->format('d-m-Y');
                             @endphp
+
+                             {{-- @dd($booking->trip->start_date) --}}
                             <td> {{ $tripDate }}</td>
                             <td> {{ $booking->event->name }}</td>
                             <td> {{ $booking->trip->trip_code }}</td>
@@ -47,12 +50,7 @@
 
                             <td>
                                 {{ $booking->stoppage }}
-                                {{-- @foreach ($stoppage as $key => $value)
-                                        @php
-                                            $value = \Carbon\Carbon::parse($value)->format('h:i A');
-                                        @endphp
-                                        {{ $key }}-{{ $value }} <br>
-                                    @endforeach --}}
+
 
                             </td>
 
@@ -60,7 +58,7 @@
                             <td>
                                 @php
                                     $date = date('d-m-Y');
-                                    $tripDate = $booking->trip->start_date;
+                                    // $tripDate = $booking->trip->start_date;
                                     
                                     $date1 = strtotime($date);
                                     $date2 = strtotime($tripDate);
@@ -110,4 +108,15 @@
 
     @endif
 
+   
+</div>
+ {{-- <script>
+        let height = window.innerHeight;
+        let screenSize = document.getElementById('screenSize');
+        screenSize.style.height = '100vh';
+        
+
+      
+        
+</script> --}}
 </x-frontend.layouts.master>

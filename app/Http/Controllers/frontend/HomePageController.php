@@ -11,7 +11,7 @@ use App\Models\Trip;
 use Exception;
 use Illuminate\Http\Request;
 use Mockery\Generator\Parameter;
-
+use Redirect; 
 class HomePageController extends Controller
 {
     public function index()
@@ -39,12 +39,13 @@ class HomePageController extends Controller
     public function fleet_details($id)
     {
         $event = Event::find($id);
-        $event->images = json_decode($event->images, true);
+        //$event->images = json_decode($event->images, true);
         $date = date('Y-m-d');
         $event->trips = $event->trips->where('start_date', '>=', $date)->sortBy('start_date');
         $trips = Trip::where('event_id', $event->id)->get();
-        // dd($event, $trips);
-        return view('frontend.events.fleets-details', compact('trips', 'event'));
+        $dates = Trip::where('event_id', $event->id)->get()->groupBy('start_date');
+        // dd($event, $dates);
+        return view('frontend.events.fleets-details', compact('trips', 'event', 'dates'));
     }
 
     public function trip($id)
@@ -96,7 +97,9 @@ class HomePageController extends Controller
 
     public function getPassenger($user_id, $trip_id)
     {
+        // dd($user_id,$trip_id);
         $passenger = Passenger::where('user_id', $user_id)->first();
+        // dd($passenger);
         $trip = Trip::where('id', $trip_id)->first();
         $trip->bus = $trip->bus;
         $trip->driver = $trip->driver;
@@ -113,7 +116,7 @@ class HomePageController extends Controller
         $route['parameter'] = $prevRoute->parameters['id'] ?? '';
         // dd($route);
 
-        
+        Redirect::setIntendedUrl(url()->previous());
         return view('frontend.passenger_login', compact('prevRoute', 'route'));
     }
 
