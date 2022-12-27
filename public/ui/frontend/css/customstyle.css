@@ -1,140 +1,126 @@
-*{
+* {
     margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-  
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
     box-sizing: border-box;
 }
-.nav-header{
+.nav-header {
     position: fixed;
-    z-index:2;
+    z-index: 2;
     width: 100%;
     height: 65px;
     background: #400859;
     display: flex;
-    align-items : center;
-    justify-content : space-between;
-    padding : 0 100px;
-   
-   
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
 }
 
-.navvv{
-    display:flex;
- 
-  
+.navvv {
+    display: flex;
 }
-
-
-     
 
 .logo {
-    font-size : 16px;
+    font-size: 16px;
     font-weight: bold;
     color: #fefefe;
-    padding-right:20px;
-    padding-top:15px;
-    padding-left:7px;
-    
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-left: 7px;
 }
 
-.logo:hover{
-    color:darkgray;
+.logo:hover {
+    color: darkgray;
 }
 
 .tranzit {
     display: none;
 }
 
-.bla-bar ul{
+.bla-bar ul {
     display: flex;
-
 }
 
 .bla-bar ul li a {
     display: block;
-    color:#fefefe;
+    color: #fefefe;
     font-size: 16px;
     padding: 8px 8px;
-    border-radius : 50px;
-    transition : 0.2s;
+    border-radius: 50px;
+    transition: 0.2s;
     margin: 0 5px;
     text-decoration: none;
-  
 }
 
 .bla-bar ul li a:hover {
-    color:darkgray;
-    background : #fefefe;
+    color: darkgray;
+    background: #fefefe;
 }
 
 .bla-bar ul li a.active1 {
-    color:white;
-    background:rgba(255, 238, 0, 0.795);
-    padding-top:2px;
-    padding-bottom:2px;
-    padding-left:10px;
-    padding-right:10px;
-    margin-top:7px;
-    margin-left:10px;
-   
+    color: white;
+    background: rgba(255, 238, 0, 0.795);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 7px;
+    margin-left: 10px;
 }
 
-
-.bla-bar ul li a.active1:hover{
-    color:#400859;
+.bla-bar ul li a.active1:hover {
+    color: #400859;
 }
 
-
-@media only screen and (max-width :1320px) {
+@media only screen and (max-width: 1320px) {
     .nav-header {
         padding: 0 50px;
     }
 }
-@media only screen and (max-width :1100px) {
+@media only screen and (max-width: 1100px) {
     .nav-header {
         padding: 0 0px;
     }
 }
-@media only screen and (max-width :900px) {
+@media only screen and (max-width: 900px) {
     .tranzit {
-        display : block;
-        cursor : pointer;
-
+        display: block;
+        cursor: pointer;
     }
 
     .tranzit .line {
         width: 30px;
         height: 3px;
         background: #fefefe;
-        margin : 6px 7px; ;
+        margin: 6px 7px;
     }
-    
+
     .bla-bar {
-       height:  0px;
-       position: absolute;
-       top: 80px;
-       left : 0;
-       right: 0;
-       width : 100vw;
-       background:#400859;
-       transition : 0.2s; 
-       overflow: hidden;
+        height: 0px;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        background: #400859;
+        transition: 0.2s;
+        overflow: hidden;
     }
 
     .bla-bar.active {
         height: auto;
     }
-    
-    .bla-bar ul{
+
+    .bla-bar ul {
         display: block;
         width: fit-content;
         margin: 80px auto 0 auto;
         text-align: center;
-        transition : 0.5s;
-        Opacity: 0;
+        transition: 0.5s;
+        opacity: 0;
     }
 
     .bla-bar.active ul {
@@ -142,8 +128,7 @@
     }
 
     .bla-bar ul li a {
-        margin-bottom : 12px;
-        color:#fefefe;
-
+        margin-bottom: 12px;
+        color: #fefefe;
     }
-} 
+}

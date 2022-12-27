@@ -105,7 +105,7 @@
                                                     </div>
                                                     <div class="d-md-flex justify-content-between">
                                                         <div>
-                                                            <span>{{ $time }}</span> -
+                                                            <span>{{ $timeFormat == 24 ? $time : changeFormat($time) }}</span> -
                                                             <span>{{ $location }}</span>
                                                         </div>
 
@@ -189,6 +189,7 @@
             }
         });
     </script>
+
     {{-- end booking modal --}}
     <div class="modal" tabindex="-1" id="booking_modal">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -229,17 +230,14 @@
                                 <input class="form-control" type="text" id="trip" required readonly>
                             </div>
 
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <label for="time_format">Select Time Format</label>
                                 <select name="time_format" id="time_format" class="form-control" required>
                                     <option value="">Choose One...</option>
                                     <option value="24">24 Hours</option>
                                     <option value="12">12 Hours</option>
                                 </select>
-                            </div>
-                        </div>
-
-                        <div class="row">
+                            </div> -->
                             <div class="col-md-4">
                                 <label for="stoppage" id="selectnew">Shuttle Place and Time</label>
                                 <select name="stoppage" id="stoppage" class="form-control">
@@ -248,6 +246,17 @@
                                 {{-- <input class="form-control" type="text" name="stoppage" id="stoppage" required
                                     readonly> --}}
                             </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- <div class="col-md-4">
+                                <label for="stoppage" id="selectnew">Shuttle Place and Time</label>
+                                <select name="stoppage" id="stoppage" class="form-control">
+                                    {{-- <option value="">Select One...</option> --}}
+                                </select>
+                                {{-- <input class="form-control" type="text" name="stoppage" id="stoppage" required
+                                    readonly> --}}
+                            </div> -->
                             <div class="col-md-4">
                                 <label for="no_of_seat">Number of Seats</label>
                                 <input type="number" class="form-control" id="no_of_seat" name="no_of_seat"
@@ -307,7 +316,7 @@
                 fetch(fethc_url)
                     .then(response => response.json())
                     .then(data => {
-                        //  console.log(data);
+                         console.log(data);
                         $("#name").val(data[0]['name']);
                         $("#phone").val(data[0]['phone']);
                         $("#address").val(data[0]['address']);
@@ -318,12 +327,16 @@
                         $("#event_id").val(data[1]['event_id']);
 
                         var seats = data[1]['available_seats'];
-                        let time_format = document.getElementById("time_format");
-                        time_format.addEventListener('change', function() {
-
-                            console.log(this.value);
-                            makeStopageTimeformat(this.value);
-                        });
+                        // let time_format = document.getElementById("time_format");
+                        // time_format.addEventListener('change', function() {
+                        //     alert("Check");
+                        //     console.log(this.value);
+                        //     makeStopageTimeformat(this.value);
+                        // });
+                        
+                        const time_format = "<?php echo $timeFormat; ?>";
+                        // alert(time_format);
+                        makeStopageTimeformat(time_format+'');
 
                         function changeFormat(time) {
                             hour = time.split(":")[0];
@@ -350,6 +363,9 @@
                             const locations = Object.keys(data[1]['stoppages']);
                             const times = Object.values(data[1]['stoppages']);
                             const limit = locations.length;
+
+                            console.log("Check");
+                            console.log(data[1]['stoppages']);
 
 
                             for (let i = 0; i < limit; i++) {

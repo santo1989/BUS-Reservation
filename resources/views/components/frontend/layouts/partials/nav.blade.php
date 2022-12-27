@@ -24,8 +24,8 @@
 
         <ul>
             @if(Session::has('user'))
-                <li>
-                    <a class="form-check form-switch">
+                <li style="list-style: none;">
+                    <a class="form-check form-switch" style="text-decoration: none;" id="switch">
                         <label  for="flexSwitchCheckDefault">24 hr</label>
                         <input class="form-check-input" type="checkbox" id="time_format" {{ session('user')->time_format == 24 ? 'checked' : '' }}>
                     </a>
