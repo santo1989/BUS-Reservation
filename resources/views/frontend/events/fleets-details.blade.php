@@ -50,9 +50,11 @@
 
 
             <x-backend.layouts.elements.errors :errors="$errors" />
+            @php
+                $count = 0;
+            @endphp
             @forelse ($dates as $index=>$date)
-                <div id="accordion">
-
+                <div id="accordion">                    
                     <div class="card mt-2">
                         <div class="card-header d-md-flex justify-content-center" style="background-color: #1f1252"
                             id="heading{{ $date[0]->start_date }}" data-toggle="collapse"
@@ -86,7 +88,7 @@
                             </button>
                         </h5> --}}
                         </div>
-                        <div id="collapse{{ $index }}" class="{{ $index == 0 ? 'collapse show' : 'collapse' }}"
+                        <div id="collapse{{ $index }}" class="{{ $count == 0 ? 'collapse show' : 'collapse' }}"
                             aria-labelledby="heading{{ $date[0]->id }}" data-parent="#accordion">
                             <div class="card-body">
 
@@ -129,6 +131,9 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $count++;
+                @endphp
             @empty
                 <div class=" text-center">
                     <h3>No Trips Found</h3>
