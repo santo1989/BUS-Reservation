@@ -169,12 +169,12 @@ class BookingController extends Controller
 
     public function newBooking(Request $request)
     {
-        // dd($request->all());
-        $trip_id = Booking::where('trip_id', $request->trip_id)->get();
+        //dd($request->all());
+        $trip_id = Booking::where('trip_id', $request->trip_id)->where('passenger_id',$request->passenger_id)->first();
         // dd($trip_id);
         try {
-            if ($trip_id->count() > 0) {
-                $booking = $trip_id->first();
+            if ($trip_id) {
+                $booking = $trip_id;
                 // dd($booking);
                 $events = Event::all();
                 $trip = Trip::where('id', $booking->trip_id)->first();
