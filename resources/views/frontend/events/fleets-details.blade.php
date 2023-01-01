@@ -382,9 +382,10 @@
                                     console.log(times[i]);
 
                                     newtime = changeFormat(times[i]);
+                                    newTimeForValue = times[i];
 
                                     options +=
-                                        `<option value="${locations[i]} - ${newtime}">${locations[i]} - ${newtime}</option>`;
+                                        `<option value="${locations[i]} - ${newTimeForValue}">${locations[i]} - ${newtime}</option>`;
 
                                 }
 

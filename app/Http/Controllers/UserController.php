@@ -110,7 +110,7 @@ class UserController extends Controller
                 return redirect()->back()->withInput()->withErrors('Invalid Email');
             }
         }catch(Exception $e){
-            return redirect()->back()->withInput()->withErrors($e->getMessage('Email already exists'));
+            return redirect()->back()->withInput()->withErrors('Internal server error');
         }
 
         
