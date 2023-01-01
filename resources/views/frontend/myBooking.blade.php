@@ -1,10 +1,9 @@
 <x-frontend.layouts.master>
 
 <div id="screenSize">
-
     @if (is_null($bookings) || empty($bookings))
         <div class="row text-center">
-            <div class="col-md-12 col-lg-12 col-sm-12" style="height:100vh">
+            <div class="col-md-12 col-lg-12 col-sm-12">
                 <h1 class="text-danger text-center"> <strong>You do not have any booking currently!</strong> </h1>
             </div>
         </div>
@@ -107,16 +106,12 @@
         </div>
 
     @endif
-
-   
 </div>
- {{-- <script>
-        let height = window.innerHeight;
-        let screenSize = document.getElementById('screenSize');
-        screenSize.style.height = '100vh';
-        
 
-      
-        
-</script> --}}
+ <script>
+    let booking_size = <?php echo isset($bookings) == 1 ? count($bookings) : ''; ?>; 
+    let screenSize = document.getElementById('screenSize');
+    if(booking_size<=3)
+     screenSize.style.height = '50vh';
+</script>
 </x-frontend.layouts.master>

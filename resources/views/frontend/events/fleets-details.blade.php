@@ -61,10 +61,7 @@
                             data-target="#collapse{{ $date[0]->start_date }}"
                             aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
                             aria-controls="collapse{{ $date[0]->start_date }}">
-                            {{-- <h5 class="mt-1">
-                            <p class="btn badge bg-danger">
-                                {{  $date[0]->start_date }}</p>
-                        </h5> --}}
+                        
                             <h5 class="mt-1">
                                 <button class="btn badge bg-danger" data-toggle="collapse"
                                     data-target="#collapse{{ $date[0]->start_date }}"
@@ -74,19 +71,7 @@
                                     {{ \Carbon\Carbon::parse($date[0]->start_date)->format('d M, Y') }}
                                 </button>
                             </h5>
-                            {{-- <h5 class="mt-1">
-                            <p class="btn badge bg-danger"><i class="fas fa-bus"></i> {{  $date[0]->start_date }}
-                            </p>
-                        </h5> --}}
-                            {{-- <h5 class="mt-1">
-                            <button class="btn badge bg-info" data-toggle="collapse"
-                                data-target="#collapse{{  $date[0]->start_date }}"
-                                aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
-                                aria-controls="collapse{{ $date[0]->start_date }}">
-                                <i class="fas fa-plane-arrival"></i>
-                                {{ \Carbon\Carbon::parse( $date[0]->start_date)->format('d M, Y') }}
-                            </button>
-                        </h5> --}}
+                         
                         </div>
                         <div id="collapse{{ $index }}" class="{{ $count == 0 ? 'collapse show' : 'collapse' }}"
                             aria-labelledby="heading{{ $date[0]->id }}" data-parent="#accordion">
@@ -118,15 +103,7 @@
                                             @endforeach
                                         @endforeach
                                 </div>
-                                {{-- @foreach ($date as $trip)
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="d-flex justify-content-end w-100">
-                                        <button class="btn btn-primary mt-2"
-                                            onclick="modalOpen(<?php echo $trip->id; ?>)">Book a
-                                            Seat</button>
-                                    </div>
-                                </div>
-                                @endforeach --}}
+                             
                             </div>
                         </div>
                     </div>
@@ -235,14 +212,6 @@
                                 <input class="form-control" type="text" id="trip" required readonly>
                             </div>
 
-                            <!-- <div class="col-md-4">
-                                <label for="time_format">Select Time Format</label>
-                                <select name="time_format" id="time_format" class="form-control" required>
-                                    <option value="">Choose One...</option>
-                                    <option value="24">24 Hours</option>
-                                    <option value="12">12 Hours</option>
-                                </select>
-                            </div> -->
                             <div class="col-md-4">
                                 <label for="stoppage" id="selectnew">Shuttle Place and Time</label>
                                 <select name="stoppage" id="stoppage" class="form-control">
@@ -254,14 +223,6 @@
                         </div>
 
                         <div class="row">
-                            <!-- <div class="col-md-4">
-                                <label for="stoppage" id="selectnew">Shuttle Place and Time</label>
-                                <select name="stoppage" id="stoppage" class="form-control">
-                                    {{-- <option value="">Select One...</option> --}}
-                                </select>
-                                {{-- <input class="form-control" type="text" name="stoppage" id="stoppage" required
-                                    readonly> --}}
-                            </div> -->
                             <div class="col-md-4">
                                 <label for="no_of_seat">Number of Seats</label>
                                 <input type="number" class="form-control" id="no_of_seat" name="no_of_seat"
@@ -308,6 +269,7 @@
     @endforelse
     {{-- //end modal --}}
     <script>
+        let a_seat;
         const modalOpen = (trip_id) => {
 
             const user_id = ($("#user_id").val());
@@ -330,8 +292,9 @@
                         $("#trip_id").val(data[1]['id']);
                         $("#passenger_id").val(data[0]['id']);
                         $("#event_id").val(data[1]['event_id']);
-
-                        var seats = data[1]['available_seats'];
+                        
+                        a_seat = data[1]['available_seats'];
+                        // console.log(a_seat);
                         // let time_format = document.getElementById("time_format");
                         // time_format.addEventListener('change', function() {
                         //     alert("Check");
@@ -394,13 +357,13 @@
                         }
 
 
-                        if (seats < 6) {
+                        if (a_seat < 6) {
                             document.getElementById('available_seats').innerHTML =
-                                ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: ` + seats +
+                                ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: ` + a_seat +
                                 `</div>`;
                         } else {
                             document.getElementById('available_seats').innerHTML =
-                                ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ` + seats +
+                                ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ` + a_seat +
                                 `</div>`;
                         }
 
@@ -414,9 +377,6 @@
             }
 
         }
-    </script>
-
-    <script>
         let seat = <?php echo $seat; ?>;
         let seat_old = document.getElementById('no_of_seat');
         let newSeat = document.getElementById('available_seats').innerHTML = " ";
@@ -424,7 +384,8 @@
             ` <div class="rounded bg-success text-white p-2 mt-4">Available Seats: ${seat}</div>`;
         seat_old.addEventListener('change', function() {
             if (seat_old.value > 0 && seat_old.value <= seat) {
-                let seat_new = seat - seat_old.value;
+                let seat_new = a_seat - seat_old.value;
+                console.log(seat_new);
                 if (seat_new < 6) {
                     newSeat = document.getElementById('available_seats').innerHTML =
                         ` <div class="rounded bg-danger text-white p-2 mt-4">Available Seats: ${seat_new}</div>`;
