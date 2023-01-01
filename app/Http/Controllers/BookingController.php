@@ -218,11 +218,22 @@ class BookingController extends Controller
     public function mybooking()
     {
         $bookings = [];
+        $timeFormat = '';
         if (isset(session('user')->passenger->id)) {
             $bookings = Booking::where('passenger_id', session('user')->passenger->id)->latest()->get();
+            $timeFormat = session('user')->time_format;
+            if($timeFormat == '12') {
+                foreach($bookings as $booking) {
+                    $stop = explode('- ', $booking->stoppage)[0];
+                    $time = explode('- ', $booking->stoppage)[1];
+                    $time = changeFormat($time);
+                    $booking->stoppage = $stop.'- '.$time;
+                }
+            }
+            // dd($bookings);
         }
 
-        return view('frontend.myBooking', compact('bookings'));
+        return view('frontend.myBooking', compact('bookings', 'timeFormat'));
     }
 
     public function cancelBooking($id)
