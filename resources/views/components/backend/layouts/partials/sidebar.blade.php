@@ -125,10 +125,46 @@
             @endcan
 
         </div>
-        <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            {{ auth()->user()->role->name ?? '' }}
-
+        <div class="sb-sidenav-footer d-flex justify-content-between">
+            <div>
+                <div class="small">Logged in as:</div>
+                {{ auth()->user()->role->name ?? '' }}
+            </div>
+            <div class="d-flex align-items-center"">
+                @if(auth()->user())
+                
+                    <a class="form-check form-switch" style="text-decoration: none;" id="switch">
+                        <input class="form-check-input" type="checkbox" id="time_format" {{ auth()->user()->time_format == 24 ? 'checked' : '' }}>
+                        <input type="hidden" value="{{ url('') }}" id="base_url">
+                        <span style="color:white;">24hr</span>
+                    </a>
+                @endif
+            </div>
         </div>
     </nav>
 </div>
+
+<script>
+    $('#time_format').on('click', () => {
+        const base_url = $("#base_url").val();
+        const user_id = $("#user_id").val();
+        if($("#time_format").is(':checked')){
+           fetch(base_url+`/change-time-format-back/24`)
+           .then(response => response.json())
+           .then(data => {
+               if(data == "done") {
+                   window.location.reload();
+               }
+           })
+        }
+        else{
+           fetch(base_url+`/change-time-format-back/12`)
+           .then(response => response.json())
+           .then(data => {
+                if(data == "done") {
+                    window.location.reload();
+                }    
+           })
+        }
+    })
+</script>

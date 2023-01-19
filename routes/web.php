@@ -227,6 +227,9 @@ Route::get('/update-event/{trip_id}/{event_id}', [EventController::class, 'updat
 
 Route::get('/change-time-format/{make_format}', [UserController::class, 'changeTimeFormat']);
 
+Route::get('/change-time-format-back/{make_format}', [UserController::class, 'changeTimeFormatBack']);
+
+
 
 
 //end apis

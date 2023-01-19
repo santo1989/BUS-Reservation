@@ -66,7 +66,11 @@
                                             <td>
                                                 @foreach ($trip->stoppages as $stoppage => $time)
                                                     {{-- <li>{{ $stoppage }} - {{ $time }}</li> --}}
-                                                    <li>{{ $stoppage }} - {{ date("h:i A", strtotime($time))}}</li>
+                                                    @if(auth()->user()->time_format == 24)
+                                                        <li>{{ $stoppage }} - {{ $time }}</li>
+                                                    @else
+                                                        <li>{{ $stoppage }} - {{ changeFormat($time) }}</li>
+                                                    @endif
                                                     
                                                 @endforeach
                                             </td>

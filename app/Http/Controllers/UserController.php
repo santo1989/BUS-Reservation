@@ -169,4 +169,25 @@ class UserController extends Controller
 
         return response()->json('done');
     }
+
+    public function changeTimeFormatBack($makeFormat) 
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        if($makeFormat == 24) {
+            if($user->time_format == 12) {
+                $user->time_format = 24;
+                $user->update();
+                // $user->passenger = $user->passenger;
+                // session()->put('user', $user);
+            }
+        } else if($makeFormat == 12) {
+            if($user->time_format == 24) {
+                $user->time_format = 12;
+                $user->update();
+                // $user->passenger = $user->passenger;
+                // session()->put('user', $user);
+            }
+        }
+        return response()->json('done');
+    }
 }
